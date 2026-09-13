@@ -57,6 +57,9 @@ figcaption{font-size:12px;color:var(--muted);padding:10px 14px;border-top:1px so
 
 /* ===== Hero ===== */
 .hero{padding-block:52px 60px;border-bottom:1px solid var(--line);scroll-margin-top:88px;}
+.hero{background:radial-gradient(ellipse at 80% 10%,#fff 0%,rgba(255,255,255,0) 62%),linear-gradient(125deg,#fafaf8 8%,#e7e7e3 67%,#f3f3f0 100%);}
+.hero .frame{box-shadow:0 28px 65px -34px rgba(0,0,0,.5);}
+.hero .eyebrow{background:rgba(255,255,255,.5);}
 .hero-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:52px;align-items:center;}
 .eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
   border:1px solid var(--line);display:inline-block;padding:6px 14px;border-radius:999px;margin-bottom:20px;}
@@ -68,6 +71,10 @@ figcaption{font-size:12px;color:var(--muted);padding:10px 14px;border-top:1px so
   background:var(--ink);color:var(--paper);border-radius:999px;}
 .btn.ghost{background:none;color:var(--ink);}
 .btn:hover{opacity:.85;}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .btn{transition:transform 180ms ease-out;}
+  .btn:hover{transform:translateY(-2px);}
+}
 .present-btn{margin-top:16px;}
 
 .hero-stage{min-width:0;}
@@ -271,7 +278,7 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
         <div>
           <h2>Корпоративная платформа автоматизации документов</h2>
           <p class="lead">Система для обработки закупочных писем и документов. Разрабатывается командой — ниже показаны модули, над которыми работал непосредственно я, и модули общей платформы.</p>
-          <button class="btn ghost present-btn" type="button" data-project="platform">Смотреть презентацию</button>
+          <button class="btn ghost present-btn" type="button" data-project="platform">Посмотреть экраны</button>
         </div>
       </div>
       <div class="platform-grid">
@@ -336,7 +343,7 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
         <div>
           <h2>Фотоотчёты по объектам</h2>
           <p class="lead">Мобильный инструмент для сбора фотоотчётов на объектах, разработанный самостоятельно. Данные хранятся локально, на устройстве пользователя.</p>
-          <button class="btn ghost present-btn" type="button" data-project="photo">Смотреть презентацию</button>
+          <button class="btn ghost present-btn" type="button" data-project="photo">Посмотреть экраны</button>
         </div>
       </div>
       <div class="photo-grid">
@@ -390,7 +397,7 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
         <div>
           <h2>VPN — личный проект</h2>
           <p class="lead">Небольшой семейный сервис для доверенного круга пользователей: управление устройствами и доступом, контроль состояния сервера. Некоммерческий проект.</p>
-          <button class="btn ghost present-btn" type="button" data-project="vpn">Смотреть презентацию</button>
+          <button class="btn ghost present-btn" type="button" data-project="vpn">Посмотреть экраны</button>
         </div>
       </div>
       <div class="pair-row">
@@ -437,7 +444,7 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
           <h3>Конструктор спецификаций</h3>
         </div>
         <p class="tool-lead">Совместная разработка. Табличная выгрузка (XLSX/XLS/XLSB/CSV) размечается на поля и правила, задаётся группировка — на выходе спецификации и дополнительные соглашения в Excel и PDF.</p>
-        <button class="btn ghost present-btn" type="button" data-project="constructor">Смотреть презентацию</button>
+        <button class="btn ghost present-btn" type="button" data-project="constructor">Посмотреть экраны</button>
         <div class="feature-shot frame">
           <figure>
 <button class="shot-btn" aria-label="Увеличить: настройка полей конструктора спецификаций" data-cap="Настройка полей и правил · демонстрационные данные" type="button"><img src="assets/spec-generator-fields.jpg" alt="Экран настройки полей и правил конструктора спецификаций" loading="lazy" width="1114" height="768"></button>
@@ -474,7 +481,7 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
           <h3>Обработка входящих PDF-спецификаций</h3>
         </div>
         <p class="tool-lead">Самостоятельная разработка. Из текстового PDF извлекаются позиции и условия, сопоставляются с договорными реквизитами по таблице соответствия — формируется исходящая спецификация.</p>
-        <button class="btn ghost present-btn" type="button" data-project="incoming">Смотреть презентацию</button>
+        <button class="btn ghost present-btn" type="button" data-project="incoming">Посмотреть экраны</button>
         <div class="feature-shot frame">
           <figure>
 <button class="shot-btn" aria-label="Увеличить: предпросмотр входящей спецификации" data-cap="Предпросмотр обработки входящей спецификации · демонстрационные данные" type="button"><img src="assets/incoming-spec-preview.jpg" alt="Экран предпросмотра обработки входящей PDF-спецификации" loading="lazy" width="1422" height="768"></button>
@@ -565,13 +572,37 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
   </div>
   <div class="prj-nav">
     <button class="dlg-close" id="prjPrev" type="button">← Назад</button>
-    <span class="prj-counter" id="prjCounter"></span>
+    <span class="prj-counter" id="prjCounter" aria-live="polite" aria-atomic="true"></span>
     <button class="dlg-close" id="prjNext" type="button">Далее →</button>
   </div>
 </dialog>
 
 <script>
 (function(){
+  var motionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var runningMotion = new Set();
+  var galleryMotion = null;
+
+  function animateSurface(element, frames, duration){
+    if ((motionQuery && motionQuery.matches) || typeof element.animate !== 'function') { return null; }
+    var animation = element.animate(frames, {duration:duration, easing:'cubic-bezier(.22,1,.36,1)'});
+    runningMotion.add(animation);
+    var cleanup = function(){ runningMotion.delete(animation); };
+    if (animation.finished && typeof animation.finished.then === 'function') { animation.finished.then(cleanup, cleanup); }
+    else { animation.onfinish = cleanup; animation.oncancel = cleanup; }
+    return animation;
+  }
+
+  function animateGallery(){
+    if (galleryMotion) { galleryMotion.cancel(); }
+    galleryMotion = null;
+    if (!prjDialog.open) { return; }
+    galleryMotion = animateSurface(prjDialog.querySelector('.prj-body'), [
+      {opacity:.75, transform:'translateY(6px)'},
+      {opacity:1, transform:'translateY(0)'}
+    ], 220);
+  }
+
   var imgDialog = document.getElementById('imgDialog');
   var dlgImg = document.getElementById('dlgImg');
   var dlgCap = document.getElementById('dlgCap');
@@ -699,6 +730,7 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
     prjCounter.textContent = 'Кадр ' + (currentIndex + 1) + ' из ' + proj.frames.length;
     prjPrev.disabled = currentIndex === 0;
     prjNext.disabled = currentIndex === proj.frames.length - 1;
+    animateGallery();
   }
 
   function openProject(id, trigger){
@@ -715,6 +747,7 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
     lockBody();
     prjDialog.showModal();
     prjClose.focus();
+    animateGallery();
   }
 
   document.querySelectorAll('.present-btn').forEach(function(btn){
@@ -776,10 +809,44 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
   });
 
   prjDialog.addEventListener('close', function(){
+    if (galleryMotion) { galleryMotion.cancel(); galleryMotion = null; }
     if (imgDialog.open) { return; }
     unlockBody();
     if (lastPrjTrigger) { lastPrjTrigger.focus(); }
   });
+
+  if (typeof window.IntersectionObserver === 'function') {
+    var observedOnce = new WeakSet();
+    var revealObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var element = entry.target;
+        if (!observedOnce.has(element)) {
+          observedOnce.add(element);
+          if (entry.isIntersecting) { revealObserver.unobserve(element); }
+          return;
+        }
+        if (!entry.isIntersecting) { return; }
+        revealObserver.unobserve(element);
+        if (entry.boundingClientRect.top < window.innerHeight) { return; }
+        animateSurface(element, [
+          {opacity:0, transform:'translateY(18px)'},
+          {opacity:1, transform:'translateY(0)'}
+        ], 450);
+      });
+    }, {rootMargin:'0px 0px 15% 0px', threshold:0});
+    document.querySelectorAll('.case-head, .frame').forEach(function(element){ revealObserver.observe(element); });
+  }
+
+  if (motionQuery) {
+    var handleMotionChange = function(event){
+      if (!event.matches) { return; }
+      runningMotion.forEach(function(animation){ animation.cancel(); });
+      runningMotion.clear();
+      galleryMotion = null;
+    };
+    if (motionQuery.addEventListener) { motionQuery.addEventListener('change', handleMotionChange); }
+    else if (motionQuery.addListener) { motionQuery.addListener(handleMotionChange); }
+  }
 })();
 </script>
 </body>
