@@ -5,110 +5,228 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Александр Федосеев — проекты по автоматизации</title>
 <style>
-:root{--ink:#111;--paper:#fdfdfc;--line:#111;--muted:#5a5a5a;}
+:root{
+  --ink:#0a0a0a;
+  --paper:#fafaf8;
+  --line:#111;
+  --muted:#5c5c5c;
+  --graphite:#161616;
+  --graphite-line:#2c2c2c;
+}
 *{box-sizing:border-box;}
-html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;}
+html{scroll-behavior:smooth;}
+html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+}
 a{color:inherit;}
 img{display:block;width:100%;height:auto;}
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
 .wrap{max-width:1180px;margin:0 auto;padding-inline:32px;}
-header{border-bottom:2px solid var(--line);padding:16px 0;position:sticky;top:0;background:var(--paper);z-index:5;}
-.headrow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;min-width:0;}
-.headrow>*,.hero-grid>*,.sub-grid>*,.pair-row>*,.mini-grid>*,.phone-row>*{min-width:0;}
-.name{font-size:20px;font-weight:700;letter-spacing:.02em;}
-nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;align-items:center;}
-nav a{text-decoration:none;border-bottom:1px solid transparent;display:inline-flex;align-items:center;min-height:40px;padding:2px 2px;}
-nav a:hover{border-bottom:1px solid var(--ink);}
-.badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);padding:5px 12px;color:var(--muted);}
-.hero{padding-block:56px;border-bottom:1px solid var(--line);scroll-margin-top:96px;}
-.hero-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:44px;align-items:center;}
-.hero h1{font-size:clamp(36px,4.4vw,52px);line-height:1.08;margin:16px 0 18px;font-weight:800;}
-.hero p{max-width:52ch;font-size:17px;line-height:1.6;color:var(--muted);}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px;}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 22px;font-size:14px;font-weight:700;text-decoration:none;border:2px solid var(--ink);cursor:pointer;background:var(--ink);color:var(--paper);}
-.btn.ghost{background:none;color:var(--ink);}
-.shot-eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;}
-section.case{padding-block:56px;border-bottom:1px solid var(--line);scroll-margin-top:96px;}
-.case .num{font-size:13px;font-weight:800;color:var(--muted);letter-spacing:.06em;margin-right:10px;}
-.case h2{font-size:clamp(24px,3vw,36px);margin:0 0 6px;}
-.case .lead{color:var(--muted);max-width:60ch;margin:0 0 20px;line-height:1.6;}
-.case.dark{background:#0a0a0a;color:#f5f5f5;--muted:#c9c9c9;--line:#3a3a3a;border-bottom-color:#0a0a0a;}
-.case.dark :focus-visible{outline-color:#fff;outline-offset:3px;}
-.shot-btn{border:none;background:none;padding:0;cursor:pointer;display:block;width:100%;text-align:left;min-height:44px;position:relative;}
-.shot-btn::after{content:"Увеличить ↗";position:absolute;top:8px;right:8px;font-size:12px;padding:4px 8px;background:rgba(0,0,0,.72);color:#fff;opacity:0;pointer-events:none;}
-.shot-btn:hover::after,.shot-btn:focus-visible::after{opacity:1;}
-@media (hover:none){
-  .shot-btn::after{opacity:1;}
-}
-figure{margin:0;border:1px solid var(--line);}
-.case.dark figure{border-color:#3a3a3a;}
+.hero-grid>*,.platform-grid>*,.platform-shots>*,.photo-grid>*,.pair-row>*,.phone-row>*,.stage-notes>*,.skill-grid>*{min-width:0;}
+em{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-weight:400;}
+
+/* ===== Header ===== */
+header.site{border-bottom:1px solid var(--line);padding:14px 0;position:sticky;top:0;background:var(--paper);z-index:20;}
+.headrow{display:flex;align-items:center;gap:24px;min-width:0;}
+.brand{font-size:17px;font-weight:800;letter-spacing:.01em;flex-shrink:0;white-space:nowrap;}
+.nav-scroll{overflow-x:auto;flex:1;min-width:0;-webkit-overflow-scrolling:touch;}
+.nav-scroll::-webkit-scrollbar{height:4px;}
+nav.nav-inner{display:flex;gap:22px;white-space:nowrap;width:max-content;min-width:100%;}
+nav.nav-inner a{text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.02em;
+  display:inline-flex;align-items:center;min-height:44px;border-bottom:1px solid transparent;}
+nav.nav-inner a:hover{border-bottom-color:var(--ink);}
+nav.nav-inner a.resume-link{border:1px solid var(--line);border-radius:999px;padding:0 16px;}
+nav.nav-inner a.resume-link:hover{background:var(--ink);color:var(--paper);border-bottom:1px solid var(--line);}
+
+/* ===== Frames for real screenshots ===== */
+figure{margin:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
 figcaption{font-size:12px;color:var(--muted);padding:10px 14px;border-top:1px solid var(--line);}
-.case.dark figcaption{border-top-color:#3a3a3a;}
-.sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.note{font-size:13px;color:var(--muted);max-width:64ch;margin:16px 0 0;line-height:1.55;}
-details{margin-top:28px;border-top:1px solid var(--line);padding-top:20px;}
-.case.dark details{border-top-color:#3a3a3a;}
-summary{cursor:pointer;font-weight:700;font-size:15px;list-style:none;min-height:44px;display:flex;align-items:center;}
+.frame{background:var(--graphite);border:1px solid var(--graphite-line);border-radius:22px;padding:16px;}
+.frame figure{border:none;border-radius:0;overflow:visible;}
+.frame figure img{border-radius:12px;display:block;}
+.frame figcaption{border-top:1px solid var(--graphite-line);color:#b9b9b9;padding:12px 4px 0;}
+.frame-phone{border-radius:34px;padding:12px;width:100%;max-width:250px;min-width:0;margin-inline:auto;}
+.frame-phone figure img{border-radius:24px;}
+
+.shot-btn{border:none;background:none;padding:0;cursor:pointer;display:block;width:100%;text-align:left;
+  min-height:44px;position:relative;border-radius:inherit;}
+.shot-btn::after{content:"Увеличить ↗";position:absolute;top:8px;right:8px;font-size:12px;padding:4px 8px;
+  background:rgba(0,0,0,.72);color:#fff;opacity:0;pointer-events:none;border-radius:6px;}
+.shot-btn:hover::after,.shot-btn:focus-visible::after{opacity:1;}
+@media (hover:none){.shot-btn::after{opacity:1;}}
+
+/* ===== Hero ===== */
+.hero{padding-block:52px 60px;border-bottom:1px solid var(--line);scroll-margin-top:88px;}
+.hero-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:52px;align-items:center;}
+.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--line);display:inline-block;padding:6px 14px;border-radius:999px;margin-bottom:20px;}
+.hero h1{font-size:clamp(34px,4.2vw,50px);line-height:1.06;margin:0 0 18px;font-weight:800;letter-spacing:-.01em;}
+.hero p{max-width:50ch;font-size:16px;line-height:1.6;color:var(--muted);}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 24px;
+  font-size:14px;font-weight:700;text-decoration:none;border:2px solid var(--ink);cursor:pointer;
+  background:var(--ink);color:var(--paper);border-radius:999px;}
+.btn.ghost{background:none;color:var(--ink);}
+.btn:hover{opacity:.85;}
+.present-btn{margin-top:16px;}
+
+.hero-stage{min-width:0;}
+.stage-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;font-weight:700;}
+.stage-notes{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line);}
+.stage-notes h4{margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;}
+.stage-notes p{margin:0;font-size:13.5px;line-height:1.45;}
+
+/* ===== Sections / cases ===== */
+section.case{padding-block:60px;border-bottom:1px solid var(--line);scroll-margin-top:88px;}
+.case-head{display:flex;gap:22px;align-items:flex-start;margin-bottom:26px;}
+.case-index{font-size:60px;font-weight:800;line-height:.85;color:var(--muted);opacity:.32;flex-shrink:0;min-width:68px;}
+.case h2{font-size:clamp(24px,2.9vw,34px);margin:6px 0 10px;letter-spacing:-.01em;}
+.case .lead{color:var(--muted);max-width:60ch;margin:0;line-height:1.6;font-size:15.5px;}
+.case.dark{background:#0a0a0a;color:#f5f5f5;--muted:#c9c9c9;--line:#333;border-bottom-color:#0a0a0a;}
+.case.dark .case-index{color:#fff;opacity:.24;}
+.case.dark :focus-visible{outline-color:#fff;outline-offset:3px;}
+.case.dark .btn.ghost{color:#f5f5f5;border-color:#f5f5f5;}
+.case.dark figure{border-color:#333;}
+.case.dark figcaption{border-top-color:#333;}
+
+.note{font-size:13px;color:var(--muted);max-width:66ch;margin:22px 0 0;line-height:1.55;}
+
+details{margin-top:26px;border-top:1px solid var(--line);padding-top:18px;}
+.case.dark details{border-top-color:#333;}
+summary{cursor:pointer;font-weight:700;font-size:14.5px;list-style:none;min-height:44px;display:flex;align-items:center;}
 summary::-webkit-details-marker{display:none;}
-summary::before{content:"+";margin-right:8px;flex-shrink:0;}
+summary::before{content:"+";margin-right:10px;flex-shrink:0;font-weight:800;}
 details[open] summary::before{content:"−";}
-.detail-body{margin-top:18px;line-height:1.65;max-width:74ch;}
-.detail-body h4{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:18px 0 6px;}
+.detail-body{margin-top:16px;line-height:1.65;max-width:74ch;font-size:14.5px;}
+.detail-body h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:18px 0 6px;font-weight:700;}
 .detail-body ul{margin:0;padding-left:20px;line-height:1.7;}
 .detail-body li{margin-bottom:4px;}
-.flow{font-size:14px;font-weight:700;margin:0 0 18px;}
-.phone-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;align-items:start;}
-.pair-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.feature-shot{margin-bottom:20px;}
-.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-.tool-block{padding:28px 0;border-top:1px solid var(--line);}
-.tool-block:last-child{border-bottom:1px solid var(--line);}
-.tool-head{display:flex;gap:16px;align-items:baseline;margin-bottom:16px;}
-.tool-num{font-size:22px;font-weight:800;min-width:34px;color:var(--muted);}
-.tool-block h3{margin:0 0 4px;font-size:19px;}
-.tool-block p{margin:0 0 6px;color:var(--muted);line-height:1.6;max-width:70ch;}
-.tool-flow{font-size:13px;font-weight:700;margin:10px 0 0;}
-.skills{scroll-margin-top:96px;padding-block:56px;border-bottom:1px solid var(--line);}
-.skills h2{font-size:clamp(24px,3vw,34px);margin:0 0 10px;}
-.skills .lead{color:var(--muted);max-width:64ch;line-height:1.6;margin:0 0 26px;}
-.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px;margin-bottom:26px;}
-.skill-grid h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 8px;}
+
+.flow{font-size:14px;font-weight:700;margin:0 0 24px;}
+
+/* ---- Section 01 platform ---- */
+.platform-grid{display:grid;grid-template-columns:1fr;gap:24px;align-items:start;}
+.platform-shots{display:grid;grid-template-columns:1fr 1fr;gap:18px;min-width:0;}
+.platform-side{padding-top:6px;order:-1;min-width:0;}
+.platform-side h3{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 4px;font-weight:700;}
+.platform-side .platform-line{font-size:19px;font-weight:800;margin:0 0 22px;line-height:1.3;}
+.platform-side .platform-line span{display:block;}
+
+/* ---- Section 02 photo ---- */
+.photo-grid{display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start;}
+.workflow-steps{list-style:none;margin:0;padding:0;border-left:2px solid var(--line);}
+.workflow-steps li{padding:0 0 24px 18px;position:relative;font-weight:700;font-size:15px;}
+.workflow-steps li:last-child{padding-bottom:0;}
+.workflow-steps li::before{content:"";position:absolute;left:-6px;top:3px;width:10px;height:10px;border-radius:50%;background:var(--ink);}
+.phone-row{display:flex;gap:24px;flex-wrap:wrap;}
+.phone-row>*{flex:0 1 250px;}
+
+/* ---- Section 03 VPN ---- */
+.pair-row{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+
+/* ---- Section 04 tools ---- */
+.tool-block{padding:32px 0;border-top:1px solid var(--line);}
+.tool-block:last-of-type{border-bottom:1px solid var(--line);}
+.tool-top{display:flex;gap:16px;align-items:baseline;margin-bottom:10px;}
+.tool-num{font-size:20px;font-weight:800;min-width:32px;color:var(--muted);}
+.tool-block h3{margin:0;font-size:19px;}
+.tool-lead{margin:0 0 20px;color:var(--muted);line-height:1.6;max-width:70ch;font-size:15px;}
+.tool-flow{font-size:13px;font-weight:700;margin:18px 0 0;}
+.feature-shot{margin-bottom:18px;}
+.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px;}
+.mini-grid figure{border-radius:8px;}
+.vba-list{margin:0;padding-left:20px;line-height:1.75;font-size:15px;color:var(--muted);}
+.vba-list li{margin-bottom:4px;}
+
+/* ---- Skills ---- */
+.skills{scroll-margin-top:88px;padding-block:60px;border-bottom:1px solid var(--line);}
+.skills h2{font-size:clamp(24px,2.9vw,34px);margin:0 0 12px;}
+.skills .flow{font-size:15px;margin:4px 0 14px;}
+.skills .lead{color:var(--muted);max-width:66ch;line-height:1.6;margin:0 0 30px;font-size:15.5px;}
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-bottom:30px;
+  border-top:1px solid var(--line);padding-top:26px;}
+.skill-grid h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 8px;font-weight:700;}
 .skill-grid p{margin:0;font-size:14px;line-height:1.5;}
-footer{padding:40px 0 60px;text-align:left;}
+
+footer{padding:44px 0 60px;text-align:left;}
 footer a{font-weight:700;text-decoration:underline;}
-dialog{border:1px solid var(--line);padding:0;max-width:92vw;max-height:88vh;background:var(--paper);}
-dialog::backdrop{background:rgba(0,0,0,.75);}
+
+/* ===== Dialog ===== */
+dialog{border:1px solid var(--line);border-radius:14px;padding:0;max-width:92vw;max-height:88vh;background:var(--paper);}
+dialog::backdrop{background:rgba(0,0,0,.8);}
 dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:contain;}
 .dlg-body{overflow:auto;max-height:88vh;}
-.dlg-cap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 16px;border-top:1px solid var(--line);flex-wrap:wrap;position:sticky;bottom:0;background:var(--paper);z-index:1;}
-.dlg-close{border:1px solid var(--line);background:none;cursor:pointer;font-size:13px;min-height:44px;padding:8px 18px;}
+.dlg-cap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 16px;
+  border-top:1px solid var(--line);flex-wrap:wrap;position:sticky;bottom:0;background:var(--paper);z-index:1;}
+.dlg-close{border:1px solid var(--line);background:none;cursor:pointer;font-size:13px;min-height:44px;
+  padding:8px 18px;border-radius:999px;}
+
+/* ===== Project presentation dialog ===== */
+#projectDialog{width:min(1200px,94vw);max-width:1200px;max-height:92vh;max-height:92dvh;padding:0;border:1px solid var(--line);border-radius:14px;background:var(--paper);display:flex;flex-direction:column;}
+#projectDialog::backdrop{background:rgba(0,0,0,.8);}
+#projectDialog:not([open]){display:none;}
+.prj-head{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 22px;
+  border-bottom:1px solid var(--line);flex:0 0 auto;background:var(--paper);}
+.prj-title{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em;}
+.prj-body{flex:1 1 auto;min-height:0;overflow:auto;display:grid;grid-template-columns:1.35fr 1fr;gap:26px;padding:22px;}
+.prj-stage{min-width:0;display:flex;align-items:center;justify-content:center;background:#111;border-radius:10px;overflow:hidden;padding:8px;}
+.prj-stage img{width:100%;height:auto;max-height:60vh;object-fit:contain;display:block;}
+.prj-copy{min-width:0;display:flex;flex-direction:column;gap:6px;}
+.prj-caption{margin:0 0 10px;font-size:13px;color:var(--muted);}
+.prj-text h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:14px 0 6px;font-weight:700;}
+.prj-text h4:first-child{margin-top:0;}
+.prj-text p{margin:0;font-size:14.5px;line-height:1.6;}
+.prj-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 22px;
+  border-top:1px solid var(--line);flex:0 0 auto;background:var(--paper);}
+.prj-counter{font-size:13px;color:var(--muted);font-weight:700;}
+.prj-nav button:disabled{opacity:.35;cursor:not-allowed;}
+
+@media(max-width:900px){
+  .photo-grid{grid-template-columns:1fr;}
+  .workflow-steps{border-left:none;border-top:2px solid var(--line);display:flex;flex-wrap:wrap;gap:0 22px;padding-top:14px;}
+  .workflow-steps li{padding:0 0 10px 0;}
+  .workflow-steps li::before{display:none;}
+}
 @media(max-width:760px){
   .wrap{padding-inline:18px;}
-  .hero-grid,.sub-grid,.pair-row,.mini-grid{grid-template-columns:1fr;min-width:0;}
-  .hero h1{font-size:32px;}
-  nav{gap:12px;font-size:13px;}
-  dialog{max-width:100vw;}
+  .hero-grid,.sub-grid,.pair-row,.mini-grid,.platform-shots,.stage-notes,.skill-grid{grid-template-columns:1fr;min-width:0;}
+  .hero{padding-block:36px 44px;}
+  .case{padding-block:44px;}
+  .case-index{font-size:40px;min-width:50px;}
+  dialog{max-width:100vw;border-radius:0;}
   dialog img{max-height:60vh;max-width:94vw;}
-  header{padding:12px 0;position:static;}
-  .hero,section.case,.skills{scroll-margin-top:24px;}
+  header.site{padding:10px 0;position:static;}
+  .headrow{flex-wrap:wrap;gap:4px;}
+  .nav-scroll{flex-basis:100%;}
+  .hero,section.case,.skills{scroll-margin-top:20px;}
+  .phone-row{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;-webkit-overflow-scrolling:touch;}
+  .phone-row>*{flex:0 0 78%;scroll-snap-align:start;}
+  #projectDialog{width:100vw;max-width:100vw;height:100vh;height:100dvh;max-height:100vh;max-height:100dvh;margin:0;border:none;border-radius:0;}
+  .prj-body{display:flex;flex-direction:column;padding:14px;}
+  .prj-stage,.prj-copy{flex:0 0 auto;}
+  .prj-stage img{max-height:38vh;}
+  .prj-head,.prj-nav{padding:12px 14px;}
 }
 @media (prefers-reduced-motion: reduce){
-  *{scroll-behavior:auto !important;}
+  html{scroll-behavior:auto;}
+  *{transition:none !important;animation:none !important;}
 }
 </style>
 </head>
 <body>
-<header>
+<header class="site">
   <div class="wrap headrow">
-    <div><span class="name">Александр Федосеев</span></div>
-    <nav>
-      <a href="#platform">Платформа</a>
-      <a href="#photo">Фотоотчёты</a>
-      <a href="#vpn">VPN</a>
-      <a href="#tools">Инструменты</a>
-      <a href="#skills">Опыт</a>
-      <a href="./resume.pdf" target="_blank" rel="noopener noreferrer">Резюме PDF</a>
-    </nav>
+    <span class="brand">Александр Федосеев</span>
+    <div class="nav-scroll">
+      <nav class="nav-inner">
+        <a href="#platform">Платформа</a>
+        <a href="#photo">Фотоотчёты</a>
+        <a href="#vpn">VPN</a>
+        <a href="#tools">Инструменты</a>
+        <a href="#skills">Опыт</a>
+        <a class="resume-link" href="./resume.pdf" target="_blank" rel="noopener noreferrer">Резюме</a>
+      </nav>
+    </div>
   </div>
 </header>
 
@@ -116,45 +234,83 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
   <section class="hero" id="top">
     <div class="wrap hero-grid">
       <div>
-        <span class="badge">Автоматизация и прикладная разработка</span>
-        <h1>Разбираюсь в процессе. Создаю инструмент.</h1>
-        <p>Работаю на стыке закупочных процессов и разработки: вижу, где ручная работа съедает время команды, и довожу решение до рабочего интерфейса — от корпоративной платформы автоматизации документов до личных прикладных инструментов.</p>
+        <span class="eyebrow">Автоматизация и прикладная разработка</span>
+        <h1>Разбираюсь в процессе. Делаю <em>продукт</em>.</h1>
+        <p>Вижу, где ручная работа съедает время команды, и довожу решение до рабочего интерфейса — от корпоративной платформы до личных прикладных инструментов.</p>
         <div class="cta-row">
           <a class="btn" href="#platform">Смотреть проекты</a>
           <a class="btn ghost" href="./resume.pdf" target="_blank" rel="noopener noreferrer">Резюме PDF</a>
         </div>
       </div>
-      <div>
-        <p class="shot-eyebrow">01 / Корпоративная платформа</p>
-        <figure>
+      <div class="hero-stage">
+        <p class="stage-label">01 / Корпоративная платформа</p>
+        <div class="frame">
+          <figure>
 <button class="shot-btn" aria-label="Увеличить: главный экран платформы" data-cap="Главный экран платформы · демонстрационные данные" type="button"><img src="assets/platform-home.jpg" alt="Главный экран платформы с рабочими модулями" loading="eager" width="1440" height="1000"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
 </figure>
+        </div>
+        <div class="stage-notes">
+          <div>
+            <h4>Чат-ассистент</h4>
+            <p>Мой модуль — вопросы к данным на естественном языке.</p>
+          </div>
+          <div>
+            <h4>Обработка писем</h4>
+            <p>Мой модуль — приём и разбор входящих документов.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="platform" class="case dark">
     <div class="wrap">
-      <h2><span class="num">01</span>Корпоративная платформа автоматизации документов</h2>
-      <p class="lead">Система для обработки закупочных писем и документов. Разрабатывается командой; ниже — модули, над которыми работал непосредственно, и общий обзор направлений платформы.</p>
-      <div class="sub-grid">
-        <figure>
+      <div class="case-head">
+        <span class="case-index">01</span>
+        <div>
+          <h2>Корпоративная платформа автоматизации документов</h2>
+          <p class="lead">Система для обработки закупочных писем и документов. Разрабатывается командой — ниже показаны модули, над которыми работал непосредственно я, и модули общей платформы.</p>
+          <button class="btn ghost present-btn" type="button" data-project="platform">Смотреть презентацию</button>
+        </div>
+      </div>
+      <div class="platform-grid">
+        <div class="platform-shots">
+          <div class="frame">
+            <figure>
 <button class="shot-btn" aria-label="Увеличить: ИИ-чат-ассистент, полноэкранный режим" data-cap="ИИ-чат-ассистент, полноэкранный режим · демонстрационные данные" type="button"><img src="assets/platform-assistant.jpg" alt="Полноэкранный ИИ-чат-ассистент с синтетическим ответом" loading="lazy" width="1440" height="1000"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
 </figure>
-        <figure>
+          </div>
+          <div class="frame">
+            <figure>
 <button class="shot-btn" aria-label="Увеличить: реестр писем" data-cap="Реестр писем, демонстрационные записи · демонстрационные данные" type="button"><img src="assets/platform-letters.jpg" alt="Реестр входящих писем, демонстрационные записи" loading="lazy" width="1440" height="1000"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
 </figure>
+          </div>
+        </div>
+        <div class="platform-side">
+          <h3>Командная платформа</h3>
+          <p class="platform-line"><span>Мой ИИ-чат</span><span>и собственные модули</span></p>
+          <p class="note" style="margin-top:0;">Изображения — интерфейс на демонстрационных данных, а не работа с реальными документами компании.</p>
+        </div>
       </div>
-      <p class="note">ИИ-чат-ассистент — мой модуль для вопросов к данным на естественном языке. Изображения показывают интерфейс на демонстрационных данных, а не работу с реальными документами компании.</p>
       <details>
-        <summary>Раскрыть кейс: задача, направления платформы, мой вклад, сценарий</summary>
+        <summary>Раскрыть кейс: задача, мои модули, общие возможности платформы, сценарий</summary>
         <div class="detail-body">
           <h4>Задача</h4>
           <p>Команде требовалось перенести обработку входящих писем и вложений с закупочными данными в единую платформу с прозрачной проверкой и минимумом ручных операций.</p>
-          <h4>Направления платформы (обзор)</h4>
+          <h4>Мои модули</h4>
+          <ul>
+            <li>Модуль писем — обработка входящих писем и вложений</li>
+            <li>Приём и обработка входящих актов М-7 и несоответствий</li>
+            <li>Экраны контроля качества и внедрения</li>
+            <li>Роботы выгрузки данных</li>
+            <li>Перенос движка входящих спецификаций из десктопа в веб</li>
+            <li>ИИ-чат-ассистент — вопросы к данным на естественном языке</li>
+          </ul>
+          <p>В остальных модулях помогал команде.</p>
+          <h4>Общие возможности платформы</h4>
           <ul>
             <li>Обработка писем и вложений; формирование спецификаций</li>
             <li>Приём входящих актов М-7 и работа с несоответствиями</li>
@@ -166,8 +322,6 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
             <li>Отчёты, презентации, дашборды</li>
             <li>Вопросы к доступным загруженным данным через чат-ассистента</li>
           </ul>
-          <h4>Мой вклад</h4>
-          <p>Отвечал за модуль писем, приём и обработку входящих актов М-7 и несоответствий, экраны контроля качества и внедрения, роботов выгрузки данных, перенос движка входящих спецификаций из десктопа в веб, а также ИИ-чат-ассистент. В остальных частях платформы участвовал как член команды.</p>
           <h4>Сценарий</h4>
           <p>Входящее письмо и вложения → извлечение сведений → структурированная карточка → проверка сотрудником.</p>
         </div>
@@ -177,22 +331,43 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
 
   <section id="photo" class="case">
     <div class="wrap">
-      <h2><span class="num">02</span>Фотоотчёты по объектам</h2>
-      <p class="lead">Мобильный инструмент для сбора фотоотчётов на объектах, разработанный самостоятельно. Данные хранятся локально, на устройстве пользователя.</p>
-      <p class="flow">Письмо → Excel/CSV-вложение → План → Объект → Фото → Word</p>
-      <div class="phone-row">
-        <figure>
+      <div class="case-head">
+        <span class="case-index">02</span>
+        <div>
+          <h2>Фотоотчёты по объектам</h2>
+          <p class="lead">Мобильный инструмент для сбора фотоотчётов на объектах, разработанный самостоятельно. Данные хранятся локально, на устройстве пользователя.</p>
+          <button class="btn ghost present-btn" type="button" data-project="photo">Смотреть презентацию</button>
+        </div>
+      </div>
+      <div class="photo-grid">
+        <ol class="workflow-steps">
+          <li>Письмо</li>
+          <li>Вложение</li>
+          <li>План</li>
+          <li>Объект</li>
+          <li>Фото</li>
+          <li>Word</li>
+        </ol>
+        <div class="phone-row">
+          <div class="frame frame-phone">
+            <figure>
 <button class="shot-btn" aria-label="Увеличить: план выездов" data-cap="Мобильный план выездов · демонстрационные данные" type="button"><img src="assets/photo-plan.jpg" alt="Мобильный экран плана выездов" loading="lazy" width="430" height="932"></button>
 <figcaption>План · демонстрационные данные</figcaption>
 </figure>
-        <figure>
+          </div>
+          <div class="frame frame-phone">
+            <figure>
 <button class="shot-btn" aria-label="Увеличить: выбор объекта" data-cap="Выбор объекта · демонстрационные данные" type="button"><img src="assets/photo-objects.jpg" alt="Экран выбора объекта" loading="lazy" width="430" height="932"></button>
 <figcaption>Объект · демонстрационные данные</figcaption>
 </figure>
-        <figure>
+          </div>
+          <div class="frame frame-phone">
+            <figure>
 <button class="shot-btn" aria-label="Увеличить: добавление фото" data-cap="Добавление фото через камеру или галерею · демонстрационные данные" type="button"><img src="assets/photo-add.jpg" alt="Экран добавления фото через камеру или галерею" loading="lazy" width="430" height="932"></button>
 <figcaption>Фотографии · демонстрационные данные</figcaption>
 </figure>
+          </div>
+        </div>
       </div>
       <details>
         <summary>Раскрыть кейс: задача, мой вклад, сценарий</summary>
@@ -210,17 +385,27 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
 
   <section id="vpn" class="case">
     <div class="wrap">
-      <h2><span class="num">03</span>VPN — личный проект</h2>
-      <p class="lead">Небольшой сервис для доверенного круга пользователей: управление устройствами и доступом, контроль состояния сервера.</p>
+      <div class="case-head">
+        <span class="case-index">03</span>
+        <div>
+          <h2>VPN — личный проект</h2>
+          <p class="lead">Небольшой семейный сервис для доверенного круга пользователей: управление устройствами и доступом, контроль состояния сервера. Некоммерческий проект.</p>
+          <button class="btn ghost present-btn" type="button" data-project="vpn">Смотреть презентацию</button>
+        </div>
+      </div>
       <div class="pair-row">
-        <figure>
+        <div class="frame">
+          <figure>
 <button class="shot-btn" aria-label="Увеличить: устройства и доступы" data-cap="Устройства и выданные доступы · демонстрационные данные" type="button"><img src="assets/vpn-devices.jpg" alt="Экран устройств и доступов" loading="lazy" width="1280" height="720"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
 </figure>
-        <figure>
+        </div>
+        <div class="frame">
+          <figure>
 <button class="shot-btn" aria-label="Увеличить: статус сервера" data-cap="Состояние сервера · демонстрационные данные" type="button"><img src="assets/vpn-status.jpg" alt="Экран состояния сервера" loading="lazy" width="1280" height="720"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
 </figure>
+        </div>
       </div>
       <details>
         <summary>Раскрыть кейс: задача, мой вклад, сценарий</summary>
@@ -238,22 +423,34 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
 
   <section id="tools" class="case">
     <div class="wrap">
-      <h2><span class="num">04</span>Инструменты</h2>
-      <p class="lead">Прикладные разработки, закрывающие конкретные задачи в закупочном и производственном документообороте.</p>
+      <div class="case-head">
+        <span class="case-index">04</span>
+        <div>
+          <h2>Инструменты</h2>
+          <p class="lead">Прикладные разработки, закрывающие конкретные задачи в закупочном и производственном документообороте.</p>
+        </div>
+      </div>
 
       <div class="tool-block">
-        <div class="tool-head">
+        <div class="tool-top">
           <div class="tool-num">01</div>
-          <div><h3>Конструктор спецификаций</h3>
-          <p>Совместная разработка. Табличная выгрузка (XLSX/XLS/XLSB/CSV) размечается на поля и правила, задаётся группировка — на выходе спецификации и дополнительные соглашения в Excel и PDF. Поддержаны семь типов правил обработки поля: копирование, фиксированное значение, ВПР, расширенный ВПР, формула, условное и комбинированное правило. Отдельно можно сформировать сводный реестр по всем документам. Участвовал в реализации и тестировании, вносил доработки по замечаниям, подготовил инструкцию для пользователей и сопровождал программу.</p>
-          </div>
+          <h3>Конструктор спецификаций</h3>
         </div>
-        <div class="feature-shot">
+        <p class="tool-lead">Совместная разработка. Табличная выгрузка (XLSX/XLS/XLSB/CSV) размечается на поля и правила, задаётся группировка — на выходе спецификации и дополнительные соглашения в Excel и PDF.</p>
+        <button class="btn ghost present-btn" type="button" data-project="constructor">Смотреть презентацию</button>
+        <div class="feature-shot frame">
           <figure>
 <button class="shot-btn" aria-label="Увеличить: настройка полей конструктора спецификаций" data-cap="Настройка полей и правил · демонстрационные данные" type="button"><img src="assets/spec-generator-fields.jpg" alt="Экран настройки полей и правил конструктора спецификаций" loading="lazy" width="1114" height="768"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
 </figure>
         </div>
+        <details>
+          <summary>Правила, форматы, мой вклад</summary>
+          <div class="detail-body">
+            <p>Поддержаны семь типов правил обработки поля: копирование, фиксированное значение, ВПР, расширенный ВПР, формула, условное и комбинированное правило. Отдельно можно сформировать сводный реестр по всем документам.</p>
+            <p>Участвовал в реализации и тестировании, вносил доработки по замечаниям, подготовил инструкцию для пользователей и сопровождал программу.</p>
+          </div>
+        </details>
         <div class="mini-grid">
           <figure>
 <button class="shot-btn" aria-label="Увеличить: главный экран конструктора" data-cap="Главный экран конструктора спецификаций · демонстрационные данные" type="button"><img src="assets/spec-generator-main.jpg" alt="Главный экран конструктора спецификаций" loading="lazy" width="1114" height="768"></button>
@@ -272,28 +469,39 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
       </div>
 
       <div class="tool-block">
-        <div class="tool-head">
+        <div class="tool-top">
           <div class="tool-num">02</div>
-          <div><h3>Обработка входящих PDF-спецификаций</h3>
-          <p>Самостоятельная разработка. Из текстового PDF извлекаются позиции и условия, они сопоставляются с договорными реквизитами по таблице соответствия, цены пересчитываются по заданному коэффициенту — формируется исходящая спецификация. Позднее движок обработки перенесён в веб-модуль платформы.</p>
-          </div>
+          <h3>Обработка входящих PDF-спецификаций</h3>
         </div>
-        <div class="feature-shot">
+        <p class="tool-lead">Самостоятельная разработка. Из текстового PDF извлекаются позиции и условия, сопоставляются с договорными реквизитами по таблице соответствия — формируется исходящая спецификация.</p>
+        <button class="btn ghost present-btn" type="button" data-project="incoming">Смотреть презентацию</button>
+        <div class="feature-shot frame">
           <figure>
 <button class="shot-btn" aria-label="Увеличить: предпросмотр входящей спецификации" data-cap="Предпросмотр обработки входящей спецификации · демонстрационные данные" type="button"><img src="assets/incoming-spec-preview.jpg" alt="Экран предпросмотра обработки входящей PDF-спецификации" loading="lazy" width="1422" height="768"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
 </figure>
         </div>
+        <details>
+          <summary>Логика обработки, мой вклад</summary>
+          <div class="detail-body">
+            <p>Цены пересчитываются по заданному коэффициенту, реквизиты подставляются из таблицы соответствия. Позднее движок обработки перенесён в веб-модуль платформы.</p>
+          </div>
+        </details>
         <p class="tool-flow">Текстовый PDF → позиции и условия → таблица соответствия реквизитов → пересчёт по коэффициенту → исходящая спецификация</p>
       </div>
 
       <div class="tool-block">
-        <div class="tool-head">
+        <div class="tool-top">
           <div class="tool-num">03</div>
-          <div><h3>Excel/VBA-инструменты</h3>
-          <p>Набор макросов для рутинных операций с табличными данными: сбор и сведение выгрузок из разных систем, сопоставление данных между источниками, очистка и объединение повторяющихся записей, формирование реестров и отчётности по заданным правилам.</p>
-          </div>
+          <h3>Excel/VBA-инструменты</h3>
         </div>
+        <p class="tool-lead">Набор макросов для рутинных операций с табличными данными.</p>
+        <ul class="vba-list">
+          <li>Сведение выгрузок из разных систем</li>
+          <li>Сопоставление данных между источниками</li>
+          <li>Очистка и объединение повторяющихся записей</li>
+          <li>Формирование реестров и отчётности по заданным правилам</li>
+        </ul>
       </div>
 
       <p class="note">Стек: Python, PyQt5, pdfplumber, Excel. В разработке использую ИИ-инструменты как часть рабочего процесса — для ускорения рутинных шагов и первичной проверки решений; итоговый результат проверяю и дорабатываю сам.</p>
@@ -303,7 +511,8 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
   <section id="skills" class="skills">
     <div class="wrap">
       <h2>Опыт и навыки</h2>
-      <p class="lead">Специалист по автоматизации с опытом в закупочных и производственных процессах: от анализа рабочей задачи до готового инструмента — совместная разработка, реализация, тестирование, доработки по обратной связи, инструкция для пользователей и сопровождение.</p>
+      <p class="flow">Анализ процесса → Разработка → Проверка → Внедрение</p>
+      <p class="lead">Специалист по автоматизации с опытом в закупочных и производственных процессах: от анализа рабочей задачи до готового инструмента — совместная разработка, реализация, тестирование, доработки по обратной связи, инструкция для пользователей и сопровождение. В разработке использую ИИ-инструменты.</p>
       <div class="skill-grid">
         <div><h4>Разработка</h4><p>Python, PyQt5</p></div>
         <div><h4>Табличные данные</h4><p>Excel, VBA, SQL</p></div>
@@ -335,36 +544,241 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
   </div>
 </dialog>
 
+<dialog id="projectDialog" aria-labelledby="prjTitle">
+  <div class="prj-head">
+    <h2 class="prj-title" id="prjTitle"></h2>
+    <button class="dlg-close" id="prjClose" type="button">Закрыть</button>
+  </div>
+  <div class="prj-body">
+    <div class="prj-stage">
+      <img id="prjImg" src="" alt="">
+    </div>
+    <div class="prj-copy">
+      <p class="prj-caption" id="prjCaption"></p>
+      <div class="prj-text">
+        <h4>Суть проекта</h4>
+        <p id="prjPurpose"></p>
+        <h4>Мой вклад</h4>
+        <p id="prjContribution"></p>
+      </div>
+    </div>
+  </div>
+  <div class="prj-nav">
+    <button class="dlg-close" id="prjPrev" type="button">← Назад</button>
+    <span class="prj-counter" id="prjCounter"></span>
+    <button class="dlg-close" id="prjNext" type="button">Далее →</button>
+  </div>
+</dialog>
+
 <script>
 (function(){
-  var dialog = document.getElementById('imgDialog');
+  var imgDialog = document.getElementById('imgDialog');
   var dlgImg = document.getElementById('dlgImg');
   var dlgCap = document.getElementById('dlgCap');
-  var closeBtn = document.getElementById('dlgClose');
-  var lastTrigger = null;
+  var dlgClose = document.getElementById('dlgClose');
+  var lastImgTrigger = null;
+
+  var prjDialog = document.getElementById('projectDialog');
+  var prjTitle = document.getElementById('prjTitle');
+  var prjImg = document.getElementById('prjImg');
+  var prjCaption = document.getElementById('prjCaption');
+  var prjPurpose = document.getElementById('prjPurpose');
+  var prjContribution = document.getElementById('prjContribution');
+  var prjCounter = document.getElementById('prjCounter');
+  var prjPrev = document.getElementById('prjPrev');
+  var prjNext = document.getElementById('prjNext');
+  var prjClose = document.getElementById('prjClose');
+  var lastPrjTrigger = null;
+  var currentProject = null;
+  var currentIndex = 0;
+  var bodyOverflowBackup = null;
+
+  var projects = {
+    platform: {
+      title: 'Корпоративная платформа автоматизации документов',
+      purpose: 'Платформа для обработки закупочных писем и документов разрабатывается совместно с командой.',
+      contribution: 'Мои модули: ИИ-чат-ассистент, обработка писем, приём и обработка актов М-7, экраны контроля качества и внедрения, роботы выгрузки данных, перенос движка входящих спецификаций из десктопа в веб. В остальных модулях помогал команде.',
+      frames: [
+        {src:'assets/platform-home.jpg', alt:'Главный экран платформы с рабочими модулями', caption:'Главный экран платформы · демонстрационные данные'},
+        {src:'assets/platform-assistant.jpg', alt:'Полноэкранный ИИ-чат-ассистент с синтетическим ответом', caption:'ИИ-чат-ассистент, полноэкранный режим · демонстрационные данные'},
+        {src:'assets/platform-letters.jpg', alt:'Реестр входящих писем, демонстрационные записи', caption:'Реестр писем, демонстрационные записи · демонстрационные данные'}
+      ]
+    },
+    photo: {
+      title: 'Фотоотчёты по объектам',
+      purpose: 'Мобильный инструмент для сбора фотоотчётов на объектах: от письма с плановыми данными до готового документа Word. Данные хранятся локально, на устройстве пользователя.',
+      contribution: 'Спроектировал и реализовал инструмент самостоятельно — от загрузки данных до формирования итогового файла.',
+      frames: [
+        {src:'assets/photo-plan.jpg', alt:'Мобильный экран плана выездов', caption:'Мобильный план выездов · демонстрационные данные'},
+        {src:'assets/photo-objects.jpg', alt:'Экран выбора объекта', caption:'Выбор объекта · демонстрационные данные'},
+        {src:'assets/photo-add.jpg', alt:'Экран добавления фото через камеру или галерею', caption:'Добавление фото через камеру или галерею · демонстрационные данные'}
+      ]
+    },
+    vpn: {
+      title: 'VPN — личный проект',
+      purpose: 'Небольшой семейный VPN-сервис для доверенного круга пользователей: управление устройствами и доступом, контроль состояния сервера. Некоммерческий проект.',
+      contribution: 'Разработал панель самостоятельно: реестр устройств, выдача и отключение доступа, мониторинг состояния сервера и базовая диагностика.',
+      frames: [
+        {src:'assets/vpn-devices.jpg', alt:'Экран устройств и доступов', caption:'Устройства и выданные доступы · демонстрационные данные'},
+        {src:'assets/vpn-status.jpg', alt:'Экран состояния сервера', caption:'Состояние сервера · демонстрационные данные'}
+      ]
+    },
+    constructor: {
+      title: 'Конструктор спецификаций',
+      purpose: 'Совместная разработка. Табличная выгрузка (XLSX/XLS/XLSB/CSV) размечается на поля и правила, задаётся группировка — на выходе спецификации и дополнительные соглашения в Excel и PDF.',
+      contribution: 'Участвовал в реализации и тестировании, вносил доработки по замечаниям, подготовил инструкцию для пользователей и сопровождал программу.',
+      frames: [
+        {src:'assets/spec-generator-fields.jpg', alt:'Экран настройки полей и правил конструктора спецификаций', caption:'Настройка полей и правил · демонстрационные данные'},
+        {src:'assets/spec-generator-main.jpg', alt:'Главный экран конструктора спецификаций', caption:'Главный экран конструктора спецификаций · демонстрационные данные'},
+        {src:'assets/spec-generator-rule.jpg', alt:'Экран настройки отдельного правила поля', caption:'Настройка отдельного правила · демонстрационные данные'},
+        {src:'assets/spec-generator-conditions.jpg', alt:'Экран условий документа', caption:'Условия документа · демонстрационные данные'}
+      ]
+    },
+    incoming: {
+      title: 'Обработка входящих PDF-спецификаций',
+      purpose: 'Самостоятельная разработка. Из текстового PDF извлекаются позиции и условия, сопоставляются с договорными реквизитами по таблице соответствия — формируется исходящая спецификация.',
+      contribution: 'Разработал самостоятельно; позднее движок обработки перенесён в веб-модуль платформы.',
+      frames: [
+        {src:'assets/incoming-spec-preview.jpg', alt:'Экран предпросмотра обработки входящей PDF-спецификации', caption:'Предпросмотр обработки входящей спецификации · демонстрационные данные'}
+      ]
+    }
+  };
+
+  function isAnyDialogOpen(){
+    return imgDialog.open || prjDialog.open;
+  }
+
+  function lockBody(){
+    if (bodyOverflowBackup === null) {
+      bodyOverflowBackup = document.body.style.overflow;
+    }
+    document.body.style.overflow = 'hidden';
+  }
+
+  function unlockBody(){
+    if (bodyOverflowBackup !== null) {
+      document.body.style.overflow = bodyOverflowBackup;
+      bodyOverflowBackup = null;
+    }
+  }
 
   document.querySelectorAll('.shot-btn').forEach(function(btn){
     btn.addEventListener('click', function(){
       var img = btn.querySelector('img');
+      if (prjDialog.open) { prjDialog.close(); }
       dlgImg.src = img.src;
       dlgImg.alt = img.alt;
       dlgCap.textContent = btn.getAttribute('data-cap') || img.alt;
-      lastTrigger = btn;
-      dialog.showModal();
+      lastImgTrigger = btn;
+      lockBody();
+      imgDialog.showModal();
     });
   });
 
-  closeBtn.addEventListener('click', function(){ dialog.close(); });
+  dlgClose.addEventListener('click', function(){ imgDialog.close(); });
 
-  dialog.addEventListener('keydown', function(event){
+  imgDialog.addEventListener('keydown', function(event){
     if (event.key === 'Tab') {
       event.preventDefault();
-      closeBtn.focus();
+      dlgClose.focus();
     }
   });
 
-  dialog.addEventListener('close', function(){
-    if (lastTrigger) { lastTrigger.focus(); }
+  imgDialog.addEventListener('close', function(){
+    if (prjDialog.open) { return; }
+    unlockBody();
+    if (lastImgTrigger) { lastImgTrigger.focus(); }
+  });
+
+  function renderFrame(){
+    var proj = projects[currentProject];
+    var frame = proj.frames[currentIndex];
+    prjImg.src = frame.src;
+    prjImg.alt = frame.alt;
+    prjCaption.textContent = frame.caption;
+    prjCounter.textContent = 'Кадр ' + (currentIndex + 1) + ' из ' + proj.frames.length;
+    prjPrev.disabled = currentIndex === 0;
+    prjNext.disabled = currentIndex === proj.frames.length - 1;
+  }
+
+  function openProject(id, trigger){
+    var proj = projects[id];
+    if (!proj) { return; }
+    if (imgDialog.open) { imgDialog.close(); }
+    currentProject = id;
+    currentIndex = 0;
+    prjTitle.textContent = proj.title;
+    prjPurpose.textContent = proj.purpose;
+    prjContribution.textContent = proj.contribution;
+    renderFrame();
+    lastPrjTrigger = trigger;
+    lockBody();
+    prjDialog.showModal();
+    prjClose.focus();
+  }
+
+  document.querySelectorAll('.present-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      openProject(btn.getAttribute('data-project'), btn);
+    });
+  });
+
+  prjPrev.addEventListener('click', function(){
+    if (currentIndex <= 0) { return; }
+    currentIndex -= 1;
+    renderFrame();
+    if (prjPrev.disabled) {
+      (!prjNext.disabled ? prjNext : prjClose).focus();
+    }
+  });
+
+  prjNext.addEventListener('click', function(){
+    var proj = projects[currentProject];
+    if (currentIndex >= proj.frames.length - 1) { return; }
+    currentIndex += 1;
+    renderFrame();
+    if (prjNext.disabled) {
+      (!prjPrev.disabled ? prjPrev : prjClose).focus();
+    }
+  });
+
+  prjClose.addEventListener('click', function(){ prjDialog.close(); });
+
+  function getPrjFocusable(){
+    return [prjClose, prjPrev, prjNext].filter(function(el){ return !el.disabled; });
+  }
+
+  prjDialog.addEventListener('keydown', function(event){
+    if (event.key === 'Tab') {
+      var items = getPrjFocusable();
+      if (items.length === 0) { return; }
+      var idx = items.indexOf(document.activeElement);
+      event.preventDefault();
+      var nextIdx;
+      if (event.shiftKey) {
+        nextIdx = idx <= 0 ? items.length - 1 : idx - 1;
+      } else {
+        nextIdx = (idx === -1 || idx === items.length - 1) ? 0 : idx + 1;
+      }
+      items[nextIdx].focus();
+    }
+  });
+
+  document.addEventListener('keydown', function(event){
+    if (!prjDialog.open) { return; }
+    if (event.key === 'ArrowLeft' && !prjPrev.disabled) {
+      event.preventDefault();
+      prjPrev.click();
+    } else if (event.key === 'ArrowRight' && !prjNext.disabled) {
+      event.preventDefault();
+      prjNext.click();
+    }
+  });
+
+  prjDialog.addEventListener('close', function(){
+    if (imgDialog.open) { return; }
+    unlockBody();
+    if (lastPrjTrigger) { lastPrjTrigger.focus(); }
   });
 })();
 </script>
