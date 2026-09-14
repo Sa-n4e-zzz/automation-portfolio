@@ -476,6 +476,77 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
   }
 }
 
+.hero .module-band {
+  margin-top: 48px;
+  padding-bottom: 56px;
+}
+
+.module-band .stage-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.module-band .stage-notes > div {
+  grid-column: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.module-band .stage-notes > div:nth-child(3) {
+  grid-column: auto;
+}
+
+.module-band .module-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.module-band .module-card .shot-btn {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.03);
+  overflow: hidden;
+  padding: 0;
+  cursor: zoom-in;
+}
+
+.module-band .module-card .shot-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.module-band .module-card h4 {
+  color: #0f172a;
+  margin: 0;
+}
+
+.module-band .module-card p {
+  color: #334155;
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .module-band .stage-notes {
+    grid-template-columns: 1fr;
+  }
+
+  .module-band .stage-notes > div:nth-child(3) {
+    grid-column: auto;
+  }
+}
+.module-band .stage-notes > div:nth-child(3){border-top:0;}
+.module-band .module-caption{font-size:11px;line-height:1.5;color:var(--muted);}
+
 </style>
 </head>
 <body>
@@ -524,23 +595,38 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
             </div>
 
           </div>
-          <div class="stage-notes">
-              <div>
-                <h4>Чат-ассистент</h4>
-                <p>Мой модуль — вопросы к данным на естественном языке.</p>
-              </div>
-              <div>
-                <h4>Обработка писем</h4>
-                <p>Мой модуль — приём и разбор входящих документов.</p>
-              </div>
-              <div>
-                <h4>История закупочных цен</h4>
-                <p>Разработал модуль «История закупочных цен» в составе командной платформы. Поиск по позициям и поставщикам, анализ истории и сравнение рассматриваемой закупки с предыдущими предложениями того же поставщика.</p>
-              </div>
-            </div>
+
         </div>
       </div>
     </div>
+  <div class="wrap module-band">
+  <div class="stage-notes">
+    <div class="module-card">
+      <button class="shot-btn" type="button" aria-label="Увеличить: чат-ассистент" data-cap="Интерфейс программы · демонстрационные данные"><img src="assets/platform-assistant.jpg" alt="Интерфейс чат-ассистента, демонстрационные данные" loading="lazy" width="1440" height="1000"></button>
+      <small class="module-caption">Интерфейс программы · демонстрационные данные</small>
+      <h4>Чат-ассистент</h4>
+      <p>Мой модуль — вопросы к данным на естественном языке.</p>
+    </div>
+    <div class="module-card">
+      <button class="shot-btn" type="button" aria-label="Увеличить: обработка писем" data-cap="Интерфейс программы · демонстрационные данные"><img src="assets/platform-letters.jpg" alt="Интерфейс обработки входящих писем, демонстрационные данные" loading="lazy" width="1440" height="1000"></button>
+      <small class="module-caption">Интерфейс программы · демонстрационные данные</small>
+      <h4>Обработка писем</h4>
+      <p>Мой модуль — приём и разбор входящих документов.</p>
+    </div>
+    <div class="module-card">
+      <button class="shot-btn" type="button" aria-label="Увеличить: история закупочных цен" data-cap="Интерфейс программы · демонстрационные данные"><img src="assets/platform-prices.jpg" alt="Интерфейс истории закупочных цен, демонстрационные данные" loading="lazy" width="2560" height="1440"></button>
+      <small class="module-caption">Интерфейс программы · демонстрационные данные</small>
+      <h4>История закупочных цен</h4>
+      <p>Разработал модуль «История закупочных цен» в составе командной платформы. Поиск по позициям и поставщикам, анализ истории и сравнение рассматриваемой закупки с предыдущими предложениями того же поставщика.</p>
+    </div>
+    <div class="module-card">
+      <button class="shot-btn" type="button" aria-label="Увеличить: акты М-7 и несоответствия" data-cap="Интерфейс программы · демонстрационные данные"><img src="assets/platform-m7.jpg" alt="Интерфейс модуля актов М-7 и несоответствий, демонстрационные данные" loading="lazy" width="2560" height="1440"></button>
+      <small class="module-caption">Интерфейс программы · демонстрационные данные</small>
+      <h4>Акты М-7 и несоответствия</h4>
+      <p>Мой модуль — приём, обработка и систематизация актов М-7 и несоответствий для формирования заключений и дальнейшей работы с поставщиками.</p>
+    </div>
+  </div>
+</div>
   </section>
 
   <section id="platform" class="case dark">
@@ -914,7 +1000,9 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
       frames: [
         {src:'assets/platform-home.jpg', alt:'Главный экран платформы с рабочими модулями', caption:'Главный экран платформы · демонстрационные данные'},
         {src:'assets/platform-assistant.jpg', alt:'Полноэкранный ИИ-чат-ассистент с синтетическим ответом', caption:'ИИ-чат-ассистент, полноэкранный режим · демонстрационные данные'},
-        {src:'assets/platform-letters.jpg', alt:'Реестр входящих писем, демонстрационные записи', caption:'Реестр писем, демонстрационные записи · демонстрационные данные'}
+        {src:'assets/platform-letters.jpg', alt:'Реестр входящих писем, демонстрационные записи', caption:'Реестр писем, демонстрационные записи · демонстрационные данные'},
+        {"src": "assets/platform-prices.jpg", "alt": "Интерфейс истории закупочных цен, демонстрационные данные", "caption": "Интерфейс программы · демонстрационные данные"},
+        {"src": "assets/platform-m7.jpg", "alt": "Интерфейс модуля актов М-7 и несоответствий, демонстрационные данные", "caption": "Интерфейс программы · демонстрационные данные"}
       ]
     },
     photo: {
