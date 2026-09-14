@@ -696,6 +696,162 @@ dialog{background:#ffffff;color:#171a1f;}
   .case.dark .case-index,.case.dark .flow{color:#333 !important;}
 }
 
+
+/* ===== Product sections redesign (append-only, scoped) ===== */
+.product-section [hidden]{display:none!important;}
+
+/* --- Platform: tabs + review stage --- */
+#platform .platform-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;}
+#platform.platform-enhanced .platform-tabs{display:flex;}
+#platform .platform-tab{min-height:44px;padding:10px 18px;border:1px solid var(--line);background:var(--plate);
+  border-radius:var(--r-sm);font-weight:700;font-size:13px;cursor:pointer;color:var(--ink);}
+#platform .platform-tab[aria-selected="true"]{background:var(--azure,var(--accent));color:#fff;border-color:var(--azure-ink,var(--accent-ink));}
+#platform .platform-tab:hover{border-color:var(--azure-ink,var(--accent-ink));}
+#platform .module-panels{display:flex;flex-direction:column;gap:36px;margin-bottom:28px;}
+#platform .module-panel{display:grid;grid-template-columns:280px 1fr;gap:28px;align-items:start;}
+#platform .module-panel-info{padding-top:4px;}
+#platform .module-kicker{display:inline-block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
+  font-weight:700;color:var(--azure-ink,var(--accent-ink));border:1px solid currentColor;border-radius:999px;
+  padding:3px 10px;margin-bottom:10px;}
+#platform .module-panel-info h3{margin:0 0 8px;font-size:20px;font-weight:800;letter-spacing:-.01em;}
+#platform .module-panel-info p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.55;}
+#platform .module-panel-stage{aspect-ratio:16/10;display:flex;flex-direction:column;}
+#platform .module-panel-stage figure{display:flex;flex-direction:column;flex:1;min-height:0;}
+#platform .module-panel-stage .shot-btn{flex:1;min-height:0;display:block;width:100%;}
+#platform .module-panel-stage img{width:100%;height:100%;object-fit:contain;display:block;}
+@media(prefers-reduced-motion:no-preference){
+  #platform .module-panel{animation:platformFadeIn 420ms ease both;}
+  @keyframes platformFadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+}
+@media(max-width:760px){
+  #platform .platform-tabs{display:grid;grid-template-columns:1fr 1fr;}
+  #platform.platform-enhanced .platform-tabs{display:grid;}
+  #platform .module-panel{grid-template-columns:1fr;}
+}
+
+/* --- Photo: chronological story columns --- */
+#photo .photo-story{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start;}
+#photo .photo-step{display:flex;flex-direction:column;gap:14px;}
+#photo .photo-step .step-num{font-size:28px;font-weight:800;color:var(--silver);letter-spacing:-.02em;}
+#photo .photo-step h3{margin:0;font-size:14px;font-weight:700;letter-spacing:-.005em;color:var(--ink);}
+#photo .photo-step .frame-phone{margin-inline:0;max-width:220px;}
+#photo .photo-outcome{margin-top:8px;font-size:14.5px;font-weight:700;color:var(--azure-ink,var(--accent-ink));
+  border-top:1px solid var(--line-soft);padding-top:16px;}
+@media(max-width:900px){
+  #photo .photo-story{grid-template-columns:1fr;gap:32px;}
+  #photo .photo-step .frame-phone{max-width:250px;margin-inline:auto;}
+}
+
+/* --- VPN: asymmetric split --- */
+#vpn .vpn-split{display:grid;grid-template-columns:300px 1fr;gap:32px;align-items:start;}
+#vpn .vpn-overview h3{margin:0 0 4px;font-size:15px;font-weight:800;}
+#vpn .vpn-caps{list-style:none;margin:14px 0 22px;padding:0;}
+#vpn .vpn-caps li{padding:10px 0;border-top:1px solid var(--line-soft);font-size:14px;font-weight:700;}
+#vpn .vpn-caps li:first-child{border-top:none;}
+#vpn .vpn-visual{display:flex;flex-direction:column;gap:18px;}
+#vpn .vpn-visual-secondary{max-width:70%;align-self:flex-end;}
+@media(max-width:900px){
+  #vpn .vpn-split{grid-template-columns:1fr;}
+  #vpn .vpn-visual-secondary{max-width:100%;align-self:stretch;}
+}
+
+/* --- Tools: equal two-column case studies --- */
+#tools .tools-columns{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+#tools .tool-col{display:flex;flex-direction:column;gap:16px;}
+#tools .vba-block{border-top:1px solid var(--line-soft);padding-top:28px;margin-top:8px;}
+@media(max-width:900px){
+  #tools .tools-columns{grid-template-columns:1fr;gap:0;}
+  #tools .tool-col{margin-bottom:40px;}
+}
+
+/* --- Skills: compact closing split --- */
+#skills .skills-split{display:grid;grid-template-columns:260px 1fr;gap:40px;align-items:start;}
+#skills .skills-intro .flow{margin:4px 0 16px;}
+#skills .skills-intro .lead{margin:0 0 24px;}
+#skills .skill-grid{border-top:none;padding-top:0;margin-bottom:0;}
+@media(max-width:900px){
+  #skills .skills-split{grid-template-columns:1fr;}
+}
+
+
+/* ===== Editorial refinement pass v2 (append-only, scoped) ===== */
+
+/* 1. Case-head: editorial two-column heading/lead */
+.product-section .case-head{display:flex;gap:20px;margin-bottom:36px;}
+.product-section .case-head .case-index{flex:0 0 auto;margin:0;font-size:12px;font-weight:700;color:var(--silver);}
+.product-section .case-head > div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-width:0;gap:32px;align-items:end;flex:1;}
+.product-section .case-head h2{margin:0;font-size:46px;font-weight:650;line-height:1.06;letter-spacing:-.015em;}
+.product-section .case-head .lead{margin:0;font-size:15px;line-height:1.55;color:var(--muted);}
+@media(max-width:900px){
+  .product-section .case-head{gap:12px;margin-bottom:24px;}
+  .product-section .case-head > div{grid-template-columns:1fr;gap:12px;align-items:start;}
+  .product-section .case-head h2{font-size:32px;}
+}
+
+/* 2. Platform tabs: underline style, plain kicker, framed stage */
+#platform .platform-tabs{display:flex;gap:0;border-bottom:1px solid var(--line-soft);background:none;padding:0;margin:0 0 32px;counter-reset:tabIndex;}
+#platform.platform-enhanced .platform-tabs{display:flex;}
+#platform .platform-tab{counter-increment:tabIndex;flex:1 1 25%;min-height:44px;padding:11px 6px;border:none;border-bottom:2px solid transparent;background:none;border-radius:0;font-weight:600;font-size:13px;color:var(--muted);cursor:pointer;text-align:left;}
+#platform .platform-tab::before{content:counter(tabIndex,decimal-leading-zero)"  ";font-size:11px;color:var(--silver);font-weight:400;}
+#platform .platform-tab[aria-selected="true"]{color:var(--ink);font-weight:700;border-bottom-color:var(--azure-ink,var(--accent-ink));background:none;}
+#platform .platform-tab:hover{color:var(--ink);}
+#platform .platform-tab:focus-visible{outline:2px solid var(--azure-ink,var(--accent-ink));outline-offset:2px;}
+@media(max-width:760px){
+  #platform .platform-tabs{flex-wrap:wrap;}
+  #platform .platform-tab{flex:1 1 50%;border-bottom:1px solid var(--line-soft);}
+}
+#platform .module-kicker{border:none;border-radius:0;padding:0;background:none;display:block;text-transform:uppercase;letter-spacing:.08em;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:8px;}
+#platform .module-panel-info h3{font-size:24px;}
+#platform .module-panel-stage{box-sizing:border-box;background:#eef4fb;border-radius:10px;padding:14px;}
+#platform .module-panel-stage figcaption{color:#fff;background:rgba(15,23,42,.82);padding:6px 10px;font-size:11px;}
+
+/* 3. Photo steps: pale panel + explainer copy */
+#photo .photo-story{background:#f4f8fd;border-radius:12px;padding:28px;}
+#photo .photo-step{border-top:1px solid var(--line-soft);padding-top:16px;}
+#photo .photo-step .step-note{margin:0 0 4px;font-size:13px;line-height:1.5;color:var(--muted);min-height:4.4em;}
+@media(max-width:900px){
+  #photo .photo-story{padding:20px;}
+  #photo .photo-step .step-note{min-height:auto;}
+}
+
+/* 4. Tools: aligned columns, plain VBA grid, wider skills intro */
+#tools .tool-lead{min-height:4.8em;}
+#tools .feature-shot{aspect-ratio:16/10;}
+#tools .feature-shot figure{height:100%;display:flex;flex-direction:column;}
+#tools .feature-shot img{width:100%;height:100%;object-fit:contain;}
+#tools .vba-list{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;list-style:none;padding:0;margin:0;}
+#tools .vba-list li{padding:8px 0;border-top:1px solid var(--line-soft);font-size:13.5px;}
+#tools .vba-list li:first-child{border-top:none;}
+@media(max-width:900px){
+  #tools .tool-lead{min-height:auto;}
+}
+@media(max-width:640px){
+  #tools .vba-list{grid-template-columns:1fr;}
+}
+
+/* 5. Skills intro wider column */
+#skills .skills-split{grid-template-columns:minmax(0,.44fr) minmax(0,.56fr);}
+@media(max-width:900px){#skills .skills-split{grid-template-columns:1fr;}}
+
+.product-section .case-head .case-index{min-width:24px;line-height:1.4;padding-top:8px;}
+.product-section .case-head>div>*,#platform .module-panel>*,#tools .tool-col,#skills .skills-split>*{min-width:0;}
+#platform .module-panel-stage figcaption{color:var(--muted);background:transparent;border:0;padding:10px 0 0;}
+#photo .photo-step .step-note{min-height:5em;}
+@media(min-width:901px){#tools .tool-top{min-height:58px;}}
+@media(max-width:900px){#platform .module-panel{grid-template-columns:1fr;}#photo .photo-step .step-note{min-height:0;}}
+@media(max-width:400px){.product-section .case-head h2{font-size:27px;}}
+
+
+/* Match preview geometry across the two document tools. */
+#tools .feature-shot{aspect-ratio:auto;margin:0;}
+#tools .feature-shot figure{height:auto;display:block;}
+#tools .feature-shot .shot-btn{aspect-ratio:16/10;flex:none;height:auto;}
+#tools .feature-shot .shot-btn img{width:100%;height:100%;object-fit:contain;}
+#tools .tool-col>.present-btn{align-self:flex-start;margin-top:0;}
+#tools .tool-col .tool-lead{margin:0;min-height:0;}
+#tools .tool-col details{margin-top:8px;}
+#tools .tool-col .tool-top{margin-bottom:0;}
+
 </style>
 </head>
 <body>
@@ -748,67 +904,86 @@ dialog{background:#ffffff;color:#171a1f;}
         </div>
       </div>
     </div>
-  <div class="wrap module-band">
-  <div class="stage-notes">
-    <div class="module-card">
-      <button class="shot-btn" type="button" aria-label="Увеличить: чат-ассистент" data-cap="Интерфейс программы · демонстрационные данные"><img src="assets/platform-assistant.jpg" alt="Интерфейс чат-ассистента, демонстрационные данные" loading="lazy" width="1440" height="1000"></button>
-      <small class="module-caption">Интерфейс программы · демонстрационные данные</small>
-      <h4>Чат-ассистент</h4>
-      <p>Мой модуль — вопросы к данным на естественном языке.</p>
-    </div>
-    <div class="module-card">
-      <button class="shot-btn" type="button" aria-label="Увеличить: обработка писем" data-cap="Интерфейс программы · демонстрационные данные"><img src="assets/platform-letters.jpg" alt="Интерфейс обработки входящих писем, демонстрационные данные" loading="lazy" width="1440" height="1000"></button>
-      <small class="module-caption">Интерфейс программы · демонстрационные данные</small>
-      <h4>Обработка писем</h4>
-      <p>Мой модуль — приём и разбор входящих документов.</p>
-    </div>
-    <div class="module-card">
-      <button class="shot-btn" type="button" aria-label="Увеличить: история закупочных цен" data-cap="Интерфейс программы · демонстрационные данные"><img src="assets/platform-prices.jpg" alt="Интерфейс истории закупочных цен, демонстрационные данные" loading="lazy" width="2560" height="1440"></button>
-      <small class="module-caption">Интерфейс программы · демонстрационные данные</small>
-      <h4>История закупочных цен</h4>
-      <p>Разработал модуль «История закупочных цен» в составе командной платформы. Поиск по позициям и поставщикам, анализ истории и сравнение рассматриваемой закупки с предыдущими предложениями того же поставщика.</p>
-    </div>
-    <div class="module-card">
-      <button class="shot-btn" type="button" aria-label="Увеличить: акты М-7 и несоответствия" data-cap="Интерфейс программы · демонстрационные данные"><img src="assets/platform-m7.jpg" alt="Интерфейс модуля актов М-7 и несоответствий, демонстрационные данные" loading="lazy" width="2560" height="1440"></button>
-      <small class="module-caption">Интерфейс программы · демонстрационные данные</small>
-      <h4>Акты М-7 и несоответствия</h4>
-      <p>Мой модуль — приём, обработка и систематизация актов М-7 и несоответствий для формирования заключений и дальнейшей работы с поставщиками.</p>
-    </div>
-  </div>
-</div>
+
   </section>
 
-  <section id="platform" class="case dark">
+  <section id="platform" class="case product-section">
     <div class="wrap">
       <div class="case-head">
         <span class="case-index">01</span>
         <div>
-          <h2>Корпоративная платформа автоматизации документов</h2>
-          <p class="lead">Система для обработки закупочных писем и документов. Разрабатывается командой — ниже показаны модули, над которыми работал непосредственно я, и модули общей платформы.</p>
-          <button class="btn ghost present-btn" type="button" data-project="platform">Посмотреть экраны</button>
+          <h2>Корпоративная платформа</h2>
+          <p class="lead">Командная платформа для обработки закупочных писем и документов. Ниже — четыре моих модуля.</p>
         </div>
       </div>
-      <div class="platform-grid">
-        <div class="platform-shots">
-          <div class="frame v4-css-motion">
+
+      <nav class="platform-tabs" hidden>
+        <button type="button" class="platform-tab" id="platform-tab-chat" data-panel="chat">Чат-ассистент</button>
+        <button type="button" class="platform-tab" id="platform-tab-letters" data-panel="letters">Письма</button>
+        <button type="button" class="platform-tab" id="platform-tab-prices" data-panel="prices">История цен</button>
+        <button type="button" class="platform-tab" id="platform-tab-m7" data-panel="m7">Акты М-7</button>
+      </nav>
+
+      <div class="module-panels">
+        <section class="module-panel" id="platform-panel-chat" data-panel="chat" aria-labelledby="platform-tab-chat">
+          <div class="module-panel-info">
+            <span class="module-kicker">Мой модуль</span>
+            <h3>ИИ-чат-ассистент</h3>
+            <p>Вопросы к загруженным данным на естественном языке — модуль внутри общей платформы, реализован мной.</p>
+          </div>
+          <div class="module-panel-stage frame v4-css-motion">
             <figure>
-<button class="shot-btn" aria-label="Увеличить: ИИ-чат-ассистент, полноэкранный режим" data-cap="ИИ-чат-ассистент, полноэкранный режим · демонстрационные данные" type="button"><img src="assets/platform-assistant.jpg" alt="Полноэкранный ИИ-чат-ассистент с синтетическим ответом" loading="lazy" width="1440" height="1000"></button>
+<button class="shot-btn" type="button" aria-label="Увеличить: ИИ-чат-ассистент, полноэкранный режим" data-cap="Интерфейс программы · демонстрационные данные"><img src="assets/platform-assistant.jpg" alt="Полноэкранный ИИ-чат-ассистент с синтетическим ответом" loading="lazy" width="1440" height="1000"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
 </figure>
           </div>
-          <div class="frame v4-css-motion">
-            <figure class="is-crop">
-<button class="shot-btn" aria-label="Увеличить: реестр писем" data-cap="Реестр писем, демонстрационные записи · демонстрационные данные" type="button"><img src="assets/platform-letters.jpg" alt="Реестр входящих писем, демонстрационные записи" loading="lazy" width="1440" height="1000"></button>
-<figcaption class="crop-note">Фрагмент реестра писем · полный экран открывается по клику · демонстрационные данные</figcaption>
+        </section>
+
+        <section class="module-panel" id="platform-panel-letters" data-panel="letters" aria-labelledby="platform-tab-letters">
+          <div class="module-panel-info">
+            <span class="module-kicker">Мой модуль</span>
+            <h3>Письма</h3>
+            <p>Обработка входящих писем и вложений с закупочными данными — модуль, который реализовал я.</p>
+          </div>
+          <div class="module-panel-stage frame v4-css-motion">
+            <figure>
+<button class="shot-btn" type="button" aria-label="Увеличить: реестр писем" data-cap="Реестр писем, демонстрационные записи · демонстрационные данные"><img src="assets/platform-letters.jpg" alt="Реестр входящих писем, демонстрационные записи" loading="lazy" width="1440" height="1000"></button>
+<figcaption>Реестр писем · демонстрационные данные</figcaption>
 </figure>
           </div>
-        </div>
-        <div class="platform-side">
-          <h3>Командная платформа</h3>
-          <p class="platform-line"><span>Мой ИИ-чат</span><span>и собственные модули</span></p>
-          <p class="note" style="margin-top:0;">Изображения — интерфейс на демонстрационных данных, а не работа с реальными документами компании.</p>
-        </div>
+        </section>
+
+        <section class="module-panel" id="platform-panel-prices" data-panel="prices" aria-labelledby="platform-tab-prices">
+          <div class="module-panel-info">
+            <span class="module-kicker">Мой модуль</span>
+            <h3>История закупочных цен</h3>
+            <p>Поиск по позициям и поставщикам, статистика по истории закупок, сравнение с рассматриваемой закупкой, выгрузка в Excel.</p>
+          </div>
+          <div class="module-panel-stage frame v4-css-motion">
+            <figure>
+<button class="shot-btn" type="button" aria-label="Увеличить: история закупочных цен" data-cap="История закупочных цен · демонстрационные данные"><img src="assets/platform-prices.jpg" alt="Экран истории закупочных цен: фильтры, таблица и история цен в виде спарклайнов" loading="lazy" width="2560" height="1440"></button>
+<figcaption>История цен · демонстрационные данные</figcaption>
+</figure>
+          </div>
+        </section>
+
+        <section class="module-panel" id="platform-panel-m7" data-panel="m7" aria-labelledby="platform-tab-m7">
+          <div class="module-panel-info">
+            <span class="module-kicker">Мой модуль</span>
+            <h3>Акты М-7 и несоответствия</h3>
+            <p>Приём, обработка и систематизация актов М-7 и несоответствий для подготовки заключений и дальнейшей работы с поставщиками.</p>
+          </div>
+          <div class="module-panel-stage frame v4-css-motion">
+            <figure>
+<button class="shot-btn" type="button" aria-label="Увеличить: приём актов М-7" data-cap="Приём актов М-7 · демонстрационные данные"><img src="assets/platform-m7.jpg" alt="Экран приёма и обработки актов М-7" loading="lazy" width="2560" height="1440"></button>
+<figcaption>Акты М-7 · демонстрационные данные</figcaption>
+</figure>
+          </div>
+        </section>
       </div>
+
+      <button class="btn ghost present-btn" type="button" data-project="platform">Посмотреть экраны</button>
+
       <details>
         <summary>Раскрыть кейс: задача, мои модули, общие возможности платформы, сценарий</summary>
         <div class="detail-body">
@@ -851,48 +1026,56 @@ dialog{background:#ffffff;color:#171a1f;}
     </div>
   </section>
 
-  <section id="photo" class="case">
+  <section id="photo" class="case product-section">
     <div class="wrap">
       <div class="case-head">
         <span class="case-index">02</span>
         <div>
           <h2>Фотоотчёты по объектам</h2>
           <p class="lead">Мобильный инструмент для сбора фотоотчётов на объектах, разработанный самостоятельно. Данные хранятся локально, на устройстве пользователя.</p>
-          <button class="btn ghost present-btn" type="button" data-project="photo">Посмотреть экраны</button>
         </div>
       </div>
-      <div class="photo-grid">
-        <ol class="workflow-steps">
-          <li>Письмо</li>
-          <li>Вложение</li>
-          <li>План</li>
-          <li>Объект</li>
-          <li>Фото</li>
-          <li>Word</li>
-        </ol>
-        <div class="phone-scene">
-        <div class="phone-row">
+
+      <div class="photo-story">
+        <div class="photo-step">
+          <span class="step-num">01</span>
+          <h3>План</h3>
+          <p class="step-note">Письма отбираются по теме и отправителю. Из вложений Excel/CSV загружается и проверяется план.</p>
           <div class="frame frame-phone v4-css-motion">
             <figure>
-<button class="shot-btn" aria-label="Увеличить: план выездов" data-cap="Мобильный план выездов · демонстрационные данные" type="button"><img src="assets/photo-plan.jpg" alt="Мобильный экран плана выездов" loading="lazy" width="430" height="932"></button>
+<button class="shot-btn" type="button" aria-label="Увеличить: план выездов" data-cap="Мобильный план выездов · демонстрационные данные"><img src="assets/photo-plan.jpg" alt="Мобильный экран плана выездов" loading="lazy" width="430" height="932"></button>
 <figcaption>План · демонстрационные данные</figcaption>
 </figure>
           </div>
+        </div>
+        <div class="photo-step">
+          <span class="step-num">02</span>
+          <h3>Объект</h3>
+          <p class="step-note">Объект выбирается из плана — открывается его карточка для дальнейшей фотофиксации.</p>
           <div class="frame frame-phone v4-css-motion">
             <figure>
-<button class="shot-btn" aria-label="Увеличить: выбор объекта" data-cap="Выбор объекта · демонстрационные данные" type="button"><img src="assets/photo-objects.jpg" alt="Экран выбора объекта" loading="lazy" width="430" height="932"></button>
+<button class="shot-btn" type="button" aria-label="Увеличить: выбор объекта" data-cap="Выбор объекта · демонстрационные данные"><img src="assets/photo-objects.jpg" alt="Экран выбора объекта" loading="lazy" width="430" height="932"></button>
 <figcaption>Объект · демонстрационные данные</figcaption>
 </figure>
           </div>
+        </div>
+        <div class="photo-step">
+          <span class="step-num">03</span>
+          <h3>Фото</h3>
+          <p class="step-note">Фото с камеры или из галереи, подписи и необязательные отметки освидетельствования.</p>
           <div class="frame frame-phone v4-css-motion">
             <figure>
-<button class="shot-btn" aria-label="Увеличить: добавление фото" data-cap="Добавление фото через камеру или галерею · демонстрационные данные" type="button"><img src="assets/photo-add.jpg" alt="Экран добавления фото через камеру или галерею" loading="lazy" width="430" height="932"></button>
+<button class="shot-btn" type="button" aria-label="Увеличить: добавление фото" data-cap="Добавление фото через камеру или галерею · демонстрационные данные"><img src="assets/photo-add.jpg" alt="Экран добавления фото через камеру или галерею" loading="lazy" width="430" height="932"></button>
 <figcaption>Фотографии · демонстрационные данные</figcaption>
 </figure>
           </div>
         </div>
-        </div>
       </div>
+
+      <p class="photo-outcome">Результат: документ Word — по объекту, дню или периоду. Все данные хранятся локально, на устройстве пользователя.</p>
+
+      <button class="btn ghost present-btn" type="button" data-project="photo">Посмотреть экраны</button>
+
       <details>
         <summary>Раскрыть кейс: задача, мой вклад, сценарий</summary>
         <div class="detail-body">
@@ -907,28 +1090,38 @@ dialog{background:#ffffff;color:#171a1f;}
     </div>
   </section>
 
-  <section id="vpn" class="case">
+  <section id="vpn" class="case product-section">
     <div class="wrap">
       <div class="case-head">
         <span class="case-index">03</span>
         <div>
           <h2>VPN — личный проект</h2>
-          <p class="lead">Небольшой семейный сервис для доверенного круга пользователей: управление устройствами и доступом, контроль состояния сервера. Некоммерческий проект.</p>
-          <button class="btn ghost present-btn" type="button" data-project="vpn">Посмотреть экраны</button>
+          <p class="lead">Небольшой семейный сервис для доверенного круга пользователей: управление устройствами и доступом, контроль состояния сервера. Некоммерческий проект, разработан самостоятельно для семьи.</p>
         </div>
       </div>
-      <div class="pair-row">
-        <div class="frame v4-css-motion">
-          <figure>
-<button class="shot-btn" aria-label="Увеличить: устройства и доступы" data-cap="Устройства и выданные доступы · демонстрационные данные" type="button"><img src="assets/vpn-devices.jpg" alt="Экран устройств и доступов" loading="lazy" width="1280" height="720"></button>
+      <div class="vpn-split">
+        <div class="vpn-overview">
+          <h3>Три задачи панели</h3>
+          <ul class="vpn-caps">
+            <li>Устройства и выданные доступы</li>
+            <li>Выдача и отключение доступа</li>
+            <li>Мониторинг и диагностика сервера</li>
+          </ul>
+          <button class="btn ghost present-btn" type="button" data-project="vpn">Посмотреть экраны</button>
+        </div>
+        <div class="vpn-visual">
+          <div class="frame v4-css-motion vpn-visual-main">
+            <figure>
+<button class="shot-btn" type="button" aria-label="Увеличить: устройства и доступы" data-cap="Устройства и выданные доступы · демонстрационные данные"><img src="assets/vpn-devices.jpg" alt="Экран устройств и доступов" loading="lazy" width="1280" height="720"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
 </figure>
-        </div>
-        <div class="frame v4-css-motion">
-          <figure class="is-crop">
-<button class="shot-btn" aria-label="Увеличить: статус сервера" data-cap="Состояние сервера · демонстрационные данные" type="button"><img src="assets/vpn-status.jpg" alt="Экран состояния сервера" loading="lazy" width="1280" height="720"></button>
-<figcaption class="crop-note">Фрагмент экрана состояния · полный экран открывается по клику · демонстрационные данные</figcaption>
+          </div>
+          <div class="frame v4-css-motion vpn-visual-secondary">
+            <figure>
+<button class="shot-btn" type="button" aria-label="Увеличить: статус сервера" data-cap="Состояние сервера · демонстрационные данные"><img src="assets/vpn-status.jpg" alt="Экран состояния сервера" loading="lazy" width="1280" height="720"></button>
+<figcaption>Состояние сервера · демонстрационные данные</figcaption>
 </figure>
+          </div>
         </div>
       </div>
       <details>
@@ -945,7 +1138,7 @@ dialog{background:#ffffff;color:#171a1f;}
     </div>
   </section>
 
-  <section id="tools" class="case">
+  <section id="tools" class="case product-section">
     <div class="wrap">
       <div class="case-head">
         <span class="case-index">04</span>
@@ -955,66 +1148,56 @@ dialog{background:#ffffff;color:#171a1f;}
         </div>
       </div>
 
-      <div class="tool-block">
-        <div class="tool-top">
-          <div class="tool-num">01</div>
-          <h3>Конструктор спецификаций</h3>
-        </div>
-        <p class="tool-lead">Совместная разработка. Табличная выгрузка (XLSX/XLS/XLSB/CSV) размечается на поля и правила, задаётся группировка — на выходе спецификации и дополнительные соглашения в Excel и PDF.</p>
-        <button class="btn ghost present-btn" type="button" data-project="constructor">Посмотреть экраны</button>
-        <div class="feature-shot frame v4-css-motion">
-          <figure>
-<button class="shot-btn" aria-label="Увеличить: настройка полей конструктора спецификаций" data-cap="Настройка полей и правил · демонстрационные данные" type="button"><img src="assets/spec-generator-fields.jpg" alt="Экран настройки полей и правил конструктора спецификаций" loading="lazy" width="1114" height="768"></button>
+      <div class="tools-columns">
+        <article class="tool-col">
+          <div class="tool-top">
+            <div class="tool-num">01</div>
+            <h3>Конструктор спецификаций</h3>
+          </div>
+          <div class="feature-shot frame v4-css-motion">
+            <figure>
+<button class="shot-btn" type="button" aria-label="Увеличить: настройка полей конструктора спецификаций" data-cap="Настройка полей и правил · демонстрационные данные"><img src="assets/spec-generator-fields.jpg" alt="Экран настройки полей и правил конструктора спецификаций" loading="lazy" width="1114" height="768"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
 </figure>
-        </div>
-        <details>
+          </div>
+          <p class="tool-lead">Совместная разработка. Табличная выгрузка (XLSX/XLS/XLSB/CSV) размечается на поля и правила, задаётся группировка — на выходе спецификации и дополнительные соглашения в Excel и PDF.</p>
+          <button class="btn ghost present-btn" type="button" data-project="constructor">Посмотреть экраны</button>
+
+          <details>
           <summary>Правила, форматы, мой вклад</summary>
           <div class="detail-body">
             <p>Поддержаны семь типов правил обработки поля: копирование, фиксированное значение, ВПР, расширенный ВПР, формула, условное и комбинированное правило. Отдельно можно сформировать сводный реестр по всем документам.</p>
             <p>Участвовал в реализации и тестировании, вносил доработки по замечаниям, подготовил инструкцию для пользователей и сопровождал программу.</p>
           </div>
         </details>
-        <div class="mini-grid">
-          <figure>
-<button class="shot-btn" aria-label="Увеличить: главный экран конструктора" data-cap="Главный экран конструктора спецификаций · демонстрационные данные" type="button"><img src="assets/spec-generator-main.jpg" alt="Главный экран конструктора спецификаций" loading="lazy" width="1114" height="768"></button>
-<figcaption>Интерфейс программы · демонстрационные данные</figcaption>
-</figure>
-          <figure>
-<button class="shot-btn" aria-label="Увеличить: настройка правила поля" data-cap="Настройка отдельного правила · демонстрационные данные" type="button"><img src="assets/spec-generator-rule.jpg" alt="Экран настройки отдельного правила поля" loading="lazy" width="700" height="628"></button>
-<figcaption>Интерфейс программы · демонстрационные данные</figcaption>
-</figure>
-          <figure>
-<button class="shot-btn" aria-label="Увеличить: условия документа" data-cap="Условия документа · демонстрационные данные" type="button"><img src="assets/spec-generator-conditions.jpg" alt="Экран условий документа" loading="lazy" width="1114" height="768"></button>
-<figcaption>Интерфейс программы · демонстрационные данные</figcaption>
-</figure>
-        </div>
-        <p class="tool-flow">Выгрузка → поля и правила → группировка → спецификации и допсоглашения (Excel/PDF)</p>
-      </div>
+          <p class="tool-flow">Выгрузка → поля и правила → группировка → спецификации и допсоглашения (Excel/PDF)</p>
+        </article>
 
-      <div class="tool-block">
-        <div class="tool-top">
-          <div class="tool-num">02</div>
-          <h3>Обработка входящих PDF-спецификаций</h3>
-        </div>
-        <p class="tool-lead">Самостоятельная разработка. Из текстового PDF извлекаются позиции и условия, сопоставляются с договорными реквизитами по таблице соответствия — формируется исходящая спецификация.</p>
-        <button class="btn ghost present-btn" type="button" data-project="incoming">Посмотреть экраны</button>
-        <div class="feature-shot frame v4-css-motion">
-          <figure>
-<button class="shot-btn" aria-label="Увеличить: предпросмотр входящей спецификации" data-cap="Предпросмотр обработки входящей спецификации · демонстрационные данные" type="button"><img src="assets/incoming-spec-preview.jpg" alt="Экран предпросмотра обработки входящей PDF-спецификации" loading="lazy" width="1422" height="768"></button>
+        <article class="tool-col">
+          <div class="tool-top">
+            <div class="tool-num">02</div>
+            <h3>Обработка входящих PDF-спецификаций</h3>
+          </div>
+          <div class="feature-shot frame v4-css-motion">
+            <figure>
+<button class="shot-btn" type="button" aria-label="Увеличить: предпросмотр входящей спецификации" data-cap="Предпросмотр обработки входящей спецификации · демонстрационные данные"><img src="assets/incoming-spec-preview.jpg" alt="Экран предпросмотра обработки входящей PDF-спецификации" loading="lazy" width="1422" height="768"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
 </figure>
-        </div>
-        <details>
+          </div>
+          <p class="tool-lead">Самостоятельная разработка. Из текстового PDF извлекаются позиции и условия, сопоставляются с договорными реквизитами по таблице соответствия — формируется исходящая спецификация.</p>
+          <button class="btn ghost present-btn" type="button" data-project="incoming">Посмотреть экраны</button>
+
+          <details>
           <summary>Логика обработки, мой вклад</summary>
           <div class="detail-body">
             <p>Цены пересчитываются по заданному коэффициенту, реквизиты подставляются из таблицы соответствия. Позднее движок обработки перенесён в веб-модуль платформы.</p>
           </div>
         </details>
-        <p class="tool-flow">Текстовый PDF → позиции и условия → таблица соответствия реквизитов → пересчёт по коэффициенту → исходящая спецификация</p>
+          <p class="tool-flow">Текстовый PDF → позиции и условия → таблица соответствия реквизитов → пересчёт по коэффициенту → исходящая спецификация</p>
+        </article>
       </div>
 
-      <div class="tool-block">
+      <div class="tool-block vba-block">
         <div class="tool-top">
           <div class="tool-num">03</div>
           <h3>Excel/VBA-инструменты</h3>
@@ -1032,23 +1215,27 @@ dialog{background:#ffffff;color:#171a1f;}
     </div>
   </section>
 
-  <section id="skills" class="skills">
+  <section id="skills" class="skills product-section">
     <div class="wrap">
-      <h2>Опыт и навыки</h2>
-      <p class="flow">Анализ процесса → Разработка → Проверка → Внедрение</p>
-      <p class="lead">Специалист по автоматизации с опытом в закупочных и производственных процессах: от анализа рабочей задачи до готового инструмента — совместная разработка, реализация, тестирование, доработки по обратной связи, инструкция для пользователей и сопровождение. В разработке использую ИИ-инструменты.</p>
-      <div class="skill-grid">
-        <div><h4>Разработка</h4><p>Python, PyQt5</p></div>
-        <div><h4>Табличные данные</h4><p>Excel, VBA, SQL</p></div>
-        <div><h4>Корпоративные системы</h4><p>1С, ERP, Dynamics AX</p></div>
-        <div><h4>ИИ и обработка текста</h4><p>LLM, OCR, RAG</p></div>
-        <div><h4>Версионирование</h4><p>Git</p></div>
-        <div><h4>Презентации</h4><p>PowerPoint, презентации проектов</p></div>
-        <div><h4>Данные</h4><p>Анализ данных</p></div>
-        <div><h4>Язык</h4><p>English B2</p></div>
-      </div>
-      <div class="cta-row">
-        <a class="btn" href="https://sa-n4e-zzz.github.io/automation-portfolio/resume.pdf" target="_blank" rel="noopener noreferrer">Резюме PDF</a>
+      <div class="skills-split">
+        <div class="skills-intro">
+          <h2>Опыт и навыки</h2>
+          <p class="flow">Анализ процесса → Разработка → Проверка → Внедрение</p>
+          <p class="lead">Специалист по автоматизации с опытом в закупочных и производственных процессах: от анализа рабочей задачи до готового инструмента — совместная разработка, реализация, тестирование, доработки по обратной связи, инструкция для пользователей и сопровождение. В разработке использую ИИ-инструменты.</p>
+          <div class="cta-row">
+            <a class="btn" href="https://sa-n4e-zzz.github.io/automation-portfolio/resume.pdf" target="_blank" rel="noopener noreferrer">Резюме PDF</a>
+          </div>
+        </div>
+        <div class="skill-grid">
+          <div><h4>Разработка</h4><p>Python, PyQt5</p></div>
+          <div><h4>Табличные данные</h4><p>Excel, VBA, SQL</p></div>
+          <div><h4>Корпоративные системы</h4><p>1С, ERP, Dynamics AX</p></div>
+          <div><h4>ИИ и обработка текста</h4><p>LLM, OCR, RAG</p></div>
+          <div><h4>Версионирование</h4><p>Git</p></div>
+          <div><h4>Презентации</h4><p>PowerPoint, презентации проектов</p></div>
+          <div><h4>Данные</h4><p>Анализ данных</p></div>
+          <div><h4>Язык</h4><p>English B2</p></div>
+        </div>
       </div>
     </div>
   </section>
@@ -1526,6 +1713,78 @@ dialog{background:#ffffff;color:#171a1f;}
     else if (motionQuery.addListener) { motionQuery.addListener(handleMotionChange); }
   }
 })();
+</script>
+<script>
+
+(function(){
+  'use strict';
+  var root = document.getElementById('platform');
+  if(!root) return;
+  var nav = root.querySelector('.platform-tabs');
+  if(!nav) return;
+  var tabs = Array.prototype.slice.call(nav.querySelectorAll('.platform-tab'));
+  var panels = Array.prototype.slice.call(root.querySelectorAll('.module-panel'));
+  if(tabs.length !== 4 || panels.length !== 4) return;
+
+  var panelMap = {};
+  var panelsValid = true;
+  panels.forEach(function(p){
+    var key = p.getAttribute('data-panel');
+    if(!key || !p.id){ panelsValid = false; return; }
+    panelMap[key] = p;
+  });
+  var tabsValid = tabs.every(function(t){
+    var key = t.getAttribute('data-panel');
+    return !!(key && panelMap[key] && t.id);
+  });
+  if(!panelsValid || !tabsValid) return;
+
+  nav.setAttribute('role','tablist');
+  tabs.forEach(function(t, i){
+    var key = t.getAttribute('data-panel');
+    var panel = panelMap[key];
+    t.setAttribute('role','tab');
+    t.setAttribute('aria-controls', panel.id);
+    t.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    t.setAttribute('tabindex', i === 0 ? '0' : '-1');
+    panel.setAttribute('role','tabpanel');
+    panel.setAttribute('aria-labelledby', t.id);
+    if(i !== 0){ panel.hidden = true; }
+  });
+
+  function selectTab(index){
+    tabs.forEach(function(t, i){
+      var key = t.getAttribute('data-panel');
+      var panel = panelMap[key];
+      var active = i === index;
+      t.setAttribute('aria-selected', active ? 'true' : 'false');
+      t.setAttribute('tabindex', active ? '0' : '-1');
+      panel.hidden = !active;
+    });
+  }
+
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){
+      selectTab(i);
+    });
+    t.addEventListener('keydown', function(e){
+      var newIndex = null;
+      if(e.key === 'ArrowRight'){ newIndex = (i + 1) % tabs.length; }
+      else if(e.key === 'ArrowLeft'){ newIndex = (i - 1 + tabs.length) % tabs.length; }
+      else if(e.key === 'Home'){ newIndex = 0; }
+      else if(e.key === 'End'){ newIndex = tabs.length - 1; }
+      if(newIndex !== null){
+        e.preventDefault();
+        selectTab(newIndex);
+        tabs[newIndex].focus();
+      }
+    });
+  });
+
+  root.classList.add('platform-enhanced');
+  nav.hidden = false;
+})();
+
 </script>
 </body>
 </html>
