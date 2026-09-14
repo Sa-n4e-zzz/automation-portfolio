@@ -547,6 +547,155 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
 .module-band .stage-notes > div:nth-child(3){border-top:0;}
 .module-band .module-caption{font-size:11px;line-height:1.5;color:var(--muted);}
 
+/* =========================================================================
+   PREMIUM PALETTE OVERRIDE — deep midnight navy hero track / header,
+   warm porcelain light sections, one azure accent, restrained static
+   blue illumination behind the hero screenshot.
+   Append-only. No HTML/DOM/JS changes. No new interactivity.
+   ========================================================================= */
+
+:root{
+  --porcelain:#f7f5f1;
+  --porcelain-2:#eee9e1;
+  --navy-950:#0a1020;
+  --navy-900:#0d1526;
+  --navy-800:#111c33;
+  --navy-line:rgba(140,170,255,.16);
+  --navy-line-soft:rgba(140,170,255,.10);
+  --azure:#2563eb;
+  --azure-ink:#1d4ed8;
+  --azure-soft:#8fb4ff;
+  --ink-on-navy:#eef2fb;
+  --muted-on-navy:#aab8d6;
+}
+
+html,body{background:var(--porcelain);}
+
+/* ===== Header: dark navy, sticky ===== */
+header.site{
+  background:rgba(10,16,32,.86);
+  backdrop-filter:saturate(160%) blur(12px);
+  border-bottom:1px solid var(--navy-line);
+}
+header.site .brand{color:var(--ink-on-navy);}
+header.site nav.nav-inner a{color:var(--muted-on-navy);}
+header.site nav.nav-inner a:hover{color:var(--ink-on-navy);border-bottom-color:var(--azure);}
+header.site nav.nav-inner a.resume-link{border-color:var(--navy-line);border-bottom:1px solid var(--navy-line);color:var(--ink-on-navy);}
+header.site nav.nav-inner a.resume-link:hover{background:var(--azure-ink);border-color:var(--azure-ink);color:#fff;}
+header.site :focus-visible{outline-color:var(--azure-soft);}
+
+/* ===== Hero wrapper stays porcelain; navy lives on the full-width track ===== */
+.hero{background:var(--porcelain);}
+
+.v4-hero-track{
+  background:
+    radial-gradient(60% 60% at 50% 32%,rgba(59,130,246,.20) 0%,rgba(59,130,246,.08) 45%,rgba(10,16,32,0) 72%),
+    linear-gradient(180deg,var(--navy-950) 0%,var(--navy-900) 62%,var(--navy-800) 100%);
+}
+
+/* .v4-hero-dim keeps its own opacity/animation untouched */
+
+.v4-hero-track .eyebrow,
+.v4-hero-track .stage-label{color:var(--azure-soft);}
+.v4-hero-track h1{color:var(--ink-on-navy);}
+.v4-hero-track h1 em{color:var(--azure-soft);}
+.v4-hero-track p{color:var(--muted-on-navy);}
+
+/* CTAs: azure solid primary (WCAG AA on white text), ghost on navy */
+.v4-hero-track .btn{background:var(--azure);border-color:var(--azure);color:#fff;}
+.v4-hero-track .btn:hover{background:var(--azure-ink);border-color:var(--azure-ink);}
+.v4-hero-track .btn.ghost{background:none;color:var(--ink-on-navy);border-color:var(--navy-line);}
+.v4-hero-track .btn.ghost:hover{background:rgba(140,170,255,.10);color:var(--ink-on-navy);border-color:var(--azure-soft);}
+
+/* hero screenshot frame: dark/blue edge, shadow scoped to track */
+.v4-hero-track .frame{
+  background:linear-gradient(180deg,#101a30 0%,#0c1424 100%);
+  border:1px solid var(--navy-line);
+  box-shadow:0 24px 46px -26px rgba(59,130,246,.28),0 20px 38px -28px rgba(0,0,0,.55);
+}
+.v4-hero-track .frame figcaption{border-top:1px solid var(--navy-line-soft);color:var(--muted-on-navy);}
+
+.v4-hero-track :focus-visible{outline-color:var(--azure-soft);}
+
+/* ===== Module band: unchanged geometry, warm porcelain surface, light text ===== */
+.hero .module-band{
+  background:var(--porcelain);
+  border-top:1px solid rgba(15,23,42,.08);
+  color:var(--ink);
+}
+.module-band .stage-notes h4{color:var(--muted);}
+.module-band .stage-notes p{color:var(--ink);}
+.module-band .module-card h4{color:#0f172a;}
+.module-band .module-card p{color:#334155;}
+.module-band .module-card .shot-btn{
+  border-color:rgba(15,23,42,.14);
+  background:rgba(15,23,42,.03);
+}
+.module-band .module-caption{color:var(--muted);}
+.module-band :focus-visible{outline-color:var(--azure-ink);}
+
+/* ===== Light sections general porcelain warmth ===== */
+section.case,
+.skills{background:var(--porcelain);}
+.phone-scene{
+  background:linear-gradient(180deg,#eef3fb 0%,#e3ecfa 100%);
+  border-color:rgba(37,99,235,.14);
+}
+.platform-side .note{border-left-color:var(--azure);}
+.workflow-steps{border-left-color:var(--azure);}
+.workflow-steps li::before{background:var(--azure);}
+.flow{color:var(--azure-ink);}
+summary::before{color:var(--azure-ink);}
+
+/* ===== Dark platform/case sections ===== */
+.case.dark{
+  background:linear-gradient(180deg,var(--navy-950) 0%,var(--navy-900) 100%);
+  border-bottom-color:var(--navy-900);
+  border-top:1px solid var(--navy-line-soft);
+}
+.case.dark .case-index{color:rgba(140,170,255,.28);}
+.case.dark .flow{color:var(--azure-soft);}
+.case.dark summary::before{color:var(--azure-soft);}
+.case.dark details{border-top-color:var(--navy-line-soft);}
+.case.dark .btn.ghost{border-color:var(--navy-line);}
+.case.dark .btn.ghost:hover{background:rgba(140,170,255,.10);border-color:var(--azure-soft);}
+.case.dark figure{border-color:var(--navy-line-soft);background:#0b111f;}
+.case.dark figcaption{border-top-color:var(--navy-line-soft);color:var(--muted-on-navy);}
+.case.dark :focus-visible{outline-color:var(--azure-soft);}
+
+/* ===== Accent unification across light sections ===== */
+em{color:var(--azure-ink);}
+a:hover{color:var(--azure-ink);}
+:focus-visible{outline-color:var(--azure);}
+
+/* ===== Modal: explicit light background, explicit dark text/buttons ===== */
+dialog{background:#ffffff;color:#171a1f;}
+.dlg-cap{background:#ffffff;border-top-color:var(--line);}
+.dlg-close{color:#171a1f;border-color:var(--line);}
+.dlg-close:hover{background:var(--paper-2);}
+#projectDialog{background:#ffffff;color:#171a1f;}
+.prj-head,.prj-nav{background:#ffffff;border-color:var(--line);}
+.prj-title{color:#171a1f;}
+.prj-caption,.prj-counter{color:var(--muted);}
+.prj-text h4{color:var(--muted);}
+.prj-text p{color:#171a1f;}
+
+/* ===== Print: recolored hero/header readable on white paper ===== */
+@media print{
+  header.site{background:#fff !important;border-color:#000 !important;}
+  header.site .brand,
+  header.site nav.nav-inner a{color:#000 !important;}
+  .v4-hero-track{background:#fff !important;}
+  .v4-hero-track h1,.v4-hero-track p,
+  .v4-hero-track .eyebrow,.v4-hero-track .stage-label{color:#000 !important;}
+  .v4-hero-track h1 em{color:#1d4ed8 !important;}
+  .v4-hero-track .frame{background:#fff !important;box-shadow:none !important;border-color:#000 !important;}
+  .v4-hero-track .frame figcaption{color:#000 !important;}
+  .v4-hero-track .btn{background:#fff !important;color:#000 !important;border-color:#000 !important;}
+  .case.dark{background:#fff !important;color:#000 !important;}
+  .case.dark .case-index,.case.dark .flow{color:#333 !important;}
+}
+
 </style>
 </head>
 <body>
