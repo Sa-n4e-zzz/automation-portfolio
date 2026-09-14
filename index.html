@@ -1,19 +1,22 @@
 <!doctype html>
 <html lang="ru">
 <head>
+
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Александр Федосеев — проекты по автоматизации</title>
 <style>
 :root{
-  --ink:#0a0a0a;
-  --paper:#faf9f6;
-  --paper-2:#f2f0ec;
+  --ink:#0b0b0c;
+  --paper:#f7f5f0;
+  --paper-2:#efece4;
+  --plate:#faf8f4;
   --line:#141414;
-  --line-soft:rgba(10,10,10,.14);
-  --muted:#5c5c58;
-  --silver:#c9c7c0;
-  --graphite:#0e0e0e;
+  --line-soft:rgba(11,11,12,.14);
+  --muted:#5a5a56;
+  --silver:#c7c4bb;
+  --graphite:#0d0d0f;
   --graphite-line:rgba(255,255,255,.1);
   --serif:Georgia,"Times New Roman",serif;
   --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
@@ -26,6 +29,7 @@ html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);
   text-rendering:optimizeLegibility;
 }
 a{color:inherit;}
+a:hover{color:var(--ink);}
 img{display:block;width:100%;height:auto;}
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
 .wrap{max-width:1220px;margin:0 auto;padding-inline:32px;}
@@ -33,28 +37,33 @@ img{display:block;width:100%;height:auto;}
 em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0;}
 
 /* ===== Header ===== */
-header.site{border-bottom:1px solid var(--line-soft);padding:12px 0;position:sticky;top:0;background:var(--paper);z-index:20;}
+header.site{border-bottom:1px solid var(--line-soft);padding:12px 0;position:sticky;top:0;
+  background:rgba(247,245,240,.94);backdrop-filter:saturate(140%) blur(10px);z-index:30;}
 .headrow{display:flex;align-items:center;gap:24px;min-width:0;}
-.brand{font-size:16px;font-weight:800;letter-spacing:.01em;flex-shrink:0;white-space:nowrap;}
+.brand{font-size:15px;font-weight:800;letter-spacing:-.01em;flex-shrink:0;white-space:nowrap;}
 .nav-scroll{overflow-x:auto;flex:1;min-width:0;-webkit-overflow-scrolling:touch;}
 .nav-scroll::-webkit-scrollbar{height:4px;}
 nav.nav-inner{display:flex;gap:24px;white-space:nowrap;width:max-content;min-width:100%;justify-content:flex-end;}
-nav.nav-inner a{text-decoration:none;font-size:12.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
+nav.nav-inner a{text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
   display:inline-flex;align-items:center;min-height:44px;border-bottom:1px solid transparent;color:var(--ink);}
 nav.nav-inner a:hover{border-bottom-color:var(--ink);}
-nav.nav-inner a.resume-link{border:1px solid var(--line);border-radius:999px;padding:0 18px;text-transform:none;letter-spacing:.01em;}
+nav.nav-inner a.resume-link{border:1px solid var(--line);border-radius:4px;padding:0 16px;text-transform:none;letter-spacing:.01em;}
 nav.nav-inner a.resume-link:hover{background:var(--ink);color:var(--paper);border-bottom:1px solid var(--line);}
 
 /* ===== Frames for real screenshots ===== */
 figure{margin:0;border:1px solid var(--line-soft);border-radius:10px;overflow:hidden;background:#fff;}
 figcaption{font-size:12px;color:var(--muted);padding:11px 14px;border-top:1px solid var(--line-soft);letter-spacing:.01em;}
-.frame{background:var(--graphite);border:1px solid var(--graphite-line);border-radius:16px;padding:10px;
-  box-shadow:0 46px 90px -46px rgba(0,0,0,.55),0 1px 0 rgba(255,255,255,.05) inset;}
+.frame{background:var(--graphite);border:1px solid var(--graphite-line);border-radius:12px;padding:9px;
+  box-shadow:0 20px 42px -32px rgba(0,0,0,.5);}
+figure.is-crop .shot-btn{aspect-ratio:16/6;border-radius:6px;}
+figure.is-crop .shot-btn img{width:165%;max-width:none;border-radius:0;transform:translate(-16%,-20%);}
+.crop-note{font-size:11.5px;letter-spacing:.02em;}
 .frame figure{border:none;border-radius:0;overflow:visible;background:transparent;}
-.frame figure img{border-radius:10px;display:block;}
+.frame figure img{border-radius:6px;display:block;}
 .frame figcaption{border-top:1px solid var(--graphite-line);color:#b3b3b3;padding:12px 4px 0;}
-.frame-phone{border-radius:24px;padding:9px;width:100%;max-width:270px;min-width:0;margin-inline:auto;}
-.frame-phone figure img{border-radius:18px;}
+.frame-phone{border-radius:26px;padding:8px;width:100%;max-width:258px;min-width:0;margin-inline:auto;
+  box-shadow:0 18px 34px -26px rgba(0,0,0,.45);}
+.frame-phone figure img{border-radius:20px;}
 
 .shot-btn{border:none;background:none;padding:0;cursor:pointer;display:block;width:100%;text-align:left;
   min-height:44px;position:relative;border-radius:inherit;overflow:hidden;}
@@ -68,22 +77,29 @@ figcaption{font-size:12px;color:var(--muted);padding:11px 14px;border-top:1px so
 }
 
 /* ===== Hero ===== */
-.hero{padding-block:44px 68px;border-bottom:1px solid var(--line-soft);scroll-margin-top:88px;
-  background:radial-gradient(ellipse at 50% 0%,#fff 0%,rgba(255,255,255,0) 60%),linear-gradient(160deg,#fbfaf7 0%,#efeee9 62%,#f5f4f0 100%);}
-.hero .frame{box-shadow:0 60px 110px -50px rgba(0,0,0,.5);}
-.hero .eyebrow{background:rgba(255,255,255,.6);}
-.hero-grid{display:grid;grid-template-columns:1fr;gap:40px;}
-.hero-grid>div:first-child{max-width:1000px;margin-inline:auto;text-align:center;}
-.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
-  border:1px solid var(--line);display:inline-block;padding:7px 16px;border-radius:999px;margin-bottom:20px;}
-.hero h1{font-size:clamp(38px,6vw,76px);line-height:.98;margin:0 0 22px;font-weight:800;letter-spacing:-.02em;}
-.hero h1 em{letter-spacing:-.01em;}
-.hero p{max-width:70ch;margin-inline:auto;font-size:17px;line-height:1.65;color:var(--muted);}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:24px;justify-content:center;}
-.hero-grid>div:first-child .cta-row{justify-content:center;}
+.hero{padding-block:0;scroll-margin-top:88px;position:relative;overflow-x:clip;
+  background:linear-gradient(172deg,#f9f8f4 0%,#eceae2 56%,#f3f1ec 100%);}
+.v4-hero-track{position:relative;display:flex;align-items:center;padding-block:30px 40px;}
+.v4-hero-sticky{width:100%;position:relative;display:flex;align-items:center;}
+.v4-screen-wrap{position:relative;isolation:isolate;}
+.v4-hero-dim{position:absolute;left:-4%;right:-5%;top:-3%;bottom:-4%;z-index:0;pointer-events:none;opacity:0;
+  background:radial-gradient(102% 104% at 50% 48%,#131316 0%,rgba(19,19,22,.94) 58%,rgba(19,19,22,.7) 100%);
+  -webkit-mask-image:radial-gradient(ellipse closest-side at 50% 50%,#000 60%,transparent 100%);
+  mask-image:radial-gradient(ellipse closest-side at 50% 50%,#000 60%,transparent 100%);}
+@media (max-width:480px){
+  .v4-hero-dim{top:-1.5%;bottom:-2%;left:-2%;right:-3%;}
+}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:30px;position:relative;z-index:2;}
+.hero-grid>div:first-child{max-width:760px;}
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700;
+  display:block;padding:0 0 13px;margin:0 0 20px;border-bottom:1px solid var(--line-soft);}
+.hero h1{font-size:clamp(38px,7vw,76px);line-height:.95;margin:0 0 20px;font-weight:800;letter-spacing:-.038em;text-wrap:pretty;}
+.hero h1 em{letter-spacing:-.015em;}
+.hero p{max-width:54ch;font-size:16.5px;line-height:1.6;color:var(--muted);text-wrap:pretty;}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:11px 28px;
   font-size:14.5px;font-weight:700;text-decoration:none;border:2px solid var(--ink);cursor:pointer;
-  background:var(--ink);color:var(--paper);border-radius:999px;letter-spacing:.01em;}
+  background:var(--ink);color:var(--paper);border-radius:4px;letter-spacing:.01em;}
 .btn.ghost{background:none;color:var(--ink);}
 .btn:hover{opacity:.85;}
 @media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
@@ -92,73 +108,86 @@ figcaption{font-size:12px;color:var(--muted);padding:11px 14px;border-top:1px so
 }
 .present-btn{margin-top:18px;}
 
-.hero-stage{min-width:0;width:100%;max-width:1040px;margin-inline:auto;}
-.stage-label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;font-weight:700;text-align:center;}
-.stage-notes{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line-soft);}
-.stage-notes h4{margin:0 0 5px;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700;}
-.stage-notes p{margin:0;font-size:14px;line-height:1.5;}
+.hero-stage{min-width:0;width:100%;position:relative;z-index:2;}
+.stage-label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;font-weight:700;}
+.v4-screen{position:relative;transform-origin:50% 6%;z-index:1;}
+.hero .frame{background:linear-gradient(178deg,#f5f3ed 0%,#e2dfd6 100%);border:1px solid rgba(11,11,12,.16);
+  box-shadow:0 24px 46px -32px rgba(0,0,0,.4);padding:8px;border-radius:12px;}
+.hero .frame figure img{border-radius:6px;}
+.hero .frame figcaption{border-top:1px solid rgba(11,11,12,.13);color:var(--muted);padding:10px 2px 0;font-size:11.5px;}
+.stage-notes{display:grid;grid-template-columns:repeat(3,1fr);gap:0 28px;margin-top:26px;
+  border-top:1px solid var(--line-soft);padding-top:18px;}
+.stage-notes h4{margin:0 0 6px;font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:700;}
+.stage-notes p{margin:0;font-size:13.5px;line-height:1.5;padding-right:10px;}
+.stage-notes{grid-template-columns:1fr 1fr;}
+.stage-notes>div:nth-child(3){grid-column:1 / -1;border-top:1px solid var(--line-soft);margin-top:18px;padding-top:16px;}
+.stage-notes>div:nth-child(3) p{max-width:86ch;}
 
 /* ===== Sections / cases ===== */
-section.case{padding-block:72px;border-bottom:1px solid var(--line-soft);scroll-margin-top:88px;}
-.case-head{display:flex;gap:24px;align-items:flex-start;margin-bottom:30px;}
-.case-index{font-size:64px;font-weight:800;line-height:.85;color:var(--muted);opacity:.28;flex-shrink:0;min-width:72px;letter-spacing:-.02em;}
-.case h2{font-size:clamp(26px,3.2vw,38px);margin:6px 0 12px;letter-spacing:-.015em;line-height:1.08;}
-.case .lead{color:var(--muted);max-width:62ch;margin:0;line-height:1.65;font-size:16px;}
-.case.dark{background:#050505;color:#f5f5f3;--muted:#c4c4c0;--line:#333;--line-soft:rgba(255,255,255,.12);border-bottom-color:#050505;
-  padding-block:92px;}
-.case.dark .case-index{color:#fff;opacity:.2;}
-.case.dark h2{font-size:clamp(30px,4.5vw,52px);margin:8px 0 16px;}
-.case.dark .lead{max-width:64ch;font-size:16.5px;}
+section.case{padding-block:100px;border-bottom:1px solid var(--line-soft);scroll-margin-top:88px;overflow-x:clip;}
+.case-head{display:flex;gap:24px;align-items:flex-start;margin-bottom:34px;}
+.case-index{font-size:clamp(30px,3vw,42px);font-weight:800;line-height:1;color:var(--silver);flex-shrink:0;min-width:62px;letter-spacing:-.04em;
+  padding-top:6px;}
+.case h2{font-size:clamp(28px,3.8vw,50px);margin:2px 0 14px;letter-spacing:-.03em;line-height:1.04;text-wrap:pretty;}
+.case .lead{color:var(--muted);max-width:60ch;margin:0;line-height:1.62;font-size:16.5px;text-wrap:pretty;}
+.case.dark{background:var(--graphite);color:#f6f5f2;--muted:#c2c2be;--line:#3a3a3a;--line-soft:rgba(255,255,255,.13);
+  border-bottom-color:var(--graphite);padding-block:120px;}
+.case.dark .case-index{color:rgba(255,255,255,.26);}
+.case.dark h2{font-size:clamp(30px,4.8vw,60px);margin:4px 0 18px;}
+.case.dark .lead{max-width:62ch;font-size:17px;}
 .case.dark :focus-visible{outline-color:#fff;outline-offset:3px;}
-.case.dark .btn.ghost{color:#f5f5f3;border-color:#f5f5f3;}
+.case.dark .btn.ghost{color:#f6f5f2;border-color:#f6f5f2;}
 .case.dark figure{border-color:var(--line-soft);background:#0c0c0c;}
 .case.dark figcaption{border-top-color:var(--line-soft);color:#b6b6b2;}
 
 .note{font-size:13px;color:var(--muted);max-width:66ch;margin:24px 0 0;line-height:1.6;}
 
-details{margin-top:30px;border-top:1px solid var(--line-soft);padding-top:20px;}
+details{margin-top:38px;border-top:1px solid var(--line-soft);padding-top:20px;}
 .case.dark details{border-top-color:var(--line-soft);}
 summary{cursor:pointer;font-weight:700;font-size:14.5px;list-style:none;min-height:44px;display:flex;align-items:center;}
 summary::-webkit-details-marker{display:none;}
 summary::before{content:"+";margin-right:10px;flex-shrink:0;font-weight:800;}
 details[open] summary::before{content:"−";}
 .detail-body{margin-top:16px;line-height:1.65;max-width:74ch;font-size:14.5px;}
-.detail-body h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:18px 0 6px;font-weight:700;}
+.detail-body h4{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin:20px 0 6px;font-weight:700;}
 .detail-body ul{margin:0;padding-left:20px;line-height:1.7;}
 .detail-body li{margin-bottom:4px;}
 
 .flow{font-size:14px;font-weight:700;margin:0 0 26px;letter-spacing:.01em;}
 
 /* ---- Section 01 platform ---- */
-.platform-grid{display:grid;grid-template-columns:1fr;gap:32px;align-items:start;}
-.platform-shots{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;min-width:0;align-items:start;}
+.platform-grid{display:grid;grid-template-columns:1fr;gap:36px;align-items:start;}
+.platform-shots{display:grid;grid-template-columns:1fr;gap:22px;min-width:0;align-items:start;}
 .platform-side{padding-top:6px;order:-1;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:0 48px;align-items:start;}
 .platform-side h3,.platform-side .platform-line{grid-column:1;}
 .platform-side .note{grid-column:2;grid-row:1 / span 2;align-self:center;border-left:1px solid var(--line-soft);padding-left:30px;}
-.platform-side h3{font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 6px;font-weight:700;}
-.platform-side .platform-line{font-size:21px;font-weight:800;margin:0;line-height:1.32;letter-spacing:-.01em;}
+.platform-side h3{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:0 0 8px;font-weight:700;}
+.platform-side .platform-line{font-size:clamp(21px,2.4vw,30px);font-weight:800;margin:0;line-height:1.22;letter-spacing:-.025em;}
 .platform-side .platform-line span{display:block;}
 
 /* ---- Section 02 photo ---- */
-.photo-grid{display:grid;grid-template-columns:210px 1fr;gap:46px;align-items:start;}
+.photo-grid{display:grid;grid-template-columns:210px 1fr;gap:46px;align-items:center;}
 .workflow-steps{list-style:none;margin:0;padding:0;border-left:2px solid var(--line);}
-.workflow-steps li{padding:0 0 26px 20px;position:relative;font-weight:700;font-size:15.5px;letter-spacing:-.005em;}
+.workflow-steps li{padding:0 0 26px 20px;position:relative;font-weight:700;font-size:15.5px;letter-spacing:-.01em;}
 .workflow-steps li:last-child{padding-bottom:0;}
 .workflow-steps li::before{content:"";position:absolute;left:-6px;top:3px;width:10px;height:10px;border-radius:50%;background:var(--ink);}
-.phone-row{display:flex;gap:28px;flex-wrap:nowrap;justify-content:center;}
-.phone-row>*{flex:0 1 270px;}
+.phone-scene{background:linear-gradient(180deg,#efede6 0%,#e3e0d7 100%);border:1px solid var(--line-soft);
+  border-radius:12px;padding:32px 26px 26px;}
+.phone-row{display:flex;gap:26px;flex-wrap:nowrap;justify-content:center;align-items:flex-start;}
+.phone-row>*{flex:0 1 266px;}
+.phone-row>*:nth-child(2){margin-top:-26px;}
 
 /* ---- Section 03 VPN ---- */
-.pair-row{display:grid;grid-template-columns:1fr 1fr;gap:26px;}
+.pair-row{display:grid;grid-template-columns:1fr;gap:22px;}
 
 /* ---- Section 04 tools ---- */
-.tool-block{padding:38px 0;border-top:1px solid var(--line-soft);}
+.tool-block{padding:44px 0;border-top:1px solid var(--line-soft);}
 .tool-block:last-of-type{border-bottom:1px solid var(--line-soft);}
-.tool-top{display:flex;gap:16px;align-items:baseline;margin-bottom:12px;}
-.tool-num{font-size:21px;font-weight:800;min-width:32px;color:var(--muted);letter-spacing:-.01em;}
-.tool-block h3{margin:0;font-size:20px;letter-spacing:-.01em;}
-.tool-lead{margin:0 0 22px;color:var(--muted);line-height:1.65;max-width:70ch;font-size:15.5px;}
-.tool-flow{font-size:13px;font-weight:700;margin:20px 0 0;}
+.tool-top{display:flex;gap:18px;align-items:baseline;margin-bottom:12px;}
+.tool-num{font-size:22px;font-weight:800;min-width:34px;color:var(--silver);letter-spacing:-.03em;}
+.tool-block h3{margin:0;font-size:clamp(20px,2.2vw,27px);letter-spacing:-.025em;}
+.tool-lead{margin:0 0 22px;color:var(--muted);line-height:1.62;max-width:70ch;font-size:15.5px;}
+.tool-flow{font-size:13px;font-weight:700;margin:22px 0 0;}
 .feature-shot{margin-bottom:20px;}
 .mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px;}
 .mini-grid figure{border-radius:8px;}
@@ -166,16 +195,17 @@ details[open] summary::before{content:"−";}
 .vba-list li{margin-bottom:5px;}
 
 /* ---- Skills ---- */
-.skills{scroll-margin-top:88px;padding-block:72px;border-bottom:1px solid var(--line-soft);}
-.skills h2{font-size:clamp(26px,3.2vw,38px);margin:0 0 14px;letter-spacing:-.015em;}
+.skills{scroll-margin-top:88px;padding-block:100px;border-bottom:1px solid var(--line-soft);}
+.skills h2{font-size:clamp(28px,3.8vw,50px);margin:0 0 14px;letter-spacing:-.03em;}
 .skills .flow{font-size:15px;margin:4px 0 16px;}
-.skills .lead{color:var(--muted);max-width:66ch;line-height:1.65;margin:0 0 34px;font-size:16px;}
-.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px;margin-bottom:34px;
-  border-top:1px solid var(--line-soft);padding-top:28px;}
-.skill-grid h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 9px;font-weight:700;}
+.skills .lead{color:var(--muted);max-width:66ch;line-height:1.62;margin:0 0 34px;font-size:16.5px;}
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px;margin-bottom:34px;
+  border-top:1px solid var(--line-soft);padding-top:30px;}
+.skill-grid h4{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:0 0 9px;font-weight:700;}
 .skill-grid p{margin:0;font-size:14.5px;line-height:1.55;}
+.skills .cta-row{justify-content:flex-start;}
 
-footer{padding:48px 0 64px;text-align:left;border-top:1px solid var(--line-soft);}
+footer{padding:48px 0 72px;text-align:left;border-top:1px solid var(--line-soft);}
 footer a{font-weight:700;text-decoration:underline;}
 footer p{font-size:15px;color:var(--muted);}
 
@@ -187,7 +217,7 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
 .dlg-cap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 16px;
   border-top:1px solid var(--line);flex-wrap:wrap;position:sticky;bottom:0;background:var(--paper);z-index:1;}
 .dlg-close{border:1px solid var(--line);background:none;cursor:pointer;font-size:13px;min-height:44px;
-  padding:8px 18px;border-radius:999px;}
+  padding:8px 18px;border-radius:4px;}
 
 /* ===== Project presentation dialog ===== */
 #projectDialog{width:min(1200px,94vw);max-width:1200px;max-height:92vh;max-height:92dvh;padding:0;border:1px solid var(--line);border-radius:14px;background:var(--paper);display:flex;flex-direction:column;}
@@ -195,13 +225,13 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
 #projectDialog:not([open]){display:none;}
 .prj-head{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 22px;
   border-bottom:1px solid var(--line);flex:0 0 auto;background:var(--paper);}
-.prj-title{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em;}
+.prj-title{margin:0;font-size:18px;font-weight:800;letter-spacing:-.02em;}
 .prj-body{flex:1 1 auto;min-height:0;overflow:auto;display:grid;grid-template-columns:1.35fr 1fr;gap:26px;padding:22px;}
 .prj-stage{min-width:0;display:flex;align-items:center;justify-content:center;background:#111;border-radius:10px;overflow:hidden;padding:8px;}
 .prj-stage img{width:100%;height:auto;max-height:60vh;object-fit:contain;display:block;}
 .prj-copy{min-width:0;display:flex;flex-direction:column;gap:6px;}
 .prj-caption{margin:0 0 10px;font-size:13px;color:var(--muted);}
-.prj-text h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:14px 0 6px;font-weight:700;}
+.prj-text h4{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin:14px 0 6px;font-weight:700;}
 .prj-text h4:first-child{margin-top:0;}
 .prj-text p{margin:0;font-size:14.5px;line-height:1.6;}
 .prj-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 22px;
@@ -209,12 +239,20 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
 .prj-counter{font-size:13px;color:var(--muted);font-weight:700;}
 .prj-nav button:disabled{opacity:.35;cursor:not-allowed;}
 
+/* ===== Wide layout: hero becomes a two-column stage ===== */
+@media(min-width:920px){
+  .hero-grid{grid-template-columns:minmax(300px,.72fr) 1.28fr;gap:38px;align-items:start;}
+  .hero-grid>div:first-child{max-width:none;padding-top:2px;}
+  .hero h1{font-size:clamp(38px,3.5vw,52px);}
+  .hero p{font-size:16px;}
+}
+
 @media(max-width:1100px){
   .photo-grid{grid-template-columns:1fr;}
   .workflow-steps{border-left:none;border-top:2px solid var(--line);display:flex;flex-wrap:wrap;gap:0 22px;padding-top:16px;}
   .workflow-steps li{padding:0 0 10px 0;}
   .workflow-steps li::before{display:none;}
-  .platform-shots{grid-template-columns:1fr 1fr;}
+  .platform-shots{grid-template-columns:1fr;}
 }
 @media(max-width:760px){
   .wrap{padding-inline:18px;}
@@ -222,18 +260,21 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
   .hero-grid>div:first-child{max-width:100%;}
   .platform-side{grid-template-columns:1fr;gap:14px;}
   .platform-side .note{grid-column:1;grid-row:auto;border-left:none;padding-left:0;}
-  .hero{padding-block:28px 46px;}
+  .v4-hero-track{padding-block:22px 36px;}
   .hero-grid{gap:26px;}
-  .hero .eyebrow{font-size:10.5px;letter-spacing:.08em;padding:6px 10px;margin-bottom:18px;}
+  .hero .eyebrow{font-size:10px;letter-spacing:.18em;padding:0 0 11px;margin-bottom:16px;}
   .hero p{font-size:15px;line-height:1.55;}
   .hero .cta-row{gap:10px;flex-wrap:wrap;margin-top:18px;}
-  .hero .btn{font-size:13px;padding:10px 12px;white-space:nowrap;}
-  .hero .stage-label{font-size:11px;line-height:1.4;margin:0 0 12px;}
-  .hero h1{font-size:clamp(34px,10vw,52px);}
-  .case{padding-block:48px;}
-  .case.dark{padding-block:56px;}
-  .case.dark h2{font-size:clamp(28px,7.5vw,38px);}
-  .case-index{font-size:42px;min-width:52px;}
+  .hero .btn{font-size:13px;padding:10px 14px;white-space:nowrap;}
+  .hero .stage-label{font-size:10.5px;line-height:1.4;margin:0 0 12px;}
+  .hero h1{font-size:clamp(34px,10.5vw,54px);}
+  .stage-notes{gap:18px;padding-top:16px;}
+  .case{padding-block:56px;}
+  .case.dark{padding-block:64px;}
+  .case.dark h2{font-size:clamp(28px,7.8vw,40px);}
+  .case-head{gap:16px;margin-bottom:26px;}
+  .case-index{font-size:40px;min-width:52px;}
+  .skills{padding-block:56px;}
   dialog{max-width:100vw;border-radius:0;}
   dialog img{max-height:60vh;max-width:94vw;}
   header.site{padding:10px 0;position:static;}
@@ -241,8 +282,10 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
   .nav-scroll{flex-basis:100%;}
   nav.nav-inner{justify-content:flex-start;}
   .hero,section.case,.skills{scroll-margin-top:20px;}
-  .phone-row{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;-webkit-overflow-scrolling:touch;}
+  .phone-scene{padding:20px 0 14px;border-radius:10px;}
+  .phone-row{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 16px 10px;-webkit-overflow-scrolling:touch;}
   .phone-row>*{flex:0 0 78%;scroll-snap-align:start;}
+  .phone-row>*:nth-child(2){margin-top:0;}
   #projectDialog{width:100vw;max-width:100vw;height:100vh;height:100dvh;max-height:100vh;max-height:100dvh;margin:0;border:none;border-radius:0;}
   .prj-body{display:flex;flex-direction:column;padding:14px;}
   .prj-stage,.prj-copy{flex:0 0 auto;}
@@ -264,33 +307,104 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
   *{transition:none !important;animation:none !important;}
 }
 
-@supports (animation-timeline: view()) and (animation-range: entry 0% cover 45%) {
+/* ===== Scroll-driven motion (CSS view timelines only) ===== */
+@supports (animation-timeline: view()) and (animation-range: contain 0% contain 100%) {
   @media (prefers-reduced-motion: no-preference) {
-    @keyframes heroStageFrameRevealDesktop {
-      from { transform: translateY(32px) scale(.90); }
-      to { transform: translateY(0) scale(1); }
+
+    /* --- Hero: the screen straightens and opens up --- */
+    .v4-hero-track{view-timeline-name:--v4hero;view-timeline-axis:block;min-height:calc(100svh + 220px);align-items:flex-start;}
+
+    @keyframes v4HeroScreen{
+      from{transform:perspective(1500px) translateY(14px) rotateX(23deg) rotateZ(-1.2deg) scale(.86);}
+      to{transform:perspective(1500px) translateY(0) rotateX(0deg) rotateZ(0deg) scale(1);}
     }
-    .hero-stage > .frame {
-      animation: heroStageFrameRevealDesktop 1ms linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 45%;
+    @keyframes v4HeroDim{
+      from{opacity:0;}
+      to{opacity:1;}
     }
-    @media (max-width: 767px) {
-      @keyframes heroStageFrameRevealMobile {
-        from { transform: translateY(12px) scale(.97); }
-        to { transform: translateY(0) scale(1); }
+    .v4-screen{
+      animation:v4HeroScreen 1ms linear both;
+      animation-timeline:--v4hero;
+      animation-range:contain -80px contain 90%;
+    }
+    .v4-hero-dim{
+      animation:v4HeroDim 1ms linear both;
+      animation-timeline:--v4hero;
+      animation-range:contain -80px contain 80%;
+    }
+
+    @media (min-width:1100px) and (min-height:850px){
+      .v4-hero-track{min-height:min(160svh,1520px);align-items:flex-start;}
+      .v4-hero-sticky{position:sticky;top:80px;min-height:0;align-items:flex-start;}
+      .v4-screen{animation-range:contain -80px contain 100%;}
+      .v4-hero-dim{animation-range:contain -80px contain 86%;}
+    }
+    @media (max-width:760px){
+      @keyframes v4HeroScreen{
+        from{transform:perspective(1100px) translateY(10px) rotateX(15deg) scale(.94);}
+        to{transform:perspective(1100px) translateY(0) rotateX(0deg) scale(1);}
       }
-      .hero-stage > .frame {
-        animation-name: heroStageFrameRevealMobile;
+    }
+
+    /* --- Platform: two screens open from opposite sides --- */
+    @keyframes v4OpenLeft{
+      from{opacity:.28;transform:perspective(1400px) translateX(-88px) rotateY(14deg) scale(.9);}
+      to{opacity:1;transform:perspective(1400px) translateX(0) rotateY(0deg) scale(1);}
+    }
+    @keyframes v4OpenRight{
+      from{opacity:.28;transform:perspective(1400px) translateX(88px) rotateY(-14deg) scale(.9);}
+      to{opacity:1;transform:perspective(1400px) translateX(0) rotateY(0deg) scale(1);}
+    }
+    .platform-shots>.frame:nth-child(1){
+      animation:v4OpenLeft 1ms linear both;animation-timeline:view();animation-range:entry 0% entry 100%;
+    }
+    .platform-shots>.frame:nth-child(2){
+      animation:v4OpenRight 1ms linear both;animation-timeline:view();animation-range:entry 6% entry 100%;
+    }
+
+    /* --- Photo reports: three phones drift apart --- */
+    @keyframes v4PhoneLeft{
+      from{opacity:.3;transform:translateX(92px) translateY(16px) rotate(-8deg) scale(.88);}
+      to{opacity:1;transform:translateX(0) translateY(0) rotate(0deg) scale(1);}
+    }
+    @keyframes v4PhoneMid{
+      from{opacity:.4;transform:translateY(34px) scale(.93);}
+      to{opacity:1;transform:translateY(0) scale(1);}
+    }
+    @keyframes v4PhoneRight{
+      from{opacity:.3;transform:translateX(-92px) translateY(16px) rotate(8deg) scale(.88);}
+      to{opacity:1;transform:translateX(0) translateY(0) rotate(0deg) scale(1);}
+    }
+    .phone-row>*:nth-child(1){animation:v4PhoneLeft 1ms linear both;animation-timeline:view();animation-range:entry 0% entry 100%;}
+    .phone-row>*:nth-child(2){animation:v4PhoneMid 1ms linear both;animation-timeline:view();animation-range:entry 0% entry 96%;}
+    .phone-row>*:nth-child(3){animation:v4PhoneRight 1ms linear both;animation-timeline:view();animation-range:entry 0% entry 100%;}
+    @media (max-width:760px){
+      .phone-row>*:nth-child(1),.phone-row>*:nth-child(2),.phone-row>*:nth-child(3){
+        animation-name:v4PhoneMid;animation-range:entry 0% entry 100%;
       }
     }
+
+    /* --- Calmer rhythm: VPN and tools --- */
+    @keyframes v4Rise{
+      from{opacity:.42;transform:translateY(38px) scale(.975);}
+      to{opacity:1;transform:translateY(0) scale(1);}
+    }
+    .pair-row>.frame,#tools .feature-shot.frame{
+      animation:v4Rise 1ms linear both;animation-timeline:view();animation-range:entry 0% entry 100%;
+    }
+    .pair-row>.frame:nth-child(2){animation-range:entry 8% entry 100%;}
   }
 }
+
 @media print {
-  .hero-stage > .frame {
-    animation: none !important;
-    transform: none !important;
-  }
+  *{animation:none !important;transition:none !important;}
+  .v4-hero-track{min-height:0 !important;padding-block:24px !important;}
+  .v4-hero-sticky{position:static !important;min-height:0 !important;}
+  .v4-hero-dim{display:none !important;}
+  .v4-screen,.frame,.phone-row>*,.platform-shots>.frame,.pair-row>.frame,
+  .hero-stage>.stage-label,.hero-stage>.stage-notes{transform:none !important;opacity:1 !important;}
+  header.site{position:static !important;}
+  .case.dark{background:#fff !important;color:#000 !important;}
 }
 </style>
 </head>
@@ -305,7 +419,7 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
         <a href="#vpn">VPN</a>
         <a href="#tools">Инструменты</a>
         <a href="#skills">Опыт</a>
-        <a class="resume-link" href="./resume.pdf" target="_blank" rel="noopener noreferrer">Резюме</a>
+        <a class="resume-link" href="https://sa-n4e-zzz.github.io/automation-portfolio/resume.pdf" target="_blank" rel="noopener noreferrer">Резюме</a>
       </nav>
     </div>
   </div>
@@ -313,32 +427,45 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
 
 <main>
   <section class="hero" id="top">
-    <div class="wrap hero-grid">
-      <div>
-        <span class="eyebrow">Автоматизация и прикладная разработка</span>
-        <h1>Разбираюсь в процессе. Делаю <em>продукт</em>.</h1>
-        <p>Вижу, где ручная работа съедает время команды, и довожу решение до рабочего интерфейса — от корпоративной платформы до личных прикладных инструментов.</p>
-        <div class="cta-row">
-          <a class="btn" href="#platform">Смотреть проекты</a>
-          <a class="btn ghost" href="./resume.pdf" target="_blank" rel="noopener noreferrer">Резюме PDF</a>
-        </div>
-      </div>
-      <div class="hero-stage">
-        <p class="stage-label">01 / Корпоративная платформа</p>
-        <div class="frame">
-          <figure>
+    <div class="v4-hero-track">
+      <div class="v4-hero-sticky">
+        <div class="wrap hero-grid">
+          <div>
+            <span class="eyebrow">Автоматизация и прикладная разработка</span>
+            <h1>Разбираюсь в процессе. Делаю <em>продукт</em>.</h1>
+            <p>Вижу, где ручная работа съедает время команды, и довожу решение до рабочего интерфейса — от корпоративной платформы до личных прикладных инструментов.</p>
+            <div class="cta-row">
+              <a class="btn" href="#platform">Смотреть проекты</a>
+              <a class="btn ghost" href="https://sa-n4e-zzz.github.io/automation-portfolio/resume.pdf" target="_blank" rel="noopener noreferrer">Резюме PDF</a>
+            </div>
+          </div>
+          <div class="hero-stage v4-css-motion">
+            <p class="stage-label">01 / Корпоративная платформа</p>
+            <div class="v4-screen-wrap">
+              <div class="v4-hero-dim" aria-hidden="true"></div>
+              <div class="v4-screen">
+              <div class="frame">
+                <figure>
 <button class="shot-btn" aria-label="Увеличить: главный экран платформы" data-cap="Главный экран платформы · демонстрационные данные" type="button"><img src="assets/platform-home.jpg" alt="Главный экран платформы с рабочими модулями" loading="eager" width="1440" height="1000"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
 </figure>
-        </div>
-        <div class="stage-notes">
-          <div>
-            <h4>Чат-ассистент</h4>
-            <p>Мой модуль — вопросы к данным на естественном языке.</p>
-          </div>
-          <div>
-            <h4>Обработка писем</h4>
-            <p>Мой модуль — приём и разбор входящих документов.</p>
+              </div>
+              </div>
+            </div>
+            <div class="stage-notes">
+              <div>
+                <h4>Чат-ассистент</h4>
+                <p>Мой модуль — вопросы к данным на естественном языке.</p>
+              </div>
+              <div>
+                <h4>Обработка писем</h4>
+                <p>Мой модуль — приём и разбор входящих документов.</p>
+              </div>
+              <div>
+                <h4>История закупочных цен</h4>
+                <p>Разработал модуль «История закупочных цен» в составе командной платформы. Поиск по позициям и поставщикам, анализ истории и сравнение рассматриваемой закупки с предыдущими предложениями того же поставщика.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -357,16 +484,16 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
       </div>
       <div class="platform-grid">
         <div class="platform-shots">
-          <div class="frame">
+          <div class="frame v4-css-motion">
             <figure>
 <button class="shot-btn" aria-label="Увеличить: ИИ-чат-ассистент, полноэкранный режим" data-cap="ИИ-чат-ассистент, полноэкранный режим · демонстрационные данные" type="button"><img src="assets/platform-assistant.jpg" alt="Полноэкранный ИИ-чат-ассистент с синтетическим ответом" loading="lazy" width="1440" height="1000"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
 </figure>
           </div>
-          <div class="frame">
-            <figure>
+          <div class="frame v4-css-motion">
+            <figure class="is-crop">
 <button class="shot-btn" aria-label="Увеличить: реестр писем" data-cap="Реестр писем, демонстрационные записи · демонстрационные данные" type="button"><img src="assets/platform-letters.jpg" alt="Реестр входящих писем, демонстрационные записи" loading="lazy" width="1440" height="1000"></button>
-<figcaption>Интерфейс программы · демонстрационные данные</figcaption>
+<figcaption class="crop-note">Фрагмент реестра писем · полный экран открывается по клику · демонстрационные данные</figcaption>
 </figure>
           </div>
         </div>
@@ -389,8 +516,16 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
             <li>Роботы выгрузки данных</li>
             <li>Перенос движка входящих спецификаций из десктопа в веб</li>
             <li>ИИ-чат-ассистент — вопросы к данным на естественном языке</li>
+            <li>Модуль «История закупочных цен» — поиск по позициям и поставщикам, анализ истории, сравнение предложений</li>
           </ul>
           <p>В остальных модулях помогал команде.</p>
+          <h4>Модуль «История закупочных цен»</h4>
+          <ul>
+            <li>Поиск по названию товара и поставщику; фильтры по периоду, проекту, объекту и условиям поставки</li>
+            <li>Сгруппированная история закупок со статистикой: минимум, среднее, максимум и последняя цена</li>
+            <li>Сравнение закупки на рассмотрении с историей цен того же поставщика</li>
+            <li>Выгрузка истории в Excel/CSV</li>
+          </ul>
           <h4>Общие возможности платформы</h4>
           <ul>
             <li>Обработка писем и вложений; формирование спецификаций</li>
@@ -429,25 +564,27 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
           <li>Фото</li>
           <li>Word</li>
         </ol>
+        <div class="phone-scene">
         <div class="phone-row">
-          <div class="frame frame-phone">
+          <div class="frame frame-phone v4-css-motion">
             <figure>
 <button class="shot-btn" aria-label="Увеличить: план выездов" data-cap="Мобильный план выездов · демонстрационные данные" type="button"><img src="assets/photo-plan.jpg" alt="Мобильный экран плана выездов" loading="lazy" width="430" height="932"></button>
 <figcaption>План · демонстрационные данные</figcaption>
 </figure>
           </div>
-          <div class="frame frame-phone">
+          <div class="frame frame-phone v4-css-motion">
             <figure>
 <button class="shot-btn" aria-label="Увеличить: выбор объекта" data-cap="Выбор объекта · демонстрационные данные" type="button"><img src="assets/photo-objects.jpg" alt="Экран выбора объекта" loading="lazy" width="430" height="932"></button>
 <figcaption>Объект · демонстрационные данные</figcaption>
 </figure>
           </div>
-          <div class="frame frame-phone">
+          <div class="frame frame-phone v4-css-motion">
             <figure>
 <button class="shot-btn" aria-label="Увеличить: добавление фото" data-cap="Добавление фото через камеру или галерею · демонстрационные данные" type="button"><img src="assets/photo-add.jpg" alt="Экран добавления фото через камеру или галерею" loading="lazy" width="430" height="932"></button>
 <figcaption>Фотографии · демонстрационные данные</figcaption>
 </figure>
           </div>
+        </div>
         </div>
       </div>
       <details>
@@ -475,16 +612,16 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
         </div>
       </div>
       <div class="pair-row">
-        <div class="frame">
+        <div class="frame v4-css-motion">
           <figure>
 <button class="shot-btn" aria-label="Увеличить: устройства и доступы" data-cap="Устройства и выданные доступы · демонстрационные данные" type="button"><img src="assets/vpn-devices.jpg" alt="Экран устройств и доступов" loading="lazy" width="1280" height="720"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
 </figure>
         </div>
-        <div class="frame">
-          <figure>
+        <div class="frame v4-css-motion">
+          <figure class="is-crop">
 <button class="shot-btn" aria-label="Увеличить: статус сервера" data-cap="Состояние сервера · демонстрационные данные" type="button"><img src="assets/vpn-status.jpg" alt="Экран состояния сервера" loading="lazy" width="1280" height="720"></button>
-<figcaption>Интерфейс программы · демонстрационные данные</figcaption>
+<figcaption class="crop-note">Фрагмент экрана состояния · полный экран открывается по клику · демонстрационные данные</figcaption>
 </figure>
         </div>
       </div>
@@ -519,7 +656,7 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
         </div>
         <p class="tool-lead">Совместная разработка. Табличная выгрузка (XLSX/XLS/XLSB/CSV) размечается на поля и правила, задаётся группировка — на выходе спецификации и дополнительные соглашения в Excel и PDF.</p>
         <button class="btn ghost present-btn" type="button" data-project="constructor">Посмотреть экраны</button>
-        <div class="feature-shot frame">
+        <div class="feature-shot frame v4-css-motion">
           <figure>
 <button class="shot-btn" aria-label="Увеличить: настройка полей конструктора спецификаций" data-cap="Настройка полей и правил · демонстрационные данные" type="button"><img src="assets/spec-generator-fields.jpg" alt="Экран настройки полей и правил конструктора спецификаций" loading="lazy" width="1114" height="768"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
@@ -556,7 +693,7 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
         </div>
         <p class="tool-lead">Самостоятельная разработка. Из текстового PDF извлекаются позиции и условия, сопоставляются с договорными реквизитами по таблице соответствия — формируется исходящая спецификация.</p>
         <button class="btn ghost present-btn" type="button" data-project="incoming">Посмотреть экраны</button>
-        <div class="feature-shot frame">
+        <div class="feature-shot frame v4-css-motion">
           <figure>
 <button class="shot-btn" aria-label="Увеличить: предпросмотр входящей спецификации" data-cap="Предпросмотр обработки входящей спецификации · демонстрационные данные" type="button"><img src="assets/incoming-spec-preview.jpg" alt="Экран предпросмотра обработки входящей PDF-спецификации" loading="lazy" width="1422" height="768"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
@@ -605,14 +742,14 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
         <div><h4>Язык</h4><p>English B2</p></div>
       </div>
       <div class="cta-row">
-        <a class="btn" href="./resume.pdf" target="_blank" rel="noopener noreferrer">Резюме PDF</a>
+        <a class="btn" href="https://sa-n4e-zzz.github.io/automation-portfolio/resume.pdf" target="_blank" rel="noopener noreferrer">Резюме PDF</a>
       </div>
     </div>
   </section>
 </main>
 
 <footer class="wrap">
-  <p>Полное описание опыта — в резюме: <a href="./resume.pdf" target="_blank" rel="noopener noreferrer">открыть PDF</a>.</p>
+  <p>Полное описание опыта — в резюме: <a href="https://sa-n4e-zzz.github.io/automation-portfolio/resume.pdf" target="_blank" rel="noopener noreferrer">открыть PDF</a>.</p>
 </footer>
 
 <dialog id="imgDialog" aria-label="Просмотр изображения">
@@ -702,7 +839,7 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
     platform: {
       title: 'Корпоративная платформа автоматизации документов',
       purpose: 'Платформа для обработки закупочных писем и документов разрабатывается совместно с командой.',
-      contribution: 'Мои модули: ИИ-чат-ассистент, обработка писем, приём и обработка актов М-7, экраны контроля качества и внедрения, роботы выгрузки данных, перенос движка входящих спецификаций из десктопа в веб. В остальных модулях помогал команде.',
+      contribution: 'Мои модули: ИИ-чат-ассистент, обработка писем, приём и обработка актов М-7, экраны контроля качества и внедрения, роботы выгрузки данных, перенос движка входящих спецификаций из десктопа в веб, модуль «История закупочных цен» — поиск по позициям и поставщикам, анализ истории и сравнение рассматриваемой закупки с предыдущими предложениями того же поставщика. В остальных модулях помогал команде.',
       frames: [
         {src:'assets/platform-home.jpg', alt:'Главный экран платформы с рабочими модулями', caption:'Главный экран платформы · демонстрационные данные'},
         {src:'assets/platform-assistant.jpg', alt:'Полноэкранный ИИ-чат-ассистент с синтетическим ответом', caption:'ИИ-чат-ассистент, полноэкранный режим · демонстрационные данные'},
@@ -889,13 +1026,19 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
     if (lastPrjTrigger) { lastPrjTrigger.focus(); }
   });
 
+  /* Scroll reveal for section headings only.
+     Every screenshot surface carries .v4-css-motion and is driven by CSS view timelines. */
   (function(){
     if (typeof window.IntersectionObserver !== 'function') { return; }
     if (typeof document.createElement('div').animate !== 'function') { return; }
 
     var revealSurfaces = Array.prototype.slice.call(
       document.querySelectorAll('main .case-head, main .frame')
-    ).filter(function(element){ return !element.closest('.hero'); });
+    ).filter(function(element){
+      if (element.closest('.hero')) { return false; }
+      if (element.classList.contains('v4-css-motion')) { return false; }
+      return !element.closest('.v4-css-motion');
+    });
 
     if (!revealSurfaces.length) { return; }
 
@@ -908,11 +1051,11 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
 
     function revealFrames(element){
       var frames = [
-        {opacity:.5, transform:'translateY(28px)'},
+        {opacity:.35, transform:'translateY(42px)'},
         {opacity:1, transform:'translateY(0)'}
       ];
       if (element.classList.contains('frame')) {
-        frames[0].transform += ' scale(.985)';
+        frames[0].transform += ' scale(.98)';
         frames[1].transform += ' scale(1)';
       }
       return frames;
@@ -963,7 +1106,7 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
         }
         if (pendingReveal.has(element) || activeReveal.has(element)) { return; }
         if (rect.top < window.innerHeight) { stopObserving(element); return; }
-        var duration = isMobileViewport() ? 550 : 700;
+        var duration = isMobileViewport() ? 620 : 780;
         var animation = animateSurface(element, revealFrames(element), duration);
         if (!animation) { return; }
         animation.pause();
