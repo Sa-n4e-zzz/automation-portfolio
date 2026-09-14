@@ -6,6 +6,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Александр Федосеев — проекты по автоматизации</title>
+<script>
+(function(){
+  var d = document.documentElement;
+  try {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+  } catch (e) { return; }
+  if (typeof IntersectionObserver !== 'function' || !('animate' in Element.prototype)) { return; }
+  if (document.hidden) { return; }
+  if (/\bmv-js\b/.test(d.className)) { return; }
+  d.className = d.className ? d.className + ' mv-js' : 'mv-js';
+  window.setTimeout(function(){
+    if (d.getAttribute('data-mv-ready') !== '1') {
+      d.className = d.className.replace(/\bmv-js\b/, '').trim();
+    }
+  }, 2500);
+})();
+</script>
 <style>
 :root{
   --ink:#171a1f;
@@ -319,88 +336,6 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
   *{transition:none !important;animation:none !important;}
 }
 
-/* ===== Scroll-driven motion (CSS view timelines only) ===== */
-@supports (animation-timeline: view()) and (animation-range: contain 0% contain 100%) {
-  @media (prefers-reduced-motion: no-preference) {
-
-    .v4-hero-track{view-timeline-name:--v4hero;view-timeline-axis:block;}
-
-    @keyframes v4HeroScreen{
-      from{transform:perspective(1500px) translateY(10px) rotateX(14deg) scale(.93);}
-      to{transform:perspective(1500px) translateY(0) rotateX(0deg) scale(1);}
-    }
-    @keyframes v4HeroDim{
-      from{opacity:0;}
-      to{opacity:1;}
-    }
-    .v4-screen{
-      animation:v4HeroScreen 1ms linear both;
-      animation-timeline:--v4hero;
-      animation-range:contain -40px contain 70%;
-    }
-    .v4-hero-dim{
-      animation:v4HeroDim 1ms linear both;
-      animation-timeline:--v4hero;
-      animation-range:contain -40px contain 60%;
-    }
-
-    @media (max-width:760px){
-      @keyframes v4HeroScreen{
-        from{transform:perspective(1100px) translateY(8px) rotateX(9deg) scale(.96);}
-        to{transform:perspective(1100px) translateY(0) rotateX(0deg) scale(1);}
-      }
-    }
-
-    /* --- Platform: two screens open from opposite sides --- */
-    @keyframes v4OpenLeft{
-      from{opacity:.32;transform:perspective(1400px) translateX(-64px) rotateY(10deg) scale(.94);}
-      to{opacity:1;transform:perspective(1400px) translateX(0) rotateY(0deg) scale(1);}
-    }
-    @keyframes v4OpenRight{
-      from{opacity:.32;transform:perspective(1400px) translateX(64px) rotateY(-10deg) scale(.94);}
-      to{opacity:1;transform:perspective(1400px) translateX(0) rotateY(0deg) scale(1);}
-    }
-    .platform-shots>.frame:nth-child(1){
-      animation:v4OpenLeft 1ms linear both;animation-timeline:view();animation-range:entry 0% entry 100%;
-    }
-    .platform-shots>.frame:nth-child(2){
-      animation:v4OpenRight 1ms linear both;animation-timeline:view();animation-range:entry 6% entry 100%;
-    }
-
-    /* --- Photo reports: three phones drift apart --- */
-    @keyframes v4PhoneLeft{
-      from{opacity:.35;transform:translateX(60px) translateY(10px) rotate(-5deg) scale(.92);}
-      to{opacity:1;transform:translateX(0) translateY(0) rotate(0deg) scale(1);}
-    }
-    @keyframes v4PhoneMid{
-      from{opacity:.42;transform:translateY(24px) scale(.95);}
-      to{opacity:1;transform:translateY(0) scale(1);}
-    }
-    @keyframes v4PhoneRight{
-      from{opacity:.35;transform:translateX(-60px) translateY(10px) rotate(5deg) scale(.92);}
-      to{opacity:1;transform:translateX(0) translateY(0) rotate(0deg) scale(1);}
-    }
-    .phone-row>*:nth-child(1){animation:v4PhoneLeft 1ms linear both;animation-timeline:view();animation-range:entry 0% entry 100%;}
-    .phone-row>*:nth-child(2){animation:v4PhoneMid 1ms linear both;animation-timeline:view();animation-range:entry 0% entry 96%;}
-    .phone-row>*:nth-child(3){animation:v4PhoneRight 1ms linear both;animation-timeline:view();animation-range:entry 0% entry 100%;}
-    @media (max-width:760px){
-      .phone-row>*:nth-child(1),.phone-row>*:nth-child(2),.phone-row>*:nth-child(3){
-        animation-name:v4PhoneMid;animation-range:entry 0% entry 100%;
-      }
-    }
-
-    /* --- Calmer rhythm: VPN and tools --- */
-    @keyframes v4Rise{
-      from{opacity:.48;transform:translateY(28px) scale(.98);}
-      to{opacity:1;transform:translateY(0) scale(1);}
-    }
-    .pair-row>.frame,#tools .feature-shot.frame{
-      animation:v4Rise 1ms linear both;animation-timeline:view();animation-range:entry 0% entry 100%;
-    }
-    .pair-row>.frame:nth-child(2){animation-range:entry 8% entry 100%;}
-  }
-}
-
 @media print {
   *{animation:none !important;transition:none !important;}
   .v4-hero-track{padding-block:24px !important;}
@@ -411,10 +346,7 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
   .case.dark{background:#fff !important;color:#000 !important;}
 }
 
-/* ===== Hero refinement pass: lighter headline, rebalanced columns, ===== */
-/* ===== stage-notes as a full-width 3-col band under hero content   ===== */
-
-/* Lighter, less "bold blob" headline at all sizes */
+/* ===== Hero refinement pass: lighter headline, rebalanced columns ===== */
 .hero h1{
   font-weight:650;
   line-height:1.15;
@@ -422,10 +354,8 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
   margin:0 0 20px;
 }
 .hero h1 em{
-  font-weight:800; /* keep the single accent word as the only heavy element */
+  font-weight:800;
 }
-
-/* stage-notes is no longer nested in hero-stage: full-width band, compact 3-col */
 .hero-grid{
   row-gap:32px;
 }
@@ -436,7 +366,6 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
   margin-top:0;
   padding-top:22px;
 }
-/* cancel the old "3rd item spans full row" special-case: all three are equal now */
 .hero-grid .stage-notes > div:nth-child(3){
   grid-column:auto;
   border-top:none;
@@ -451,7 +380,6 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
 }
 
 @media(min-width:920px){
-  /* Give the text column real room so the headline breaks in 2 lines, not 3 */
   .hero-grid{
     grid-template-columns:minmax(360px,.94fr) 1.06fr;
     gap:40px;
@@ -468,7 +396,6 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
 }
 
 @media(max-width:760px){
-  /* keep original mobile stacking/hierarchy for stage-notes band */
   .hero-grid .stage-notes{
     grid-template-columns:1fr;
     gap:16px;
@@ -480,7 +407,6 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
   margin-top: 48px;
   padding-bottom: 56px;
 }
-
 .module-band .stage-notes {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -489,71 +415,28 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
   padding: 0;
   color: inherit;
 }
-
-.module-band .stage-notes > div {
-  grid-column: auto;
-  margin: 0;
-  padding: 0;
-}
-
-.module-band .stage-notes > div:nth-child(3) {
-  grid-column: auto;
-}
-
-.module-band .module-card {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
+.module-band .stage-notes > div { grid-column: auto; margin: 0; padding: 0; }
+.module-band .stage-notes > div:nth-child(3) { grid-column: auto; }
+.module-band .module-card { display: flex; flex-direction: column; gap: 12px; }
 .module-band .module-card .shot-btn {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  border-radius: 12px;
-  background: rgba(15, 23, 42, 0.03);
-  overflow: hidden;
-  padding: 0;
-  cursor: zoom-in;
+  display: block; width: 100%; aspect-ratio: 16 / 10;
+  border: 1px solid rgba(148, 163, 184, 0.35); border-radius: 12px;
+  background: rgba(15, 23, 42, 0.03); overflow: hidden; padding: 0; cursor: zoom-in;
 }
-
-.module-band .module-card .shot-btn img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.module-band .module-card h4 {
-  color: #0f172a;
-  margin: 0;
-}
-
-.module-band .module-card p {
-  color: #334155;
-  margin: 0;
-}
-
+.module-band .module-card .shot-btn img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.module-band .module-card h4 { color: #0f172a; margin: 0; }
+.module-band .module-card p { color: #334155; margin: 0; }
 @media (max-width: 760px) {
-  .module-band .stage-notes {
-    grid-template-columns: 1fr;
-  }
-
-  .module-band .stage-notes > div:nth-child(3) {
-    grid-column: auto;
-  }
+  .module-band .stage-notes { grid-template-columns: 1fr; }
+  .module-band .stage-notes > div:nth-child(3) { grid-column: auto; }
 }
 .module-band .stage-notes > div:nth-child(3){border-top:0;}
 .module-band .module-caption{font-size:11px;line-height:1.5;color:var(--muted);}
 
 /* =========================================================================
-   PREMIUM PALETTE OVERRIDE — deep midnight navy hero track / header,
-   warm porcelain light sections, one azure accent, restrained static
-   blue illumination behind the hero screenshot.
-   Append-only. No HTML/DOM/JS changes. No new interactivity.
+   PREMIUM PALETTE — deep midnight navy hero track / header,
+   warm porcelain light sections, one azure accent.
    ========================================================================= */
-
 :root{
   --porcelain:#f7f5f1;
   --porcelain-2:#eee9e1;
@@ -571,7 +454,6 @@ dialog img{max-height:70vh;width:auto;max-width:88vw;margin:0 auto;object-fit:co
 
 html,body{background:var(--porcelain);}
 
-/* ===== Header: dark navy, sticky ===== */
 header.site{
   background:rgba(10,16,32,.86);
   backdrop-filter:saturate(160%) blur(12px);
@@ -584,7 +466,6 @@ header.site nav.nav-inner a.resume-link{border-color:var(--navy-line);border-bot
 header.site nav.nav-inner a.resume-link:hover{background:var(--azure-ink);border-color:var(--azure-ink);color:#fff;}
 header.site :focus-visible{outline-color:var(--azure-soft);}
 
-/* ===== Hero wrapper stays porcelain; navy lives on the full-width track ===== */
 .hero{background:var(--porcelain);}
 
 .v4-hero-track{
@@ -593,31 +474,25 @@ header.site :focus-visible{outline-color:var(--azure-soft);}
     linear-gradient(180deg,var(--navy-950) 0%,var(--navy-900) 62%,var(--navy-800) 100%);
 }
 
-/* .v4-hero-dim keeps its own opacity/animation untouched */
-
 .v4-hero-track .eyebrow,
 .v4-hero-track .stage-label{color:var(--azure-soft);}
 .v4-hero-track h1{color:var(--ink-on-navy);}
 .v4-hero-track h1 em{color:var(--azure-soft);}
 .v4-hero-track p{color:var(--muted-on-navy);}
 
-/* CTAs: azure solid primary (WCAG AA on white text), ghost on navy */
 .v4-hero-track .btn{background:var(--azure);border-color:var(--azure);color:#fff;}
 .v4-hero-track .btn:hover{background:var(--azure-ink);border-color:var(--azure-ink);}
 .v4-hero-track .btn.ghost{background:none;color:var(--ink-on-navy);border-color:var(--navy-line);}
 .v4-hero-track .btn.ghost:hover{background:rgba(140,170,255,.10);color:var(--ink-on-navy);border-color:var(--azure-soft);}
 
-/* hero screenshot frame: dark/blue edge, shadow scoped to track */
 .v4-hero-track .frame{
   background:linear-gradient(180deg,#101a30 0%,#0c1424 100%);
   border:1px solid var(--navy-line);
   box-shadow:0 24px 46px -26px rgba(59,130,246,.28),0 20px 38px -28px rgba(0,0,0,.55);
 }
 .v4-hero-track .frame figcaption{border-top:1px solid var(--navy-line-soft);color:var(--muted-on-navy);}
-
 .v4-hero-track :focus-visible{outline-color:var(--azure-soft);}
 
-/* ===== Module band: unchanged geometry, warm porcelain surface, light text ===== */
 .hero .module-band{
   background:var(--porcelain);
   border-top:1px solid rgba(15,23,42,.08);
@@ -627,14 +502,10 @@ header.site :focus-visible{outline-color:var(--azure-soft);}
 .module-band .stage-notes p{color:var(--ink);}
 .module-band .module-card h4{color:#0f172a;}
 .module-band .module-card p{color:#334155;}
-.module-band .module-card .shot-btn{
-  border-color:rgba(15,23,42,.14);
-  background:rgba(15,23,42,.03);
-}
+.module-band .module-card .shot-btn{ border-color:rgba(15,23,42,.14); background:rgba(15,23,42,.03); }
 .module-band .module-caption{color:var(--muted);}
 .module-band :focus-visible{outline-color:var(--azure-ink);}
 
-/* ===== Light sections general porcelain warmth ===== */
 section.case,
 .skills{background:var(--porcelain);}
 .phone-scene{
@@ -647,7 +518,6 @@ section.case,
 .flow{color:var(--azure-ink);}
 summary::before{color:var(--azure-ink);}
 
-/* ===== Dark platform/case sections ===== */
 .case.dark{
   background:linear-gradient(180deg,var(--navy-950) 0%,var(--navy-900) 100%);
   border-bottom-color:var(--navy-900);
@@ -663,12 +533,10 @@ summary::before{color:var(--azure-ink);}
 .case.dark figcaption{border-top-color:var(--navy-line-soft);color:var(--muted-on-navy);}
 .case.dark :focus-visible{outline-color:var(--azure-soft);}
 
-/* ===== Accent unification across light sections ===== */
 em{color:var(--azure-ink);}
 a:hover{color:var(--azure-ink);}
 :focus-visible{outline-color:var(--azure);}
 
-/* ===== Modal: explicit light background, explicit dark text/buttons ===== */
 dialog{background:#ffffff;color:#171a1f;}
 .dlg-cap{background:#ffffff;border-top-color:var(--line);}
 .dlg-close{color:#171a1f;border-color:var(--line);}
@@ -680,7 +548,6 @@ dialog{background:#ffffff;color:#171a1f;}
 .prj-text h4{color:var(--muted);}
 .prj-text p{color:#171a1f;}
 
-/* ===== Print: recolored hero/header readable on white paper ===== */
 @media print{
   header.site{background:#fff !important;border-color:#000 !important;}
   header.site .brand,
@@ -696,11 +563,9 @@ dialog{background:#ffffff;color:#171a1f;}
   .case.dark .case-index,.case.dark .flow{color:#333 !important;}
 }
 
-
-/* ===== Product sections redesign (append-only, scoped) ===== */
+/* ===== Product sections ===== */
 .product-section [hidden]{display:none!important;}
 
-/* --- Platform: tabs + review stage --- */
 #platform .platform-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;}
 #platform.platform-enhanced .platform-tabs{display:flex;}
 #platform .platform-tab{min-height:44px;padding:10px 18px;border:1px solid var(--line);background:var(--plate);
@@ -719,17 +584,12 @@ dialog{background:#ffffff;color:#171a1f;}
 #platform .module-panel-stage figure{display:flex;flex-direction:column;flex:1;min-height:0;}
 #platform .module-panel-stage .shot-btn{flex:1;min-height:0;display:block;width:100%;}
 #platform .module-panel-stage img{width:100%;height:100%;object-fit:contain;display:block;}
-@media(prefers-reduced-motion:no-preference){
-  #platform .module-panel{animation:platformFadeIn 420ms ease both;}
-  @keyframes platformFadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
-}
 @media(max-width:760px){
   #platform .platform-tabs{display:grid;grid-template-columns:1fr 1fr;}
   #platform.platform-enhanced .platform-tabs{display:grid;}
   #platform .module-panel{grid-template-columns:1fr;}
 }
 
-/* --- Photo: chronological story columns --- */
 #photo .photo-story{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start;}
 #photo .photo-step{display:flex;flex-direction:column;gap:14px;}
 #photo .photo-step .step-num{font-size:28px;font-weight:800;color:var(--silver);letter-spacing:-.02em;}
@@ -742,7 +602,6 @@ dialog{background:#ffffff;color:#171a1f;}
   #photo .photo-step .frame-phone{max-width:250px;margin-inline:auto;}
 }
 
-/* --- VPN: asymmetric split --- */
 #vpn .vpn-split{display:grid;grid-template-columns:300px 1fr;gap:32px;align-items:start;}
 #vpn .vpn-overview h3{margin:0 0 4px;font-size:15px;font-weight:800;}
 #vpn .vpn-caps{list-style:none;margin:14px 0 22px;padding:0;}
@@ -755,7 +614,6 @@ dialog{background:#ffffff;color:#171a1f;}
   #vpn .vpn-visual-secondary{max-width:100%;align-self:stretch;}
 }
 
-/* --- Tools: equal two-column case studies --- */
 #tools .tools-columns{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
 #tools .tool-col{display:flex;flex-direction:column;gap:16px;}
 #tools .vba-block{border-top:1px solid var(--line-soft);padding-top:28px;margin-top:8px;}
@@ -764,7 +622,6 @@ dialog{background:#ffffff;color:#171a1f;}
   #tools .tool-col{margin-bottom:40px;}
 }
 
-/* --- Skills: compact closing split --- */
 #skills .skills-split{display:grid;grid-template-columns:260px 1fr;gap:40px;align-items:start;}
 #skills .skills-intro .flow{margin:4px 0 16px;}
 #skills .skills-intro .lead{margin:0 0 24px;}
@@ -773,10 +630,7 @@ dialog{background:#ffffff;color:#171a1f;}
   #skills .skills-split{grid-template-columns:1fr;}
 }
 
-
-/* ===== Editorial refinement pass v2 (append-only, scoped) ===== */
-
-/* 1. Case-head: editorial two-column heading/lead */
+/* ===== Editorial refinement pass ===== */
 .product-section .case-head{display:flex;gap:20px;margin-bottom:36px;}
 .product-section .case-head .case-index{flex:0 0 auto;margin:0;font-size:12px;font-weight:700;color:var(--silver);}
 .product-section .case-head > div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-width:0;gap:32px;align-items:end;flex:1;}
@@ -788,7 +642,6 @@ dialog{background:#ffffff;color:#171a1f;}
   .product-section .case-head h2{font-size:32px;}
 }
 
-/* 2. Platform tabs: underline style, plain kicker, framed stage */
 #platform .platform-tabs{display:flex;gap:0;border-bottom:1px solid var(--line-soft);background:none;padding:0;margin:0 0 32px;counter-reset:tabIndex;}
 #platform.platform-enhanced .platform-tabs{display:flex;}
 #platform .platform-tab{counter-increment:tabIndex;flex:1 1 25%;min-height:44px;padding:11px 6px;border:none;border-bottom:2px solid transparent;background:none;border-radius:0;font-weight:600;font-size:13px;color:var(--muted);cursor:pointer;text-align:left;}
@@ -803,9 +656,7 @@ dialog{background:#ffffff;color:#171a1f;}
 #platform .module-kicker{border:none;border-radius:0;padding:0;background:none;display:block;text-transform:uppercase;letter-spacing:.08em;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:8px;}
 #platform .module-panel-info h3{font-size:24px;}
 #platform .module-panel-stage{box-sizing:border-box;background:#eef4fb;border-radius:10px;padding:14px;}
-#platform .module-panel-stage figcaption{color:#fff;background:rgba(15,23,42,.82);padding:6px 10px;font-size:11px;}
 
-/* 3. Photo steps: pale panel + explainer copy */
 #photo .photo-story{background:#f4f8fd;border-radius:12px;padding:28px;}
 #photo .photo-step{border-top:1px solid var(--line-soft);padding-top:16px;}
 #photo .photo-step .step-note{margin:0 0 4px;font-size:13px;line-height:1.5;color:var(--muted);min-height:4.4em;}
@@ -814,7 +665,6 @@ dialog{background:#ffffff;color:#171a1f;}
   #photo .photo-step .step-note{min-height:auto;}
 }
 
-/* 4. Tools: aligned columns, plain VBA grid, wider skills intro */
 #tools .tool-lead{min-height:4.8em;}
 #tools .feature-shot{aspect-ratio:16/10;}
 #tools .feature-shot figure{height:100%;display:flex;flex-direction:column;}
@@ -829,7 +679,6 @@ dialog{background:#ffffff;color:#171a1f;}
   #tools .vba-list{grid-template-columns:1fr;}
 }
 
-/* 5. Skills intro wider column */
 #skills .skills-split{grid-template-columns:minmax(0,.44fr) minmax(0,.56fr);}
 @media(max-width:900px){#skills .skills-split{grid-template-columns:1fr;}}
 
@@ -841,8 +690,6 @@ dialog{background:#ffffff;color:#171a1f;}
 @media(max-width:900px){#platform .module-panel{grid-template-columns:1fr;}#photo .photo-step .step-note{min-height:0;}}
 @media(max-width:400px){.product-section .case-head h2{font-size:27px;}}
 
-
-/* Match preview geometry across the two document tools. */
 #tools .feature-shot{aspect-ratio:auto;margin:0;}
 #tools .feature-shot figure{height:auto;display:block;}
 #tools .feature-shot .shot-btn{aspect-ratio:16/10;flex:none;height:auto;}
@@ -852,8 +699,7 @@ dialog{background:#ffffff;color:#171a1f;}
 #tools .tool-col details{margin-top:8px;}
 #tools .tool-col .tool-top{margin-bottom:0;}
 
-/* ===== Midnight-navy continuation across product sections (append-only) ===== */
-
+/* ===== Midnight-navy continuation across product sections ===== */
 section.product-section{
   --ink:#eef2fb;
   --muted:#aab8d6;
@@ -894,7 +740,6 @@ section.product-section{
   box-shadow:0 16px 30px -22px rgba(59,130,246,.20),0 14px 26px -20px rgba(0,0,0,.5);
 }
 
-/* Platform: navy stage, obvious tabs */
 #platform .platform-tabs{border-bottom:1px solid var(--line-soft);}
 #platform .platform-tab{color:var(--muted);}
 #platform .platform-tab::before{color:#8fb4ff;}
@@ -914,7 +759,6 @@ section.product-section{
 #platform .module-panel-stage figcaption{color:var(--muted);}
 #platform[hidden],.module-panel[hidden]{display:none!important;}
 
-/* Photo: navy stage, three-phase progress */
 #photo .photo-story{
   background:
     radial-gradient(70% 50% at 50% 0%,rgba(59,130,246,.10) 0%,rgba(59,130,246,.02) 55%,transparent 80%),
@@ -928,7 +772,6 @@ section.product-section{
 #photo .photo-step .step-note{color:var(--muted);}
 #photo .photo-outcome{color:var(--accent);border-top-color:var(--line-soft);}
 
-/* VPN: unified console */
 #vpn .vpn-split{
   background:linear-gradient(180deg,#0f1830 0%,#0a1120 100%);
   border:1px solid var(--line);
@@ -940,7 +783,6 @@ section.product-section{
 #vpn .vpn-caps li{color:var(--ink);border-top-color:var(--line-soft);}
 @media(max-width:900px){#vpn .vpn-split{padding:18px;}}
 
-/* Tools: fine ruling, editorial panels */
 #tools .tool-col{border-top:1px solid var(--line-soft);padding-top:20px;}
 #tools .tool-num{color:#8fb4ff;}
 #tools .tool-block h3{color:var(--ink);}
@@ -952,53 +794,25 @@ section.product-section{
   border-radius:8px;
 }
 
-/* Skills: coherent close + resume CTA */
 #skills .skills-intro .lead{color:var(--muted);}
 #skills .skill-grid h4{color:var(--muted);}
 #skills .skill-grid p{color:var(--ink);}
 #skills .skill-grid{border-top:1px solid var(--line-soft);}
 
+/* ===== Footer: full-bleed navy, no light side margins ===== */
 footer{
   background:linear-gradient(180deg,#0a1020 0%,#080d18 100%);
   border-top:1px solid rgba(140,170,255,.13);
   color:#aab8d6;
+  padding:44px 0 64px;
 }
+footer .footer-inner{max-width:1180px;margin:0 auto;padding-inline:32px;}
 footer a{color:#8fb4ff;}
 footer p{color:#aab8d6;}
+footer a:hover{color:#eef2fb;}
+@media(max-width:760px){footer .footer-inner{padding-inline:16px;}}
+@media(max-width:340px){footer .footer-inner{padding-inline:12px;}}
 
-/* ===== Restored/added scroll motion for refactored DOM ===== */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    @keyframes v4ClarityPhoneL{from{opacity:.45;transform:translateX(46px) translateY(8px) scale(.95);}to{opacity:1;transform:none;}}
-    @keyframes v4ClarityPhoneM{from{opacity:.45;transform:translateY(20px) scale(.96);}to{opacity:1;transform:none;}}
-    @keyframes v4ClarityPhoneR{from{opacity:.45;transform:translateX(-46px) translateY(8px) scale(.95);}to{opacity:1;transform:none;}}
-    @keyframes v4ClarityRise{from{opacity:.5;transform:translateY(22px) scale(.98);}to{opacity:1;transform:none;}}
-
-    .photo-story .photo-step:nth-child(1) .frame-phone.v4-css-motion{
-      animation:v4ClarityPhoneL 1ms linear both;animation-timeline:view();animation-range:entry 0% entry 100%;
-    }
-    .photo-story .photo-step:nth-child(2) .frame-phone.v4-css-motion{
-      animation:v4ClarityPhoneM 1ms linear both;animation-timeline:view();animation-range:entry 0% entry 100%;
-    }
-    .photo-story .photo-step:nth-child(3) .frame-phone.v4-css-motion{
-      animation:v4ClarityPhoneR 1ms linear both;animation-timeline:view();animation-range:entry 0% entry 100%;
-    }
-    .vpn-visual .frame.v4-css-motion{
-      animation:v4ClarityRise 1ms linear both;animation-timeline:view();animation-range:entry 0% entry 100%;
-    }
-    @media(max-width:900px){
-      #photo .photo-story .photo-step .frame-phone.v4-css-motion{
-        animation-name:v4ClarityPhoneM;
-      }
-    }
-  }
-}
-@media (prefers-reduced-motion: reduce){
-  .photo-story .frame-phone.v4-css-motion,
-  .vpn-visual .frame.v4-css-motion{animation:none!important;opacity:1!important;transform:none!important;}
-}
-
-/* ===== Accessibility / responsiveness guards ===== */
 @media(max-width:390px){
   .product-section .frame-phone{max-width:250px;}
   #photo .photo-story{padding:16px;}
@@ -1012,10 +826,47 @@ footer p{color:#aab8d6;}
 }
 
 .product-section .tool-flow{color:var(--accent);}
-footer a:hover{color:#eef2fb;}
 #photo .photo-step .frame-phone{margin-inline:auto;}
 @media(min-width:901px){#photo .photo-step .frame-phone{max-width:240px;}}
 
+/* =========================================================================
+   MOTION v7 — product choreography driven by IntersectionObserver +
+   Web Animations API. CSS here only pre-arms the surfaces while JS is
+   confirmed alive (html.mv-js) and guarantees a static page otherwise.
+   ========================================================================= */
+@media (prefers-reduced-motion: no-preference){
+  html.mv-js .v4-screen:not([data-mv-done]),
+  html.mv-js .product-section .case-head > div:not([data-mv-done]),
+  html.mv-js #platform .module-panel-stage:not([data-mv-done]),
+  html.mv-js #platform .module-panel-info:not([data-mv-done]),
+  html.mv-js #photo .photo-step .frame-phone:not([data-mv-done]),
+  html.mv-js #photo .photo-step .step-num:not([data-mv-done]),
+  html.mv-js #vpn .vpn-visual > .frame:not([data-mv-done]),
+  html.mv-js #tools .feature-shot:not([data-mv-done]){
+    opacity:0;
+  }
+}
+[data-mv-run]{will-change:opacity,transform;}
+[data-mv-done]{opacity:1;}
+
+@media (prefers-reduced-motion: reduce){
+  .v4-screen,.v4-hero-dim,.product-section .case-head > div,
+  #platform .module-panel-stage,#platform .module-panel-info,
+  #photo .photo-step .frame-phone,#photo .photo-step .step-num,
+  #vpn .vpn-visual > .frame,#tools .feature-shot{
+    opacity:1 !important;transform:none !important;
+  }
+}
+@media print{
+  .v4-screen,.product-section .case-head > div,
+  #platform .module-panel-stage,#platform .module-panel-info,
+  #photo .photo-step .frame-phone,#photo .photo-step .step-num,
+  #vpn .vpn-visual > .frame,#tools .feature-shot{
+    opacity:1 !important;transform:none !important;
+  }
+  #platform .module-panel[hidden]{display:grid !important;}
+  #platform .platform-tabs{display:none !important;}
+}
 </style>
 </head>
 <body>
@@ -1049,7 +900,7 @@ footer a:hover{color:#eef2fb;}
               <a class="btn ghost" href="https://sa-n4e-zzz.github.io/automation-portfolio/resume.pdf" target="_blank" rel="noopener noreferrer">Резюме PDF</a>
             </div>
           </div>
-          <div class="hero-stage v4-css-motion">
+          <div class="hero-stage">
             <p class="stage-label">01 / Корпоративная платформа</p>
             <div class="v4-screen-wrap">
               <div class="v4-hero-dim" aria-hidden="true"></div>
@@ -1081,7 +932,7 @@ footer a:hover{color:#eef2fb;}
         </div>
       </div>
 
-      <nav class="platform-tabs" hidden>
+      <nav class="platform-tabs" hidden aria-label="Модули платформы">
         <button type="button" class="platform-tab" id="platform-tab-chat" data-panel="chat">Чат-ассистент</button>
         <button type="button" class="platform-tab" id="platform-tab-letters" data-panel="letters">Письма</button>
         <button type="button" class="platform-tab" id="platform-tab-prices" data-panel="prices">История цен</button>
@@ -1095,7 +946,7 @@ footer a:hover{color:#eef2fb;}
             <h3>ИИ-чат-ассистент</h3>
             <p>Вопросы к загруженным данным на естественном языке — модуль внутри общей платформы, реализован мной.</p>
           </div>
-          <div class="module-panel-stage frame v4-css-motion">
+          <div class="module-panel-stage frame">
             <figure>
 <button class="shot-btn" type="button" aria-label="Увеличить: ИИ-чат-ассистент, полноэкранный режим" data-cap="Интерфейс программы · демонстрационные данные"><img src="assets/platform-assistant.jpg" alt="Полноэкранный ИИ-чат-ассистент с синтетическим ответом" loading="lazy" width="1440" height="1000"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
@@ -1109,7 +960,7 @@ footer a:hover{color:#eef2fb;}
             <h3>Письма</h3>
             <p>Обработка входящих писем и вложений с закупочными данными — модуль, который реализовал я.</p>
           </div>
-          <div class="module-panel-stage frame v4-css-motion">
+          <div class="module-panel-stage frame">
             <figure>
 <button class="shot-btn" type="button" aria-label="Увеличить: реестр писем" data-cap="Реестр писем, демонстрационные записи · демонстрационные данные"><img src="assets/platform-letters.jpg" alt="Реестр входящих писем, демонстрационные записи" loading="lazy" width="1440" height="1000"></button>
 <figcaption>Реестр писем · демонстрационные данные</figcaption>
@@ -1123,7 +974,7 @@ footer a:hover{color:#eef2fb;}
             <h3>История закупочных цен</h3>
             <p>Поиск по позициям и поставщикам, статистика по истории закупок, сравнение с рассматриваемой закупкой, выгрузка в Excel.</p>
           </div>
-          <div class="module-panel-stage frame v4-css-motion">
+          <div class="module-panel-stage frame">
             <figure>
 <button class="shot-btn" type="button" aria-label="Увеличить: история закупочных цен" data-cap="История закупочных цен · демонстрационные данные"><img src="assets/platform-prices.jpg" alt="Экран истории закупочных цен: фильтры, таблица и история цен в виде спарклайнов" loading="lazy" width="2560" height="1440"></button>
 <figcaption>История цен · демонстрационные данные</figcaption>
@@ -1137,7 +988,7 @@ footer a:hover{color:#eef2fb;}
             <h3>Акты М-7 и несоответствия</h3>
             <p>Приём, обработка и систематизация актов М-7 и несоответствий для подготовки заключений и дальнейшей работы с поставщиками.</p>
           </div>
-          <div class="module-panel-stage frame v4-css-motion">
+          <div class="module-panel-stage frame">
             <figure>
 <button class="shot-btn" type="button" aria-label="Увеличить: приём актов М-7" data-cap="Приём актов М-7 · демонстрационные данные"><img src="assets/platform-m7.jpg" alt="Экран приёма и обработки актов М-7" loading="lazy" width="2560" height="1440"></button>
 <figcaption>Акты М-7 · демонстрационные данные</figcaption>
@@ -1205,7 +1056,7 @@ footer a:hover{color:#eef2fb;}
           <span class="step-num">01</span>
           <h3>План</h3>
           <p class="step-note">Письма отбираются по теме и отправителю. Из вложений Excel/CSV загружается и проверяется план.</p>
-          <div class="frame frame-phone v4-css-motion">
+          <div class="frame frame-phone">
             <figure>
 <button class="shot-btn" type="button" aria-label="Увеличить: план выездов" data-cap="Мобильный план выездов · демонстрационные данные"><img src="assets/photo-plan.jpg" alt="Мобильный экран плана выездов" loading="lazy" width="430" height="932"></button>
 <figcaption>План · демонстрационные данные</figcaption>
@@ -1216,7 +1067,7 @@ footer a:hover{color:#eef2fb;}
           <span class="step-num">02</span>
           <h3>Объект</h3>
           <p class="step-note">Объект выбирается из плана — открывается его карточка для дальнейшей фотофиксации.</p>
-          <div class="frame frame-phone v4-css-motion">
+          <div class="frame frame-phone">
             <figure>
 <button class="shot-btn" type="button" aria-label="Увеличить: выбор объекта" data-cap="Выбор объекта · демонстрационные данные"><img src="assets/photo-objects.jpg" alt="Экран выбора объекта" loading="lazy" width="430" height="932"></button>
 <figcaption>Объект · демонстрационные данные</figcaption>
@@ -1227,7 +1078,7 @@ footer a:hover{color:#eef2fb;}
           <span class="step-num">03</span>
           <h3>Фото</h3>
           <p class="step-note">Фото с камеры или из галереи, подписи и необязательные отметки освидетельствования.</p>
-          <div class="frame frame-phone v4-css-motion">
+          <div class="frame frame-phone">
             <figure>
 <button class="shot-btn" type="button" aria-label="Увеличить: добавление фото" data-cap="Добавление фото через камеру или галерею · демонстрационные данные"><img src="assets/photo-add.jpg" alt="Экран добавления фото через камеру или галерею" loading="lazy" width="430" height="932"></button>
 <figcaption>Фотографии · демонстрационные данные</figcaption>
@@ -1274,13 +1125,13 @@ footer a:hover{color:#eef2fb;}
           <button class="btn ghost present-btn" type="button" data-project="vpn">Посмотреть экраны</button>
         </div>
         <div class="vpn-visual">
-          <div class="frame v4-css-motion vpn-visual-main">
+          <div class="frame vpn-visual-main">
             <figure>
 <button class="shot-btn" type="button" aria-label="Увеличить: устройства и доступы" data-cap="Устройства и выданные доступы · демонстрационные данные"><img src="assets/vpn-devices.jpg" alt="Экран устройств и доступов" loading="lazy" width="1280" height="720"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
 </figure>
           </div>
-          <div class="frame v4-css-motion vpn-visual-secondary">
+          <div class="frame vpn-visual-secondary">
             <figure>
 <button class="shot-btn" type="button" aria-label="Увеличить: статус сервера" data-cap="Состояние сервера · демонстрационные данные"><img src="assets/vpn-status.jpg" alt="Экран состояния сервера" loading="lazy" width="1280" height="720"></button>
 <figcaption>Состояние сервера · демонстрационные данные</figcaption>
@@ -1318,7 +1169,7 @@ footer a:hover{color:#eef2fb;}
             <div class="tool-num">01</div>
             <h3>Конструктор спецификаций</h3>
           </div>
-          <div class="feature-shot frame v4-css-motion">
+          <div class="feature-shot frame">
             <figure>
 <button class="shot-btn" type="button" aria-label="Увеличить: настройка полей конструктора спецификаций" data-cap="Настройка полей и правил · демонстрационные данные"><img src="assets/spec-generator-fields.jpg" alt="Экран настройки полей и правил конструктора спецификаций" loading="lazy" width="1114" height="768"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
@@ -1342,7 +1193,7 @@ footer a:hover{color:#eef2fb;}
             <div class="tool-num">02</div>
             <h3>Обработка входящих PDF-спецификаций</h3>
           </div>
-          <div class="feature-shot frame v4-css-motion">
+          <div class="feature-shot frame">
             <figure>
 <button class="shot-btn" type="button" aria-label="Увеличить: предпросмотр входящей спецификации" data-cap="Предпросмотр обработки входящей спецификации · демонстрационные данные"><img src="assets/incoming-spec-preview.jpg" alt="Экран предпросмотра обработки входящей PDF-спецификации" loading="lazy" width="1422" height="768"></button>
 <figcaption>Интерфейс программы · демонстрационные данные</figcaption>
@@ -1405,13 +1256,15 @@ footer a:hover{color:#eef2fb;}
   </section>
 </main>
 
-<footer class="wrap">
-  <p>Полное описание опыта — в резюме: <a href="https://sa-n4e-zzz.github.io/automation-portfolio/resume.pdf" target="_blank" rel="noopener noreferrer">открыть PDF</a>.</p>
+<footer>
+  <div class="footer-inner">
+    <p>Полное описание опыта — в резюме: <a href="https://sa-n4e-zzz.github.io/automation-portfolio/resume.pdf" target="_blank" rel="noopener noreferrer">открыть PDF</a>.</p>
+  </div>
 </footer>
 
 <dialog id="imgDialog" aria-label="Просмотр изображения">
   <div class="dlg-body">
-    <img id="dlgImg" src="" alt="">
+    <img id="dlgImg" alt="">
     <div class="dlg-cap">
       <span id="dlgCap"></span>
       <button class="dlg-close" id="dlgClose" type="button">Закрыть</button>
@@ -1426,7 +1279,7 @@ footer a:hover{color:#eef2fb;}
   </div>
   <div class="prj-body">
     <div class="prj-stage">
-      <img id="prjImg" src="" alt="">
+      <img id="prjImg" alt="">
     </div>
     <div class="prj-copy">
       <p class="prj-caption" id="prjCaption"></p>
@@ -1501,8 +1354,8 @@ footer a:hover{color:#eef2fb;}
         {src:'assets/platform-home.jpg', alt:'Главный экран платформы с рабочими модулями', caption:'Главный экран платформы · демонстрационные данные'},
         {src:'assets/platform-assistant.jpg', alt:'Полноэкранный ИИ-чат-ассистент с синтетическим ответом', caption:'ИИ-чат-ассистент, полноэкранный режим · демонстрационные данные'},
         {src:'assets/platform-letters.jpg', alt:'Реестр входящих писем, демонстрационные записи', caption:'Реестр писем, демонстрационные записи · демонстрационные данные'},
-        {"src": "assets/platform-prices.jpg", "alt": "Интерфейс истории закупочных цен, демонстрационные данные", "caption": "Интерфейс программы · демонстрационные данные"},
-        {"src": "assets/platform-m7.jpg", "alt": "Интерфейс модуля актов М-7 и несоответствий, демонстрационные данные", "caption": "Интерфейс программы · демонстрационные данные"}
+        {src:'assets/platform-prices.jpg', alt:'Интерфейс истории закупочных цен, демонстрационные данные', caption:'Интерфейс программы · демонстрационные данные'},
+        {src:'assets/platform-m7.jpg', alt:'Интерфейс модуля актов М-7 и несоответствий, демонстрационные данные', caption:'Интерфейс программы · демонстрационные данные'}
       ]
     },
     photo: {
@@ -1544,10 +1397,6 @@ footer a:hover{color:#eef2fb;}
       ]
     }
   };
-
-  function isAnyDialogOpen(){
-    return imgDialog.open || prjDialog.open;
-  }
 
   function lockBody(){
     if (bodyOverflowBackup === null) {
@@ -1685,187 +1534,6 @@ footer a:hover{color:#eef2fb;}
     if (lastPrjTrigger) { lastPrjTrigger.focus(); }
   });
 
-  /* Scroll reveal for section headings only.
-     Every screenshot surface carries .v4-css-motion and is driven by CSS view timelines. */
-  (function(){
-    if (typeof window.IntersectionObserver !== 'function') { return; }
-    if (typeof document.createElement('div').animate !== 'function') { return; }
-
-    var revealSurfaces = Array.prototype.slice.call(
-      document.querySelectorAll('main .case-head, main .frame')
-    ).filter(function(element){
-      if (element.closest('.hero')) { return false; }
-      if (element.classList.contains('v4-css-motion')) { return false; }
-      return !element.closest('.v4-css-motion');
-    });
-
-    if (!revealSurfaces.length) { return; }
-
-    var pendingReveal = new Map();
-    var activeReveal = new Map();
-
-    function isMobileViewport(){
-      return window.matchMedia ? window.matchMedia('(max-width: 767px)').matches : false;
-    }
-
-    function revealFrames(element){
-      var frames = [
-        {opacity:.35, transform:'translateY(42px)'},
-        {opacity:1, transform:'translateY(0)'}
-      ];
-      if (element.classList.contains('frame')) {
-        frames[0].transform += ' scale(.98)';
-        frames[1].transform += ' scale(1)';
-      }
-      return frames;
-    }
-
-    function stopObserving(element){
-      prepareObserver.unobserve(element);
-      runObserver.unobserve(element);
-    }
-
-    function clearPending(element){
-      var animation = pendingReveal.get(element);
-      if (animation) { animation.cancel(); }
-      pendingReveal.delete(element);
-    }
-
-    function clearActive(element){
-      var animation = activeReveal.get(element);
-      if (animation) { animation.cancel(); }
-      activeReveal.delete(element);
-    }
-
-    function cancelReveal(element){
-      clearPending(element);
-      clearActive(element);
-    }
-
-    function cancelAllReveals(){
-      pendingReveal.forEach(function(animation){ animation.cancel(); });
-      activeReveal.forEach(function(animation){ animation.cancel(); });
-      pendingReveal.clear();
-      activeReveal.clear();
-      revealSurfaces.forEach(stopObserving);
-    }
-
-    var prepareObserver = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        var element = entry.target;
-        var rect = entry.boundingClientRect;
-        if (!entry.isIntersecting) {
-          if (rect.top < window.innerHeight) {
-            clearPending(element);
-            stopObserving(element);
-          } else {
-            clearPending(element);
-          }
-          return;
-        }
-        if (pendingReveal.has(element) || activeReveal.has(element)) { return; }
-        if (rect.top < window.innerHeight) { stopObserving(element); return; }
-        var duration = isMobileViewport() ? 620 : 780;
-        var animation = animateSurface(element, revealFrames(element), duration);
-        if (!animation) { return; }
-        animation.pause();
-        pendingReveal.set(element, animation);
-      });
-    }, {root:null, rootMargin:'0px 0px 20% 0px', threshold:0});
-
-    var runObserver = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if (!entry.isIntersecting) { return; }
-        var element = entry.target;
-        var animation = pendingReveal.get(element);
-        stopObserving(element);
-        if (!animation) { return; }
-        pendingReveal.delete(element);
-        var rect = entry.boundingClientRect;
-        var reduced = motionQuery && motionQuery.matches;
-        var focused = document.activeElement && element.contains(document.activeElement);
-        if (rect.top >= window.innerHeight * .25 && !focused && !reduced) {
-          activeReveal.set(element, animation);
-          var settle = function(){ activeReveal.delete(element); };
-          animation.addEventListener('finish', settle);
-          animation.addEventListener('cancel', settle);
-          animation.play();
-        } else {
-          animation.cancel();
-        }
-      });
-    }, {root:null, rootMargin:'0px', threshold:0});
-
-    revealSurfaces.forEach(function(element){
-      var rect = element.getBoundingClientRect();
-      if (rect.top < window.innerHeight) { return; }
-      prepareObserver.observe(element);
-      runObserver.observe(element);
-    });
-
-    document.addEventListener('focusin', function(event){
-      revealSurfaces.forEach(function(element){
-        if (element.contains(event.target) && (pendingReveal.has(element) || activeReveal.has(element))) {
-          cancelReveal(element);
-        }
-      });
-    });
-
-    if (motionQuery) {
-      var cancelReducedReveals = function(event){ if (event.matches) { cancelAllReveals(); } };
-      if (motionQuery.addEventListener) { motionQuery.addEventListener('change', cancelReducedReveals); }
-      else if (motionQuery.addListener) { motionQuery.addListener(cancelReducedReveals); }
-    }
-
-    var anchorSettleTimer = null;
-
-    function clearPastReveals(){
-      revealSurfaces.forEach(function(element){
-        var rect = element.getBoundingClientRect();
-        if (rect.top < window.innerHeight) {
-          cancelReveal(element);
-          stopObserving(element);
-        }
-      });
-    }
-
-    function armAnchorSettle(){
-      clearPastReveals();
-      if (anchorSettleTimer) { window.clearTimeout(anchorSettleTimer); }
-      anchorSettleTimer = window.setTimeout(function(){
-        anchorSettleTimer = null;
-        clearPastReveals();
-      }, 120);
-    }
-
-    window.addEventListener('hashchange', armAnchorSettle);
-
-    window.addEventListener('scroll', function(){
-      if (!anchorSettleTimer) { return; }
-      window.clearTimeout(anchorSettleTimer);
-      anchorSettleTimer = window.setTimeout(function(){
-        anchorSettleTimer = null;
-        clearPastReveals();
-      }, 120);
-    }, {passive:true});
-
-    window.addEventListener('load', function(){
-      if (location.hash) { armAnchorSettle(); }
-    });
-
-    document.addEventListener('click', function(event){
-      var target = event.target;
-      if (!(target instanceof Element)) { return; }
-      var anchor = target.closest('a[href^="#"]');
-      if (!anchor) { return; }
-      if (anchor.getAttribute('href') === location.hash) { armAnchorSettle(); }
-    });
-    window.addEventListener('beforeprint', cancelAllReveals);
-    window.addEventListener('pageshow', function(event){
-      if (event.persisted) { cancelAllReveals(); }
-    });
-  })();
-
   if (motionQuery) {
     var handleMotionChange = function(event){
       if (!event.matches) { return; }
@@ -1878,77 +1546,497 @@ footer a:hover{color:#eef2fb;}
   }
 })();
 </script>
+
 <script>
-
+/* =========================================================================
+   MOTION v7 — reveal choreography (IntersectionObserver + Web Animations),
+   plus the platform module switcher. No libraries, no scroll hijacking,
+   no rAF polling. Everything degrades to a static, readable page.
+   ========================================================================= */
 (function(){
-  'use strict';
-  var root = document.getElementById('platform');
-  if(!root) return;
-  var nav = root.querySelector('.platform-tabs');
-  if(!nav) return;
-  var tabs = Array.prototype.slice.call(nav.querySelectorAll('.platform-tab'));
-  var panels = Array.prototype.slice.call(root.querySelectorAll('.module-panel'));
-  if(tabs.length !== 4 || panels.length !== 4) return;
+  var root = document.documentElement;
+  var reduceQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var supported = typeof IntersectionObserver === 'function' && ('animate' in Element.prototype);
 
-  var panelMap = {};
-  var panelsValid = true;
-  panels.forEach(function(p){
-    var key = p.getAttribute('data-panel');
-    if(!key || !p.id){ panelsValid = false; return; }
-    panelMap[key] = p;
-  });
-  var tabsValid = tabs.every(function(t){
-    var key = t.getAttribute('data-panel');
-    return !!(key && panelMap[key] && t.id);
-  });
-  if(!panelsValid || !tabsValid) return;
+  function reduced(){ return !!(reduceQuery && reduceQuery.matches); }
+  function narrow(){ return window.matchMedia ? window.matchMedia('(max-width:900px)').matches : false; }
 
-  nav.setAttribute('role','tablist');
-  tabs.forEach(function(t, i){
-    var key = t.getAttribute('data-panel');
-    var panel = panelMap[key];
-    t.setAttribute('role','tab');
-    t.setAttribute('aria-controls', panel.id);
-    t.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
-    t.setAttribute('tabindex', i === 0 ? '0' : '-1');
-    panel.setAttribute('role','tabpanel');
-    panel.setAttribute('aria-labelledby', t.id);
-    if(i !== 0){ panel.hidden = true; }
+  var EASE = 'cubic-bezier(.16,1,.3,1)';
+  var EASE_OUT = 'cubic-bezier(.25,.8,.35,1)';
+
+  function settle(el){
+    el.style.opacity = '';
+    el.style.transform = '';
+    el.style.willChange = '';
+    el.removeAttribute('data-mv-run');
+    el.setAttribute('data-mv-done', '');
+  }
+
+  function arm(el, from){
+    el.removeAttribute('data-mv-done');
+    el.setAttribute('data-mv-run', '');
+    el.style.opacity = String(from.opacity);
+    el.style.transform = from.transform;
+  }
+
+  /* ---------- reveal engine ---------- */
+  var reveals = [];
+  var liveAnim = new Map();
+  var frozen = false;
+
+  function play(item){
+    var el = item.el;
+    if (reduced()) { settle(el); item.state = 'done'; return; }
+    var prev = liveAnim.get(el);
+    if (prev) { prev.cancel(); liveAnim.delete(el); }
+    var anim = el.animate([
+      {opacity:item.from.opacity, transform:item.from.transform, offset:0},
+      {opacity:1, transform:'none', offset:1}
+    ], {duration:item.duration, delay:item.delay, easing:item.easing || EASE, fill:'both'});
+    liveAnim.set(el, anim);
+    item.state = 'running';
+    var done = function(){
+      if (liveAnim.get(el) !== anim) { return; }
+      liveAnim.delete(el);
+      anim.cancel();
+      settle(el);
+      item.state = 'done';
+    };
+    if (anim.finished && anim.finished.then) { anim.finished.then(done, function(){}); }
+    else { anim.onfinish = done; }
+  }
+
+  function finishNow(item){
+    var anim = liveAnim.get(item.el);
+    if (anim) { anim.cancel(); liveAnim.delete(item.el); }
+    settle(item.el);
+    item.state = 'done';
+  }
+
+  var enterObserver = null;
+  var exitObserver = null;
+
+  function register(el, from, delay, duration, easing){
+    if (!el) { return null; }
+    var item = {el:el, from:from, delay:delay || 0, duration:duration || 720, easing:easing, state:'idle'};
+    el.__mvItem = item;
+    reveals.push(item);
+    return item;
+  }
+
+  function boot(){
+    if (!supported || reduced()) {
+      reveals.forEach(function(item){ settle(item.el); });
+      root.className = root.className.replace(/\bmv-js\b/, '').trim();
+      return;
+    }
+
+    enterObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var item = entry.target.__mvItem;
+        if (!item || !entry.isIntersecting) { return; }
+        if (item.state === 'running' || item.state === 'done') { return; }
+        if (document.activeElement && entry.target.contains(document.activeElement)) {
+          finishNow(item);
+          return;
+        }
+        play(item);
+      });
+    }, {root:null, threshold:0, rootMargin:'0px 0px -10% 0px'});
+
+    exitObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var item = entry.target.__mvItem;
+        if (!item || entry.isIntersecting) { return; }
+        if (item.state === 'idle') { return; }
+        if (reduced() || document.hidden || frozen) { return; }
+        var anim = liveAnim.get(entry.target);
+        if (anim) { anim.cancel(); liveAnim.delete(entry.target); }
+        item.state = 'idle';
+        arm(entry.target, item.from);
+      });
+    }, {root:null, threshold:0});
+
+    reveals.forEach(function(item){
+      arm(item.el, item.from);
+      enterObserver.observe(item.el);
+      exitObserver.observe(item.el);
+    });
+
+    root.setAttribute('data-mv-ready', '1');
+
+    /* Fail open: a hidden document (prerender, background frame) never ticks
+       the document timeline, so nothing must depend on an animation finishing. */
+    if (document.hidden) {
+      reveals.forEach(finishNow);
+      return;
+    }
+    var timelineStart = (document.timeline && document.timeline.currentTime != null)
+      ? Number(document.timeline.currentTime) : null;
+    window.setTimeout(function(){
+      var now = (document.timeline && document.timeline.currentTime != null)
+        ? Number(document.timeline.currentTime) : null;
+      if (timelineStart !== null && now === timelineStart) {
+        reveals.forEach(finishNow);
+      }
+    }, 420);
+
+    /* Anything already inside the viewport plays at once — a deliberate
+       load/anchor intro instead of waiting for a scroll that may never come. */
+    window.requestAnimationFrame(function(){
+      reveals.forEach(function(item){
+        var rect = item.el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0 && item.state === 'idle') {
+          play(item);
+        }
+      });
+    });
+
+    /* Failsafe: never leave a surface hidden — settle, do not animate. */
+    window.setTimeout(function(){
+      reveals.forEach(function(item){
+        if (item.state === 'done') { return; }
+        var rect = item.el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) { finishNow(item); }
+      });
+    }, 1800);
+  }
+
+  /* Tab / focus arriving inside an armed surface must reveal it instantly. */
+  document.addEventListener('focusin', function(event){
+    reveals.forEach(function(item){
+      if (item.state === 'done') { return; }
+      if (item.el.contains(event.target)) { finishNow(item); }
+    });
   });
 
-  function selectTab(index){
-    tabs.forEach(function(t, i){
-      var key = t.getAttribute('data-panel');
-      var panel = panelMap[key];
-      var active = i === index;
-      t.setAttribute('aria-selected', active ? 'true' : 'false');
-      t.setAttribute('tabindex', active ? '0' : '-1');
-      panel.hidden = !active;
+  window.addEventListener('beforeprint', function(){
+    frozen = true;
+    reveals.forEach(finishNow);
+    if (heroDimAnim) { heroDimAnim.cancel(); heroDimAnim = null; }
+    if (heroDim) { heroDim.style.opacity = '1'; }
+  });
+  window.addEventListener('afterprint', function(){
+    frozen = false;
+  });
+  if (window.matchMedia) {
+    var printQuery = window.matchMedia('print');
+    var onPrintChange = function(event){
+      frozen = event.matches;
+      if (event.matches) {
+        reveals.forEach(finishNow);
+        if (heroDimAnim) { heroDimAnim.cancel(); heroDimAnim = null; }
+        if (heroDim) { heroDim.style.opacity = '1'; }
+      }
+    };
+    if (printQuery.addEventListener) { printQuery.addEventListener('change', onPrintChange); }
+    else if (printQuery.addListener) { printQuery.addListener(onPrintChange); }
+  }
+
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden) {
+      reveals.forEach(finishNow);
+      if (heroDimAnim) { heroDimAnim.cancel(); heroDimAnim = null; }
+      if (heroDim) { heroDim.style.opacity = '1'; }
+    }
+  });
+
+  window.addEventListener('pageshow', function(event){
+    if (event.persisted) { reveals.forEach(finishNow); }
+  });
+
+  if (reduceQuery) {
+    var onReduce = function(event){
+      if (!event.matches) { return; }
+      reveals.forEach(finishNow);
+      if (heroDimAnim) { heroDimAnim.cancel(); heroDimAnim = null; }
+      if (heroDim) { heroDim.style.opacity = '1'; }
+    };
+    if (reduceQuery.addEventListener) { reduceQuery.addEventListener('change', onReduce); }
+    else if (reduceQuery.addListener) { reduceQuery.addListener(onReduce); }
+  }
+
+  /* ---------- choreography ---------- */
+  var small = narrow();
+
+  /* Hero: the product screen lifts out of depth and straightens. */
+  var heroScreen = document.querySelector('.v4-screen');
+  if (heroScreen) {
+    register(
+      heroScreen,
+      small
+        ? {opacity:0, transform:'perspective(1100px) translateY(26px) rotateX(8deg) scale(.965)'}
+        : {opacity:0, transform:'perspective(1500px) translateY(46px) rotateX(15deg) scale(.93)'},
+      90, small ? 760 : 980
+    );
+  }
+  var heroDim = document.querySelector('.v4-hero-dim');
+  var heroDimAnim = null;
+  if (heroDim && document.hidden) { heroDim.style.opacity = '1'; }
+  if (heroDim && supported && !reduced() && !document.hidden) {
+    window.requestAnimationFrame(function(){
+      if (reduced() || document.hidden || frozen) { heroDim.style.opacity = '1'; return; }
+      var a = heroDim.animate([{opacity:0},{opacity:1}], {duration:1400, delay:160, easing:EASE_OUT, fill:'both'});
+      heroDimAnim = a;
+      var finishDim = function(){
+        if (heroDimAnim !== a) { return; }
+        a.cancel();
+        heroDimAnim = null;
+        heroDim.style.opacity = '1';
+      };
+      if (a.finished && a.finished.then) { a.finished.then(finishDim, finishDim); }
+      else { a.onfinish = finishDim; }
     });
   }
 
-  tabs.forEach(function(t, i){
-    t.addEventListener('click', function(){
-      selectTab(i);
-    });
-    t.addEventListener('keydown', function(e){
-      var newIndex = null;
-      if(e.key === 'ArrowRight'){ newIndex = (i + 1) % tabs.length; }
-      else if(e.key === 'ArrowLeft'){ newIndex = (i - 1 + tabs.length) % tabs.length; }
-      else if(e.key === 'Home'){ newIndex = 0; }
-      else if(e.key === 'End'){ newIndex = tabs.length - 1; }
-      if(newIndex !== null){
-        e.preventDefault();
-        selectTab(newIndex);
-        tabs[newIndex].focus();
-      }
-    });
+  /* Every product section: heading block rises as the section enters. */
+  document.querySelectorAll('.product-section .case-head > div').forEach(function(el){
+    register(el, {opacity:0, transform:'translateY(' + (small ? 22 : 34) + 'px)'}, 0, 640, EASE_OUT);
   });
 
-  root.classList.add('platform-enhanced');
-  nav.hidden = false;
-})();
+  /* Platform: copy slides in from the side, the interface opens out of depth. */
+  document.querySelectorAll('#platform .module-panel').forEach(function(panel){
+    var info = panel.querySelector('.module-panel-info');
+    var stage = panel.querySelector('.module-panel-stage');
+    if (info) {
+      register(info, {opacity:0, transform:'translateX(' + (small ? 0 : -28) + 'px) translateY(' + (small ? 18 : 0) + 'px)'}, 40, 620, EASE_OUT);
+    }
+    if (stage) {
+      register(stage, small
+        ? {opacity:0, transform:'translateY(38px) scale(.965)'}
+        : {opacity:0, transform:'perspective(1300px) translateY(64px) rotateX(11deg) scale(.94)'},
+        140, small ? 760 : 860);
+    }
+  });
 
+  /* Photo reports: three phones appear one after another. */
+  document.querySelectorAll('#photo .photo-step').forEach(function(step, i){
+    var num = step.querySelector('.step-num');
+    var phone = step.querySelector('.frame-phone');
+    var base = i * (small ? 110 : 150);
+    if (num) {
+      register(num, {opacity:0, transform:'translateY(16px)'}, base, 480, EASE_OUT);
+    }
+    if (phone) {
+      var tilt = i === 0 ? -4 : (i === 2 ? 4 : 0);
+      register(phone, small
+        ? {opacity:0, transform:'translateY(46px) scale(.94)'}
+        : {opacity:0, transform:'translateY(78px) rotate(' + tilt + 'deg) scale(.9)'},
+        base + 90, small ? 720 : 820);
+    }
+  });
+
+  /* VPN: the console assembles — main panel first, status panel answers it. */
+  var vpnFrames = document.querySelectorAll('#vpn .vpn-visual > .frame');
+  Array.prototype.forEach.call(vpnFrames, function(el, i){
+    register(el, small
+      ? {opacity:0, transform:'translateY(36px) scale(.97)'}
+      : {opacity:0, transform:'perspective(1200px) translateX(' + (i === 0 ? 44 : -36) + 'px) translateY(30px) rotateY(' + (i === 0 ? -7 : 6) + 'deg) scale(.96)'},
+      i * 170, small ? 700 : 820);
+  });
+
+  /* Tools: the two document tools rise in turn. */
+  document.querySelectorAll('#tools .feature-shot').forEach(function(el, i){
+    register(el, small
+      ? {opacity:0, transform:'translateY(34px) scale(.975)'}
+      : {opacity:0, transform:'perspective(1200px) translateY(52px) rotateX(7deg) scale(.965)'},
+      i * 150, small ? 680 : 780);
+  });
+
+  /* ---------- platform module switcher ---------- */
+  (function(){
+    var section = document.getElementById('platform');
+    if (!section) { return; }
+    var tablist = section.querySelector('.platform-tabs');
+    var tabs = Array.prototype.slice.call(section.querySelectorAll('.platform-tab'));
+    var panels = Array.prototype.slice.call(section.querySelectorAll('.module-panel'));
+    if (!tablist || tabs.length === 0 || panels.length === 0) { return; }
+
+    var byName = {};
+    panels.forEach(function(p){ byName[p.getAttribute('data-panel')] = p; });
+
+    tablist.removeAttribute('hidden');
+    tablist.setAttribute('role', 'tablist');
+    section.classList.add('platform-enhanced');
+
+    tabs.forEach(function(tab){
+      tab.setAttribute('role', 'tab');
+      var panel = byName[tab.getAttribute('data-panel')];
+      if (panel) {
+        tab.setAttribute('aria-controls', panel.id);
+        panel.setAttribute('role', 'tabpanel');
+      }
+    });
+
+    var currentName = null;
+    var switching = null;
+    var incomingAnims = [];
+    var gen = 0;
+
+    function panelItems(panel){
+      var out = [];
+      var info = panel.querySelector('.module-panel-info');
+      var stage = panel.querySelector('.module-panel-stage');
+      if (info && info.__mvItem) { out.push(info.__mvItem); }
+      if (stage && stage.__mvItem) { out.push(stage.__mvItem); }
+      return out;
+    }
+
+    function cancelIncoming(){
+      incomingAnims.forEach(function(a){ a.cancel(); });
+      incomingAnims = [];
+    }
+
+    function cancelOutgoing(){
+      if (switching) { switching.cancel(); switching = null; }
+    }
+
+    function cleanPanelStyles(panel){
+      if (!panel) { return; }
+      panel.style.opacity = '';
+      panel.style.transform = '';
+      var info = panel.querySelector('.module-panel-info');
+      var stage = panel.querySelector('.module-panel-stage');
+      if (info) { info.style.opacity = ''; info.style.transform = ''; }
+      if (stage) { stage.style.opacity = ''; stage.style.transform = ''; }
+    }
+
+    function settleImmediate(){
+      cancelOutgoing();
+      cancelIncoming();
+      panels.forEach(function(p){
+        p.hidden = (p.getAttribute('data-panel') !== currentName);
+        cleanPanelStyles(p);
+      });
+      if (currentName) { panelItems(byName[currentName]).forEach(finishNow); }
+    }
+
+    function showPanel(name, animate, focusTab){
+      var next = byName[name];
+      if (!next || name === currentName) { return; }
+      var prev = currentName ? byName[currentName] : null;
+      var myGen = ++gen;
+      currentName = name;
+
+      cancelOutgoing();
+      cancelIncoming();
+      if (prev) { cleanPanelStyles(prev); }
+
+      tabs.forEach(function(tab){
+        var on = tab.getAttribute('data-panel') === name;
+        tab.setAttribute('aria-selected', on ? 'true' : 'false');
+        tab.tabIndex = on ? 0 : -1;
+        if (on && focusTab) { tab.focus(); }
+      });
+
+      var reveal = function(){
+        if (myGen !== gen) { return; }
+        panels.forEach(function(p){
+          if (p !== next) { p.hidden = true; }
+        });
+        next.hidden = false;
+        if (!animate || reduced() || !supported || document.hidden) {
+          panelItems(next).forEach(finishNow);
+          cleanPanelStyles(next);
+          return;
+        }
+        var info = next.querySelector('.module-panel-info');
+        var stage = next.querySelector('.module-panel-stage');
+        if (info) {
+          finishNow(info.__mvItem || {el:info, state:'done'});
+          var infoAnim = info.animate([
+            {opacity:0, transform:'translateY(14px)'},
+            {opacity:1, transform:'none'}
+          ], {duration:420, easing:EASE_OUT, fill:'both'});
+          incomingAnims.push(infoAnim);
+          var infoDone = function(){
+            var idx = incomingAnims.indexOf(infoAnim);
+            if (idx !== -1) { incomingAnims.splice(idx, 1); }
+            infoAnim.cancel();
+            info.style.opacity = ''; info.style.transform = '';
+          };
+          if (infoAnim.finished && infoAnim.finished.then) { infoAnim.finished.then(infoDone, infoDone); }
+          else { infoAnim.onfinish = infoDone; }
+        }
+        if (stage) {
+          finishNow(stage.__mvItem || {el:stage, state:'done'});
+          var stageAnim = stage.animate([
+            {opacity:0, transform:'perspective(1300px) translateY(30px) rotateX(6deg) scale(.97)', offset:0},
+            {opacity:1, transform:'none', offset:1}
+          ], {duration:560, easing:EASE, fill:'both'});
+          incomingAnims.push(stageAnim);
+          var stageDone = function(){
+            var idx = incomingAnims.indexOf(stageAnim);
+            if (idx !== -1) { incomingAnims.splice(idx, 1); }
+            stageAnim.cancel();
+            stage.style.opacity = ''; stage.style.transform = '';
+          };
+          if (stageAnim.finished && stageAnim.finished.then) { stageAnim.finished.then(stageDone, stageDone); }
+          else { stageAnim.onfinish = stageDone; }
+        }
+      };
+
+      if (prev && animate && !reduced() && supported && !document.hidden) {
+        var handedOver = false;
+        var handOver = function(){
+          if (handedOver) { return; }
+          handedOver = true;
+          if (switching) { switching.cancel(); }
+          switching = null;
+          cleanPanelStyles(prev);
+          reveal();
+        };
+        switching = prev.animate([
+          {opacity:1, transform:'none'},
+          {opacity:0, transform:'translateY(-12px) scale(.99)'}
+        ], {duration:180, easing:'cubic-bezier(.4,0,1,1)', fill:'both'});
+        if (switching.finished && switching.finished.then) {
+          switching.finished.then(handOver, handOver);
+        }
+        /* watchdog: the swap must complete even if the timeline never ticks */
+        window.setTimeout(handOver, 340);
+      } else {
+        cleanPanelStyles(prev);
+        reveal();
+      }
+    }
+
+    document.addEventListener('visibilitychange', function(){
+      if (document.hidden) { settleImmediate(); }
+    });
+    window.addEventListener('beforeprint', settleImmediate);
+    if (reduceQuery) {
+      var onSwitchReduce = function(event){
+        if (event.matches) { settleImmediate(); }
+      };
+      if (reduceQuery.addEventListener) { reduceQuery.addEventListener('change', onSwitchReduce); }
+      else if (reduceQuery.addListener) { reduceQuery.addListener(onSwitchReduce); }
+    }
+
+    tabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        showPanel(tab.getAttribute('data-panel'), true, false);
+      });
+    });
+
+    tablist.addEventListener('keydown', function(event){
+      var idx = tabs.indexOf(document.activeElement);
+      if (idx === -1) { return; }
+      var target = -1;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') { target = (idx + 1) % tabs.length; }
+      else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') { target = (idx - 1 + tabs.length) % tabs.length; }
+      else if (event.key === 'Home') { target = 0; }
+      else if (event.key === 'End') { target = tabs.length - 1; }
+      if (target === -1) { return; }
+      event.preventDefault();
+      showPanel(tabs[target].getAttribute('data-panel'), true, true);
+    });
+
+    showPanel(panels[0].getAttribute('data-panel'), false, false);
+  })();
+
+  boot();
+})();
 </script>
 </body>
 </html>
