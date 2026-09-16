@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Автоматизация для бизнеса: инструменты и ИИ-агенты — Александр Федосеев</title>
+<meta name="description" content="Небольшие инструменты автоматизации для бизнеса: Excel-макросы, программы с интерфейсом, скрипты, роботы, чат-боты и точечные ИИ-агенты. Материал для обсуждения, не готовое решение.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Автоматизация для бизнеса: инструменты и ИИ-агенты — Александр Федосеев">
+<meta property="og:description" content="Excel-макросы, программы, скрипты, чат-боты и точечные ИИ-агенты для бизнеса. Один понятный процесс — точка старта.">
+<meta property="og:url" content="https://sa-n4e-zzz.github.io/automation-portfolio/business.html">
+<style>
+  :root{
+    --navy:#0b1224;
+    --blue:#376bf6;
+    --offwhite:#f4f6fa;
+    --white:#ffffff;
+    --ink:#15223a;
+    --line:rgba(21,34,58,.14);
+    --line-dark:rgba(244,246,250,.18);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    background:var(--offwhite);
+    line-height:1.55;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 16px;}
+  @media (min-width:600px){ .wrap{padding:0 24px;} }
+  section{padding:88px 0;}
+  h1,h2,h3{line-height:1.12;margin:0 0 .5em;font-weight:700;}
+  p{margin:0 0 1em;max-width:68ch;}
+  .measure{max-width:68ch;}
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--blue);
+    margin:0 0 18px;
+  }
+  .eyebrow.light{color:#9fb2f7;}
+
+  /* ---------- focus ---------- */
+  a:focus-visible,
+  button:focus-visible{
+    outline:3px solid var(--blue);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+
+  /* ---------- header ---------- */
+  header.site{
+    background:var(--navy);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .site-nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px 16px;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .brand{
+    color:var(--white);
+    font-weight:700;
+    font-size:16px;
+    text-decoration:none;
+  }
+  .site-nav a.back{
+    color:#c9d4f5;
+    text-decoration:none;
+    font-size:14.5px;
+    min-height:44px;
+    display:inline-flex;
+    align-items:center;
+    padding:0 4px;
+  }
+  .site-nav a.back:hover{color:var(--white);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:var(--navy);
+    color:var(--white);
+    padding:72px 0 96px;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:56px;
+    align-items:center;
+  }
+  .hero-grid > *{min-width:0;}
+  @media (min-width:960px){
+    .hero-grid{grid-template-columns:1.05fr .95fr;gap:64px;}
+  }
+  .hero h1{
+    font-size:32px;
+    letter-spacing:-.01em;
+  }
+  @media (min-width:390px){ .hero h1{font-size:40px;} }
+  @media (min-width:600px){ .hero h1{font-size:52px;} }
+  @media (min-width:1100px){ .hero h1{font-size:64px;} }
+  .hero h1 span{display:block;color:#aebdf6;}
+  .hero p.lead{
+    font-size:18px;
+    color:#c9d4f5;
+    max-width:52ch;
+  }
+  .cta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-top:28px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:44px;
+    padding:0 22px;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:600;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+  }
+  .btn-primary{
+    background:var(--blue);
+    color:var(--white);
+  }
+  .btn-primary:hover{background:#2c58d6;}
+  .btn-ghost{
+    background:transparent;
+    color:var(--white);
+    border-color:rgba(244,246,250,.4);
+  }
+  .btn-ghost:hover{border-color:var(--white);}
+
+  /* ---------- hero diagram ---------- */
+  .diagram{
+    border:1px solid var(--line-dark);
+    border-radius:14px;
+    padding:26px 22px 22px;
+    background:rgba(244,246,250,.03);
+  }
+  .diagram-label{
+    font-size:12px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:#8fa3ee;
+    margin-bottom:18px;
+  }
+  .diagram-stages{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+  }
+  .stage{
+    display:flex;
+    align-items:flex-start;
+    gap:16px;
+    position:relative;
+    padding-bottom:26px;
+  }
+  .stage:last-child{padding-bottom:0;}
+  .stage::before{
+    content:"";
+    position:absolute;
+    left:15px;
+    top:34px;
+    bottom:-2px;
+    width:1px;
+    background:var(--line-dark);
+  }
+  .stage:last-child::before{display:none;}
+  .stage-num{
+    flex:0 0 auto;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    border:1px solid rgba(244,246,250,.35);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+    font-weight:700;
+    color:#dbe3fb;
+  }
+  .stage-body{padding-top:4px;}
+  .stage-title{font-weight:600;font-size:16px;color:var(--white);margin-bottom:6px;}
+  .chip{
+    display:inline-block;
+    font-size:12.5px;
+    padding:4px 10px;
+    border-radius:6px;
+    border:1px solid rgba(244,246,250,.3);
+    color:#c9d4f5;
+  }
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:1;}
+
+  /* ---------- intro / scenarios (light) ---------- */
+  .section-head{max-width:68ch;margin-bottom:40px;}
+  .section-head h2{font-size:30px;}
+  @media (min-width:600px){ .section-head h2{font-size:36px;} }
+
+  .scenario-controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:28px;
+  }
+  .scenario-controls[hidden]{display:none;}
+  .scenario-btn{
+    min-height:44px;
+    padding:0 20px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    background:var(--white);
+    color:var(--ink);
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .scenario-btn[aria-pressed="true"]{
+    background:var(--navy);
+    border-color:var(--navy);
+    color:var(--white);
+  }
+  .scenario-btn:hover{border-color:var(--blue);}
+
+  .scenario-panel{
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:var(--white);
+    padding:32px;
+    min-height:340px;
+  }
+  .scenario-panel[hidden]{display:none;}
+  .panel-tag{
+    display:inline-block;
+    font-size:12px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--blue);
+    border:1px solid rgba(55,107,246,.35);
+    border-radius:20px;
+    padding:5px 12px;
+    margin-bottom:20px;
+  }
+  .scenario-panel h3{font-size:23px;margin-bottom:16px;}
+  .panel-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+  @media (min-width:760px){
+    .panel-grid{grid-template-columns:1fr 1fr;}
+  }
+  .panel-field dt{
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:#5a6b8c;
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .panel-field dd{margin:0;font-size:15.5px;}
+  .status-line{
+    margin-top:18px;
+    font-size:13.5px;
+    color:#5a6b8c;
+  }
+
+  /* ---------- catalog ---------- */
+  .catalog{background:var(--white);}
+  .catalog-row{
+    display:grid;
+    grid-template-columns:56px 1fr;
+    gap:20px;
+    padding:28px 0;
+    border-top:1px solid var(--line);
+  }
+  .catalog-row:last-child{border-bottom:1px solid var(--line);}
+  .catalog-num{
+    font-size:14px;
+    font-weight:700;
+    color:var(--blue);
+    padding-top:4px;
+  }
+  .catalog-row h3{font-size:20px;margin-bottom:10px;}
+  .catalog-meta{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:6px;
+    margin-top:12px;
+    font-size:14.5px;
+    color:var(--ink);
+  }
+  @media (min-width:600px){
+    .catalog-meta{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}
+  }
+  @media (min-width:900px){
+    .catalog-list{display:grid;grid-template-columns:1fr 1fr;column-gap:48px;}
+  }
+  .catalog-meta div b{
+    display:block;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:#5a6b8c;
+    font-weight:700;
+    margin-bottom:3px;
+  }
+
+  /* ---------- ai / dark ---------- */
+  .ai-section{
+    background:var(--navy);
+    color:var(--white);
+  }
+  .ai-section p{color:#c9d4f5;}
+  .ai-section h2{color:var(--white);}
+  .ai-prompt{
+    font-size:26px;
+    font-weight:700;
+    color:var(--white);
+    margin:22px 0 34px;
+    max-width:18ch;
+    line-height:1.2;
+  }
+  @media (min-width:600px){ .ai-prompt{font-size:34px;} }
+  .ai-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:26px;
+    margin:8px 0 30px;
+  }
+  @media (min-width:760px){
+    .ai-grid{grid-template-columns:repeat(3,1fr);}
+  }
+  .ai-col{
+    border-top:1px solid var(--line-dark);
+    padding-top:16px;
+  }
+  .ai-col h3{font-size:16.5px;color:var(--white);margin-bottom:8px;}
+  .ai-col p{font-size:14.5px;margin:0;max-width:34ch;}
+
+  /* ---------- start ---------- */
+  .steps{
+    counter-reset:step;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:22px;
+    margin:32px 0 26px;
+  }
+  @media (min-width:760px){
+    .steps{grid-template-columns:repeat(4,1fr);}
+  }
+  .step{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:20px 18px;
+    background:var(--white);
+  }
+  .step-num{
+    font-size:13px;
+    font-weight:700;
+    color:var(--blue);
+    margin-bottom:8px;
+  }
+  .note{
+    border-left:3px solid var(--blue);
+    padding:14px 18px;
+    background:rgba(55,107,246,.06);
+    border-radius:6px;
+    font-size:14.5px;
+    max-width:68ch;
+  }
+  .final-cta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-top:30px;
+  }
+  .btn-outline{
+    border:1px solid var(--navy);
+    color:var(--navy);
+    background:transparent;
+  }
+  .btn-outline:hover{background:var(--navy);color:var(--white);}
+
+  /* ---------- footer ---------- */
+  footer.site{
+    background:var(--navy);
+    color:#c9d4f5;
+    padding:44px 0;
+    border-top:1px solid var(--line-dark);
+  }
+  .footer-row{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:16px;
+    align-items:center;
+  }
+  footer.site a{
+    color:var(--white);
+    text-decoration:none;
+    font-weight:600;
+    min-height:44px;
+    display:inline-flex;
+    align-items:center;
+  }
+  footer.site a:hover{color:#aebdf6;}
+
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--white);color:var(--ink);padding:10px 16px;border-radius:0 0 8px 0;z-index:100;font-weight:600;text-decoration:none;}
+.skip-link:focus{left:0;}
+.site-nav .brand{min-width:0;}
+@media(min-width:600px){.site-nav{padding-inline:24px;}}
+.hero h1 span{font-size:.6em;line-height:1.3;margin-top:18px;}
+.hero{padding:60px 0 72px;}
+#intro{padding-bottom:0;}
+.catalog-row>*{min-width:0;}
+@media(min-width:900px){.catalog-row:nth-last-child(2){border-bottom:1px solid var(--line);}}
+.stage-note{display:block;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#8fa3ee;margin:4px 0 8px;}
+.next-step{border-top:1px solid var(--line);margin-top:44px;padding-top:44px;}
+:root{--blue-accent:#2c58d6;}
+.eyebrow,.panel-tag,.catalog-num,.step-num{color:var(--blue-accent);}
+.scenario-panel + .scenario-panel{margin-top:20px;}
+
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+
+<header class="site">
+  <div class="wrap site-nav">
+    <span class="brand">Александр Федосеев</span>
+    <a class="back" href="index.html">← Портфолио</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow light">Варианты решений · для обсуждения</p>
+      <h1>Автоматизация для бизнеса.<span>От макроса до ИИ-агента.</span></h1>
+      <p class="lead">Таблицы, документы и обращения клиентов часто требуют одних и тех же повторяющихся действий. Точечный инструмент снимает рутину без внедрения большой системы.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#catalog">Посмотреть решения</a>
+        <a class="btn btn-ghost" href="#start">С чего начать</a>
+      </div>
+    </div>
+    <div class="diagram reveal">
+      <p class="diagram-label">Пример процесса</p>
+      <div class="diagram-stages">
+        <div class="stage">
+          <div class="stage-num">1</div>
+          <div class="stage-body">
+            <div class="stage-title">Входящие</div>
+            <span class="stage-note">Письмо, файл, заявка</span>
+            <span class="chip">Файл</span>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">2</div>
+          <div class="stage-body">
+            <div class="stage-title">Обработка</div>
+            <span class="stage-note">Правила или ИИ</span>
+            <span class="chip">Скрипт</span>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">3</div>
+          <div class="stage-body">
+            <div class="stage-title">Проверка</div>
+            <span class="stage-note">Сотрудник</span>
+            <span class="chip">Контроль</span>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">4</div>
+          <div class="stage-body">
+            <div class="stage-title">Результат</div>
+            <span class="stage-note">Документ, отчёт, задача</span>
+            <span class="chip">Итог</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="intro">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">С чего это обычно начинается</p>
+      <h2>Один инструмент, а не платформа</h2>
+      <p>Автоматизация не обязана начинаться с крупной системы. Часто достаточно одного действия: свести данные из нескольких таблиц, собрать документ по шаблону, принять типовое обращение или подготовить утренний отчёт. Ниже — каталог конкретных решений: от Excel-макроса до чат-бота и точечного ИИ-агента.</p>
+    </div>
+  </div>
+</section>
+
+<section id="scenarios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Интерактивный пример</p>
+      <h2>Выберите процесс, где чаще всего теряется время</h2>
+    </div>
+
+    <div class="scenario-controls" id="scenario-controls" hidden role="group" aria-label="Выбор сценария процесса">
+      <button type="button" class="scenario-btn" data-key="requests" aria-pressed="true">Таблицы</button>
+      <button type="button" class="scenario-btn" data-key="trips" aria-pressed="false">Документы</button>
+      <button type="button" class="scenario-btn" data-key="docs" aria-pressed="false">Обращения</button>
+      <button type="button" class="scenario-btn" data-key="calc" aria-pressed="false">Отчёты</button>
+    </div>
+
+    <div id="scenario-panel-requests" class="scenario-panel">
+      <span class="panel-tag">Пример сценария</span>
+      <h3>Данные приходят из разных источников в разном виде</h3>
+      <dl class="panel-grid">
+        <div class="panel-field"><dt>Проблема</dt><dd>Сотрудник вручную сводит данные из нескольких таблиц и файлов, теряя время и иногда часть данных.</dd></div>
+        <div class="panel-field"><dt>Инструмент</dt><dd>Excel-макрос, который сводит данные из указанных источников в единую таблицу по заданным правилам сопоставления столбцов.</dd></div>
+        <div class="panel-field"><dt>Исходные данные</dt><dd>Образцы файлов и правила, по каким полям их сопоставлять.</dd></div>
+        <div class="panel-field"><dt>Результат</dt><dd>Единая сводная таблица в привычном формате Excel.</dd></div>
+      </dl>
+    </div>
+
+    <div id="scenario-panel-trips" class="scenario-panel">
+      <span class="panel-tag">Пример сценария</span>
+      <h3>Коммерческое предложение каждый раз собирается вручную заново</h3>
+      <dl class="panel-grid">
+        <div class="panel-field"><dt>Проблема</dt><dd>Менеджер вручную подбирает позиции, считает скидки и оформляет КП в фирменном шаблоне.</dd></div>
+        <div class="panel-field"><dt>Инструмент</dt><dd>Программа берёт цены из прайса компании, считает сумму по утверждённым правилам и собирает брендированный документ; ИИ опционально помогает с описанием, но не придумывает цены.</dd></div>
+        <div class="panel-field"><dt>Исходные данные</dt><dd>Согласованный прайс компании, фирменный шаблон КП и правила расчёта скидок.</dd></div>
+        <div class="panel-field"><dt>Результат</dt><dd>Готовое КП в Word или PDF без ручного набора и пересчёта.</dd></div>
+      </dl>
+    </div>
+
+    <div id="scenario-panel-docs" class="scenario-panel">
+      <span class="panel-tag">Пример сценария</span>
+      <h3>Типовые обращения отнимают время у сотрудников</h3>
+      <dl class="panel-grid">
+        <div class="panel-field"><dt>Проблема</dt><dd>Одни и те же вопросы клиентов и партнёров каждый раз обрабатываются вручную, хотя большинство укладывается в несколько типовых сценариев.</dd></div>
+        <div class="panel-field"><dt>Инструмент</dt><dd>Чат-бот принимает структурированную заявку или отвечает по частым вопросам, а нестандартный случай передаёт сотруднику.</dd></div>
+        <div class="panel-field"><dt>Исходные данные</dt><dd>Список типовых вопросов и правило, что именно передавать сотруднику.</dd></div>
+        <div class="panel-field"><dt>Результат</dt><dd>Меньше однотипной переписки и быстрее ответ на частые вопросы.</dd></div>
+      </dl>
+    </div>
+
+    <div id="scenario-panel-calc" class="scenario-panel">
+      <span class="panel-tag">Пример сценария</span>
+      <h3>Отчёт собирается вручную каждое утро из разных выгрузок</h3>
+      <dl class="panel-grid">
+        <div class="panel-field"><dt>Проблема</dt><dd>Перед началом дня приходится вручную сверять несколько выгрузок, чтобы получить общую картину.</dd></div>
+        <div class="panel-field"><dt>Инструмент</dt><dd>Скрипт по утрам собирает данные из указанных выгрузок и формирует единый отчёт по согласованным показателям.</dd></div>
+        <div class="panel-field"><dt>Исходные данные</dt><dd>Форматы выгрузок и список нужных показателей.</dd></div>
+        <div class="panel-field"><dt>Результат</dt><dd>Готовый отчёт к началу дня без ручного сведения.</dd></div>
+      </dl>
+    </div>
+
+    <p id="scenario-status" class="status-line" aria-live="polite"></p>
+  </div>
+</section>
+
+<section id="catalog" class="catalog">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Каталог</p>
+      <h2>Восемь вариантов конкретных инструментов</h2>
+      <p>Формат и объём каждого пункта уточняются под конкретную задачу — это отправные примеры, а не фиксированный перечень.</p>
+    </div>
+
+    <div class="catalog-list">
+      <div class="catalog-row reveal">
+        <div class="catalog-num">01</div>
+        <div>
+          <h3>Excel-макросы</h3>
+          <p>Сведение данных из нескольких источников, очистка дублей, сверка таблиц — без выхода за пределы привычного Excel.</p>
+          <div class="catalog-meta">
+            <div><b>Вход</b>файлы Excel или CSV</div>
+            <div><b>Выход</b>сводная таблица</div>
+            <div><b>Формат</b>макрос</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-row reveal">
+        <div class="catalog-num">02</div>
+        <div>
+          <h3>Генератор коммерческих предложений</h3>
+          <p>Программа с интерфейсом: выбор товаров или услуг из согласованного прайса, объёмы и скидки — на выходе брендированное КП в Word или PDF по утверждённым правилам расчёта.</p>
+          <div class="catalog-meta">
+            <div><b>Вход</b>позиции прайса, объёмы, скидки</div>
+            <div><b>Выход</b>брендированное КП Word/PDF</div>
+            <div><b>Формат</b>программа с интерфейсом</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-row reveal">
+        <div class="catalog-num">03</div>
+        <div>
+          <h3>Скрипты обработки документов</h3>
+          <p>Переименование файлов, сортировка по правилам, заполнение шаблонов и ведение реестров документов.</p>
+          <div class="catalog-meta">
+            <div><b>Вход</b>папка с файлами</div>
+            <div><b>Выход</b>упорядоченные файлы и реестр</div>
+            <div><b>Формат</b>скрипт</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-row reveal">
+        <div class="catalog-num">04</div>
+        <div>
+          <h3>Роботы для повторяющихся действий</h3>
+          <p>Сбор данных из нескольких мест, перенос через согласованные интерфейсы, уведомления при наступлении условий.</p>
+          <div class="catalog-meta">
+            <div><b>Вход</b>доступные интерфейсы и права</div>
+            <div><b>Выход</b>перенесённые данные, уведомление</div>
+            <div><b>Формат</b>скрипт-робот</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-row reveal">
+        <div class="catalog-num">05</div>
+        <div>
+          <h3>Автоматические отчёты</h3>
+          <p>Свод нескольких таблиц, расчёт показателей и отклонений по заранее утверждённым правилам.</p>
+          <div class="catalog-meta">
+            <div><b>Вход</b>исходные таблицы и правила расчёта</div>
+            <div><b>Выход</b>готовый отчёт</div>
+            <div><b>Формат</b>скрипт и таблица</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-row reveal">
+        <div class="catalog-num">06</div>
+        <div>
+          <h3>Чат-бот для клиентов</h3>
+          <p>Отвечает на типовые вопросы, принимает заявку в структурированном виде и передаёт её менеджеру — например, в Telegram или на сайте.</p>
+          <div class="catalog-meta">
+            <div><b>Вход</b>список вопросов и сценариев</div>
+            <div><b>Выход</b>заявка менеджеру, ответ клиенту</div>
+            <div><b>Формат</b>чат-бот</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-row reveal">
+        <div class="catalog-num">07</div>
+        <div>
+          <h3>Внутренний чат-бот</h3>
+          <p>Поиск ответа по внутренним инструкциям и документам с указанием источника; доступ ограничен правами сотрудника.</p>
+          <div class="catalog-meta">
+            <div><b>Вход</b>набор документов и правила доступа</div>
+            <div><b>Выход</b>ответ со ссылкой на источник</div>
+            <div><b>Формат</b>чат-бот с поиском</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-row reveal">
+        <div class="catalog-num">08</div>
+        <div>
+          <h3>ИИ-агент для бизнеса</h3>
+          <p>Выбирает согласованные источники данных, собирает информацию, готовит сводку и черновики действий; отправка или изменения — только с подтверждением сотрудника.</p>
+          <div class="catalog-meta">
+            <div><b>Вход</b>согласованные источники и правила</div>
+            <div><b>Выход</b>сводка и черновик действия</div>
+            <div><b>Формат</b>точечный ИИ-агент</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="next-step reveal">
+      <p class="eyebrow">Дальше — по необходимости</p>
+      <h2>Начать с одного инструмента. Объединить, когда появится необходимость.</h2>
+      <p class="measure">Расширение или объединение отдельных инструментов рассматривается только после того, как первый из них подтвердил пользу на практике — это не обязательный следующий шаг.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ai-section" id="ai">
+  <div class="wrap">
+    <p class="eyebrow light">Без лишнего</p>
+    <h2>ИИ — там, где он нужен</h2>
+    <p class="measure">Обычные скрипты и программы обходятся без модели: свод таблиц, заполнение шаблонов и расчёты по правилам не требуют ИИ. ИИ может помочь с нестандартными письмами, вопросами на обычном языке и поиском по документам.</p>
+
+    <p class="ai-prompt">«Что требует внимания сегодня?»</p>
+
+    <div class="ai-grid">
+      <div class="ai-col">
+        <h3>Чат-бот отвечает</h3>
+        <p>Типичное применение — типовые вопросы клиентов и приём заявки в понятном виде, без разбора всей переписки вручную.</p>
+      </div>
+      <div class="ai-col">
+        <h3>Робот выполняет правила</h3>
+        <p>Собирает и переносит данные по заданным правилам, без интерпретации содержания — там, где логика заранее известна.</p>
+      </div>
+      <div class="ai-col">
+        <h3>ИИ-агент собирает и предлагает</h3>
+        <p>Пример: сверяет заявки и сроки, находит незакрытые задачи, готовит сводку и черновики напоминаний. Начинать стоит с одной функции.</p>
+      </div>
+    </div>
+
+    <p class="measure">При необходимости ИИ-модель можно разместить на сервере компании. Оборудование, источники данных, права доступа и правила обработки подбираются под задачу.</p>
+  </div>
+</section>
+
+<section id="start">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Порядок действий</p>
+      <h2>С чего начать</h2>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <p style="margin:0;">Выбрать одну рутинную задачу, которая чаще всего отнимает время.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <p style="margin:0;">Передать обезличенный пример — файл, документ или обращение — и краткое описание того, как процесс выполняется вручную сейчас.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <p style="margin:0;">Согласовать, что должно получаться на выходе, и собрать прототип инструмента.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <p style="margin:0;">Провести небольшой пилот и сравнить время и число ошибок до и после.</p>
+      </div>
+    </div>
+
+    <div class="note reveal">Для первого обсуждения достаточно примера файла или документа и описания ручных шагов.</div>
+
+    <div class="final-cta">
+      <a class="btn btn-primary" href="#scenarios">Выбрать задачу</a>
+      <a class="btn btn-outline" href="index.html">Выполненные проекты</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap footer-row">
+    <span>Александр Федосеев</span>
+    <a href="index.html">Посмотреть выполненные проекты →</a>
+  </div>
+</footer>
+
+<script>
+"use strict";
+
+var supportsMatchMedia = typeof window.matchMedia === "function";
+var motionQuery = supportsMatchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+function reduced(){ return !!(motionQuery && motionQuery.matches); }
+
+/* ---------- scenario switcher: init first, no dependency on IO/WAAPI ---------- */
+var controls = document.getElementById("scenario-controls");
+var statusEl = document.getElementById("scenario-status");
+var buttons = controls ? Array.prototype.slice.call(controls.querySelectorAll(".scenario-btn")) : [];
+var panels = {
+  requests: document.getElementById("scenario-panel-requests"),
+  trips: document.getElementById("scenario-panel-trips"),
+  docs: document.getElementById("scenario-panel-docs"),
+  calc: document.getElementById("scenario-panel-calc")
+};
+var labels = {
+  requests: "Таблицы",
+  trips: "Документы",
+  docs: "Обращения",
+  calc: "Отчёты"
+};
+var currentKey = "requests";
+var panelAnimations = {};
+
+function initScenarios(){
+  if (!controls || !buttons.length) { return; }
+
+  Object.keys(panels).forEach(function(key){
+    if (panels[key]){ panels[key].hidden = (key !== currentKey); }
+  });
+
+  buttons.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var key = btn.getAttribute("data-key");
+      if (!key || key === currentKey || !panels[key]) { return; }
+      switchScenario(key, btn);
+    });
+  });
+
+  controls.hidden = false;
+}
+
+function cancelPanelAnimation(key){
+  var anim = panelAnimations[key];
+  if (anim){
+    try{ anim.cancel(); }catch(e){}
+    panelAnimations[key] = null;
+  }
+}
+
+function switchScenario(key, sourceBtn){
+  var oldPanel = panels[currentKey];
+  var newPanel = panels[key];
+  if (!newPanel || newPanel === oldPanel) { return; }
+
+  cancelPanelAnimation(currentKey);
+  cancelPanelAnimation(key);
+
+  buttons.forEach(function(btn){
+    btn.setAttribute("aria-pressed", btn.getAttribute("data-key") === key ? "true" : "false");
+  });
+
+  if (oldPanel){ oldPanel.hidden = true; }
+  newPanel.hidden = false;
+  currentKey = key;
+  announce(key);
+
+  if (sourceBtn && typeof sourceBtn.focus === "function"){
+    try{ sourceBtn.focus({ preventScroll: true }); }catch(e){ sourceBtn.focus(); }
+  }
+
+  if (!reduced() && typeof newPanel.animate === "function"){
+    try{
+      var anim = newPanel.animate(
+        [{ opacity: .6 }, { opacity: 1 }],
+        { duration: 200, easing: "ease-out" }
+      );
+      panelAnimations[key] = anim;
+      anim.onfinish = function(){
+        if (panelAnimations[key] === anim){ panelAnimations[key] = null; }
+      };
+    }catch(e){}
+  }
+}
+
+function announce(key){
+  if (statusEl){ statusEl.textContent = "Показан сценарий: " + labels[key]; }
+}
+
+initScenarios();
+
+/* ---------- reveal (runs after switcher is ready) ---------- */
+var revealTargets = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+var revealObserver = null;
+var activeRevealAnimations = [];
+
+function setupReveal(){
+  if (reduced() || typeof window.IntersectionObserver !== "function" || revealTargets.length === 0){
+    return;
+  }
+  revealObserver = new IntersectionObserver(function(entries, observer){
+    if (reduced() || observer !== revealObserver) { return; }
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        var el = entry.target;
+        observer.unobserve(el);
+        if (typeof el.animate === "function"){
+          try{
+            var anim = el.animate(
+              [
+                { opacity: .6, transform: "translateY(16px)" },
+                { opacity: 1, transform: "translateY(0)" }
+              ],
+              { duration: 500, easing: "ease-out", fill: "none" }
+            );
+            activeRevealAnimations.push(anim);
+            anim.onfinish = function(){
+              var idx = activeRevealAnimations.indexOf(anim);
+              if (idx > -1){ activeRevealAnimations.splice(idx, 1); }
+            };
+          }catch(e){}
+        }
+      }
+    });
+  }, { threshold: .2 });
+  revealTargets.forEach(function(el){ revealObserver.observe(el); });
+}
+
+function teardownReveal(){
+  if (revealObserver){
+    revealObserver.disconnect();
+    revealObserver = null;
+  }
+  activeRevealAnimations.forEach(function(anim){
+    try{ anim.cancel(); }catch(e){}
+  });
+  activeRevealAnimations = [];
+}
+
+setupReveal();
+
+if (motionQuery){
+  var onMotionChange = function(){
+    if (reduced()){
+      teardownReveal();
+      Object.keys(panelAnimations).forEach(cancelPanelAnimation);
+    } else if (!revealObserver){
+      setupReveal();
+    }
+  };
+  if (typeof motionQuery.addEventListener === "function"){
+    motionQuery.addEventListener("change", onMotionChange);
+  } else if (typeof motionQuery.addListener === "function"){
+    motionQuery.addListener(onMotionChange);
+  }
+}
+</script>
+
+</body>
+</html>
