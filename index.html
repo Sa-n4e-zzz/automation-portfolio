@@ -867,6 +867,22 @@ footer a:hover{color:#eef2fb;}
   #platform .module-panel[hidden]{display:grid !important;}
   #platform .platform-tabs{display:none !important;}
 }
+
+/* Business solutions — final portfolio section */
+#business{padding-block:72px;scroll-margin-top:110px;}
+#business .business-list{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;margin:28px 0 36px;}
+#business .business-item{padding:20px 0;border-top:1px solid var(--line-soft);min-width:0;}
+#business .business-list>.business-item:nth-child(-n+2){border-top:none;}
+#business .business-item h3{margin:0 0 8px;font-size:20px;font-weight:800;letter-spacing:-.01em;line-height:1.25;color:var(--ink);overflow-wrap:break-word;}
+#business .business-item p{margin:0;font-size:15.5px;line-height:1.55;color:var(--muted);}
+#business .business-note{margin:0 0 4px;max-width:70ch;}
+#business .business-bottom{margin:4px 0 0;font-size:14px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line-soft);padding-top:18px;max-width:70ch;}
+@media(max-width:760px){
+  #business{padding-block:48px;scroll-margin-top:130px;}
+  #business .business-list{grid-template-columns:1fr;gap:0;}
+  #business .business-list>.business-item:nth-child(-n+2){border-top:1px solid var(--line-soft);}
+  #business .business-list>.business-item:first-child{border-top:none;}
+}
 </style>
 </head>
 <body>
@@ -880,6 +896,7 @@ footer a:hover{color:#eef2fb;}
         <a href="#vpn">VPN</a>
         <a href="#tools">Инструменты</a>
         <a href="#skills">Опыт</a>
+        <a href="#business">Для бизнеса</a>
         <a class="resume-link" href="https://sa-n4e-zzz.github.io/automation-portfolio/resume.pdf" target="_blank" rel="noopener noreferrer">Резюме</a>
       </nav>
     </div>
@@ -1252,6 +1269,57 @@ footer a:hover{color:#eef2fb;}
           <div><h4>Язык</h4><p>English B2</p></div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="business" class="business product-section">
+    <div class="wrap">
+      <div class="case-head">
+        <span class="case-index">05</span>
+        <div>
+          <div>
+            <p class="flow">Что можно автоматизировать</p>
+            <h2>Решения для бизнеса</h2>
+          </div>
+          <p class="lead">Варианты автоматизации под задачи компании: от небольшого инструмента для таблиц и документов до чат-бота или ИИ-агента.</p>
+        </div>
+      </div>
+      <p class="note business-note">Для обычных макросов и скриптов сервер с моделью не нужен. Если решению требуется ИИ, модель может работать на сервере компании — после подбора оборудования и настройки прав доступа.</p>
+      <div class="business-list">
+        <div class="business-item">
+          <h3>Excel-макросы</h3>
+          <p>Автоматизация повторяющихся операций в таблицах: сбор данных, форматирование, расчёты и сборка итоговых листов.</p>
+        </div>
+        <div class="business-item">
+          <h3>Генератор коммерческих предложений</h3>
+          <p>Прайс, объёмы и скидки на входе — расчёт по заданным правилам и готовый документ в Word или PDF на выходе.</p>
+        </div>
+        <div class="business-item">
+          <h3>Программы и скрипты для документов</h3>
+          <p>Небольшие приложения с понятным интерфейсом для подготовки, проверки и оформления документов по шаблону.</p>
+        </div>
+        <div class="business-item">
+          <h3>Роботы для рутины</h3>
+          <p>Скрипты, которые выполняют повторяющиеся шаги в привычных программах: перенос данных, заполнение форм, сверку файлов.</p>
+        </div>
+        <div class="business-item">
+          <h3>Автоматические отчёты</h3>
+          <p>Регулярная сборка отчётов из разных источников по заданному расписанию, без ручного копирования и пересчёта.</p>
+        </div>
+        <div class="business-item">
+          <h3>Клиентский чат-бот</h3>
+          <p>Отвечает на типовые вопросы клиентов по заданным сценариям и передаёт сложные обращения сотруднику.</p>
+        </div>
+        <div class="business-item">
+          <h3>Внутренний чат-бот с источниками</h3>
+          <p>Отвечает сотрудникам на вопросы по внутренним документам и базам, опираясь на реальные источники компании.</p>
+        </div>
+        <div class="business-item">
+          <h3>ИИ-агент для сводок и черновиков</h3>
+          <p>Готовит сводки и черновики писем или документов по данным компании; отправку подтверждает сотрудник.</p>
+        </div>
+      </div>
+      <p class="business-bottom">Обсуждение обычно начинается с одного процесса: обезличенный пример, прототип, проверка результата.</p>
     </div>
   </section>
 </main>
@@ -2034,6 +2102,10 @@ footer a:hover{color:#eef2fb;}
 
     showPanel(panels[0].getAttribute('data-panel'), false, false);
   })();
+
+  document.querySelectorAll('.business-item').forEach(function(el, i){
+    register(el, {opacity:0, transform:'translateY(16px)'}, (i % 2) * 70, 500, EASE_OUT);
+  });
 
   boot();
 })();
