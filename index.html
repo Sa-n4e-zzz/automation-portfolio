@@ -868,20 +868,143 @@ footer a:hover{color:#eef2fb;}
   #platform .platform-tabs{display:none !important;}
 }
 
-/* Business solutions — final portfolio section */
-#business{padding-block:72px;scroll-margin-top:110px;}
-#business .business-list{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;margin:28px 0 36px;}
-#business .business-item{padding:20px 0;border-top:1px solid var(--line-soft);min-width:0;}
-#business .business-list>.business-item:nth-child(-n+2){border-top:none;}
-#business .business-item h3{margin:0 0 8px;font-size:20px;font-weight:800;letter-spacing:-.01em;line-height:1.25;color:var(--ink);overflow-wrap:break-word;}
-#business .business-item p{margin:0;font-size:15.5px;line-height:1.55;color:var(--muted);}
-#business .business-note{margin:0 0 4px;max-width:70ch;}
-#business .business-bottom{margin:4px 0 0;font-size:14px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line-soft);padding-top:18px;max-width:70ch;}
+/* =========================================================================
+   Business solutions — product composition (scoped to #business)
+   ========================================================================= */
+#business{padding-block:80px;scroll-margin-top:110px;}
+#business .bz-note{margin:0 0 8px;max-width:74ch;}
+
+/* ---- shared atoms ---- */
+#business .bz-tag{margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);}
+#business .bz-step{font-size:11.5px;font-weight:800;letter-spacing:.06em;color:var(--accent);font-variant-numeric:tabular-nums;}
+
+/* ---- feature blocks: asymmetric, alternating ---- */
+#business .bz-feature{display:grid;gap:26px;align-items:start;margin-top:44px;padding-top:34px;border-top:1px solid var(--line);}
+#business .bz-feature h3{margin:0 0 12px;font-size:clamp(23px,2.5vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.16;color:var(--ink);text-wrap:pretty;}
+#business .bz-feature .bz-lead{margin:0;font-size:16px;line-height:1.6;color:var(--muted);max-width:48ch;text-wrap:pretty;}
+#business .bz-meta{margin:20px 0 0;padding-left:15px;border-left:2px solid var(--accent);font-size:13.5px;line-height:1.55;color:var(--muted);max-width:46ch;}
+
+#business .bz-chain{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:10px;}
+#business .bz-chain li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start;
+  padding:14px 16px;border:1px solid var(--line-soft);border-radius:10px;background:rgba(140,170,255,.045);}
+#business .bz-chain b{display:block;font-size:15px;font-weight:800;letter-spacing:-.005em;color:var(--ink);}
+#business .bz-chain em{display:block;margin-top:3px;font-style:normal;font-weight:400;font-size:13.5px;line-height:1.5;color:var(--muted);}
+#business .bz-chain .bz-step{padding-top:3px;}
+
+/* ---- document mock (structure only, no data) ---- */
+#business .bz-visual{min-width:0;}
+#business .bz-doc{position:relative;padding:22px;border:1px solid var(--line);border-radius:16px;
+  background:radial-gradient(70% 60% at 50% 0%,rgba(59,130,246,.13) 0%,rgba(59,130,246,.04) 55%,rgba(13,21,38,0) 82%),linear-gradient(180deg,#0f1830 0%,#0a1120 100%);
+  box-shadow:inset 0 0 0 1px rgba(140,170,255,.06),0 22px 40px -26px rgba(0,0,0,.6);}
+#business .bz-flag{position:absolute;top:14px;right:14px;z-index:2;padding:5px 10px;border-radius:999px;
+  font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(37,99,235,.9);color:#fff;}
+#business .bz-sheet{padding:26px 24px 22px;border-radius:8px;background:#f7f8fa;box-shadow:0 14px 26px -18px rgba(0,0,0,.5);}
+#business .bz-sheet-head{display:grid;gap:9px;padding-bottom:18px;border-bottom:1px solid #d8dce2;}
+#business .bz-bar{display:block;height:9px;border-radius:3px;background:#cdd3db;}
+#business .bz-bar-title{height:15px;width:58%;background:#9aa4b2;}
+#business .bz-bar-sub{width:34%;height:8px;}
+#business .bz-sheet-cols{display:grid;grid-template-columns:minmax(0,1fr) 62px 74px;gap:12px;padding:14px 0 10px;
+  font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#6c7480;}
+#business .bz-sheet-cols span:not(:first-child){text-align:right;}
+#business .bz-sheet-rows{display:grid;gap:0;}
+#business .bz-row{display:grid;grid-template-columns:minmax(0,1fr) 62px 74px;gap:12px;align-items:center;
+  padding:13px 0;border-top:1px solid #e3e6eb;}
+#business .bz-row .bz-bar:nth-child(1){width:86%;}
+#business .bz-row:nth-child(2) .bz-bar:nth-child(1){width:68%;}
+#business .bz-row:nth-child(3) .bz-bar:nth-child(1){width:92%;}
+#business .bz-row:nth-child(4) .bz-bar:nth-child(1){width:74%;}
+#business .bz-row .bz-bar-s{width:70%;justify-self:end;}
+#business .bz-row .bz-bar-m{width:88%;justify-self:end;}
+#business .bz-sheet-total{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-top:14px;padding-top:15px;border-top:2px solid #b9c0ca;
+  font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#3a4049;}
+#business .bz-bar-total{width:92px;height:13px;background:#2563eb;border-radius:3px;flex:none;}
+#business .bz-doc-cap{margin:16px 2px 0;font-size:12.5px;line-height:1.5;color:var(--muted);}
+
+/* ---- AI lane ---- */
+#business .bz-lane{list-style:none;margin:0;padding:0;display:grid;gap:14px;}
+#business .bz-stage{position:relative;padding:18px;border:1px solid var(--line-soft);border-radius:12px;
+  background:linear-gradient(180deg,rgba(140,170,255,.07) 0%,rgba(140,170,255,.02) 100%);min-width:0;}
+#business .bz-stage h4{margin:8px 0 6px;font-size:16px;font-weight:800;letter-spacing:-.01em;color:var(--ink);text-wrap:pretty;}
+#business .bz-stage p{margin:0;font-size:13.5px;line-height:1.55;color:var(--muted);}
+#business .bz-stage--hold{border-color:var(--accent);background:linear-gradient(180deg,rgba(37,99,235,.18) 0%,rgba(37,99,235,.05) 100%);}
+#business .bz-hold{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:7px 11px;border-radius:6px;
+  background:rgba(10,16,32,.5);border:1px solid var(--accent);font-size:12px;font-weight:700;color:var(--ink);}
+#business .bz-hold::before{content:"";width:13px;height:13px;flex:none;border-radius:3px;border:2px solid var(--accent);
+  background:linear-gradient(135deg,transparent 45%,var(--accent) 45%);}
+
+/* ---- compact groups ---- */
+#business .bz-more{margin-top:52px;padding-top:30px;border-top:1px solid var(--line);}
+#business .bz-more-head{margin:0 0 22px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);}
+#business .bz-groups{display:grid;gap:26px;}
+#business .bz-group{min-width:0;padding-top:16px;border-top:1px solid var(--line-soft);}
+#business .bz-group h4{margin:0 0 12px;font-size:15px;font-weight:800;letter-spacing:-.005em;color:var(--accent);}
+#business .bz-group ul{list-style:none;margin:0;padding:0;display:grid;gap:12px;}
+#business .bz-group li{font-size:15px;line-height:1.55;color:var(--muted);}
+#business .bz-group li b{color:var(--ink);font-weight:800;}
+
+/* ---- launch route ---- */
+#business .bz-launch{margin-top:52px;padding-top:30px;border-top:1px solid var(--line);}
+#business .bz-launch-head{margin:0 0 20px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);}
+#business .bz-route{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:none;}
+#business .bz-route li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:baseline;
+  padding:14px 16px;border:1px solid var(--line-soft);border-radius:10px;background:rgba(140,170,255,.04);
+  font-size:15px;font-weight:700;color:var(--ink);}
+#business .bz-route li span{font-size:11.5px;font-weight:800;letter-spacing:.06em;color:var(--accent);font-variant-numeric:tabular-nums;}
+#business .bz-launch-note{margin:20px 0 0;font-size:13px;line-height:1.55;color:var(--muted);max-width:74ch;}
+
+/* ---- wide layout: asymmetric grid ---- */
+@media(min-width:901px){
+  #business .bz-feature{grid-template-columns:minmax(0,0.92fr) minmax(0,1.28fr);gap:56px;margin-top:56px;padding-top:44px;}
+  #business .bz-feature--ai{grid-template-columns:minmax(0,1.28fr) minmax(0,0.92fr);}
+  #business .bz-feature--ai .bz-feature-copy{order:2;}
+  #business .bz-feature--ai .bz-visual{order:1;}
+  #business .bz-lane{gap:16px;}
+  #business .bz-groups{grid-template-columns:repeat(3,minmax(0,1fr));gap:34px;}
+  #business .bz-route{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;}
+  #business .bz-route li{display:block;}
+  #business .bz-route li span{display:block;margin-bottom:8px;}
+}
+@media(max-width:900px){
+  #business .bz-sheet{padding:20px 18px 18px;}
+}
 @media(max-width:760px){
-  #business{padding-block:48px;scroll-margin-top:130px;}
-  #business .business-list{grid-template-columns:1fr;gap:0;}
-  #business .business-list>.business-item:nth-child(-n+2){border-top:1px solid var(--line-soft);}
-  #business .business-list>.business-item:first-child{border-top:none;}
+  #business{padding-block:52px;scroll-margin-top:130px;}
+  #business .bz-feature{margin-top:36px;padding-top:28px;}
+  #business .bz-feature .bz-lead{font-size:15.5px;max-width:none;}
+  #business .bz-doc{padding:16px;}
+  #business .bz-sheet-cols,#business .bz-row{grid-template-columns:minmax(0,1fr) 46px 58px;gap:8px;}
+  #business .bz-more,#business .bz-launch{margin-top:38px;padding-top:24px;}
+}
+@media(max-width:360px){
+  #business .bz-sheet-cols{font-size:9.5px;letter-spacing:.06em;}
+  #business .bz-sheet-cols,#business .bz-row{grid-template-columns:minmax(0,1fr) 34px 44px;}
+  #business .bz-bar-total{width:64px;}
+}
+
+/* ---- motion arming: ordered reveal, static without JS ---- */
+@media (prefers-reduced-motion: no-preference){
+  html.mv-js #business .bz-note:not([data-mv-done]),
+  html.mv-js #business .bz-feature-copy:not([data-mv-done]),
+  html.mv-js #business .bz-visual:not([data-mv-done]),
+  html.mv-js #business .bz-chain li:not([data-mv-done]),
+  html.mv-js #business .bz-stage:not([data-mv-done]),
+  html.mv-js #business .bz-group:not([data-mv-done]),
+  html.mv-js #business .bz-route li:not([data-mv-done]){opacity:0;}
+}
+@media (prefers-reduced-motion: reduce){
+  #business .bz-note,#business .bz-feature-copy,#business .bz-visual,
+  #business .bz-chain li,#business .bz-stage,#business .bz-group,#business .bz-route li{
+    opacity:1 !important;transform:none !important;}
+}
+@media print{
+  #business .bz-note,#business .bz-feature-copy,#business .bz-visual,
+  #business .bz-chain li,#business .bz-stage,#business .bz-group,#business .bz-route li{
+    opacity:1 !important;transform:none !important;}
+  #business .bz-doc,#business .bz-stage,#business .bz-route li,#business .bz-chain li{
+    background:#fff !important;box-shadow:none !important;border-color:#000 !important;}
+  #business .bz-flag{background:none !important;color:#000 !important;border:1px solid #000;}
 }
 </style>
 </head>
@@ -1281,45 +1404,109 @@ footer a:hover{color:#eef2fb;}
             <p class="flow">Что можно автоматизировать</p>
             <h2>Решения для бизнеса</h2>
           </div>
-          <p class="lead">Варианты автоматизации под задачи компании: от небольшого инструмента для таблиц и документов до чат-бота или ИИ-агента.</p>
+          <p class="lead">Возможные решения под задачи компании — от небольшого инструмента для таблиц и документов до чат-бота или ИИ-агента.</p>
         </div>
       </div>
-      <p class="note business-note">Для обычных макросов и скриптов сервер с моделью не нужен. Если решению требуется ИИ, модель может работать на сервере компании — после подбора оборудования и настройки прав доступа.</p>
-      <div class="business-list">
-        <div class="business-item">
-          <h3>Excel-макросы</h3>
-          <p>Автоматизация повторяющихся операций в таблицах: сбор данных, форматирование, расчёты и сборка итоговых листов.</p>
-        </div>
-        <div class="business-item">
+
+      <div class="bz-feature bz-feature--doc">
+        <div class="bz-feature-copy">
+          <p class="bz-tag">Основной пример</p>
           <h3>Генератор коммерческих предложений</h3>
-          <p>Прайс, объёмы и скидки на входе — расчёт по заданным правилам и готовый документ в Word или PDF на выходе.</p>
+          <p class="bz-lead">Цены берутся из прайса компании, расчёт идёт по согласованным правилам, на выходе — документ в Word или PDF по фирменному шаблону.</p>
+          <ol class="bz-chain">
+            <li><span class="bz-step">01</span><span><b>Прайс и параметры</b><em>Действующий прайс, объёмы и условия сделки на входе</em></span></li>
+            <li><span class="bz-step">02</span><span><b>Расчёт по правилам</b><em>Скидки, надбавки и округления — только по согласованной логике</em></span></li>
+            <li><span class="bz-step">03</span><span><b>Word / PDF</b><em>Собранный документ, который остаётся проверить и отправить</em></span></li>
+          </ol>
         </div>
-        <div class="business-item">
-          <h3>Программы и скрипты для документов</h3>
-          <p>Небольшие приложения с понятным интерфейсом для подготовки, проверки и оформления документов по шаблону.</p>
-        </div>
-        <div class="business-item">
-          <h3>Роботы для рутины</h3>
-          <p>Скрипты, которые выполняют повторяющиеся шаги в привычных программах: перенос данных, заполнение форм, сверку файлов.</p>
-        </div>
-        <div class="business-item">
-          <h3>Автоматические отчёты</h3>
-          <p>Регулярная сборка отчётов из разных источников по заданному расписанию, без ручного копирования и пересчёта.</p>
-        </div>
-        <div class="business-item">
-          <h3>Клиентский чат-бот</h3>
-          <p>Отвечает на типовые вопросы клиентов по заданным сценариям и передаёт сложные обращения сотруднику.</p>
-        </div>
-        <div class="business-item">
-          <h3>Внутренний чат-бот с источниками</h3>
-          <p>Отвечает сотрудникам на вопросы по внутренним документам и базам, опираясь на реальные источники компании.</p>
-        </div>
-        <div class="business-item">
-          <h3>ИИ-агент для сводок и черновиков</h3>
-          <p>Готовит сводки и черновики писем или документов по данным компании; отправку подтверждает сотрудник.</p>
+        <div class="bz-visual">
+          <div class="bz-doc">
+            <span class="bz-flag">Пример</span>
+            <div class="bz-sheet" role="img" aria-label="Условный макет документа: шапка, таблица позиций и итоговая строка. Показана только структура, без реальных данных.">
+              <div class="bz-sheet-head">
+                <span class="bz-bar bz-bar-title"></span>
+                <span class="bz-bar bz-bar-sub"></span>
+              </div>
+              <div class="bz-sheet-cols"><span>Позиция</span><span>Кол-во</span><span>Сумма</span></div>
+              <div class="bz-sheet-rows">
+                <div class="bz-row"><span class="bz-bar"></span><span class="bz-bar bz-bar-s"></span><span class="bz-bar bz-bar-m"></span></div>
+                <div class="bz-row"><span class="bz-bar"></span><span class="bz-bar bz-bar-s"></span><span class="bz-bar bz-bar-m"></span></div>
+                <div class="bz-row"><span class="bz-bar"></span><span class="bz-bar bz-bar-s"></span><span class="bz-bar bz-bar-m"></span></div>
+                <div class="bz-row"><span class="bz-bar"></span><span class="bz-bar bz-bar-s"></span><span class="bz-bar bz-bar-m"></span></div>
+              </div>
+              <div class="bz-sheet-total"><span>Итого по расчёту</span><span class="bz-bar bz-bar-total"></span></div>
+            </div>
+            <p class="bz-doc-cap">Условное оформление документа — только структура: без реальных цен, позиций и клиентов.</p>
+          </div>
         </div>
       </div>
-      <p class="business-bottom">Обсуждение обычно начинается с одного процесса: обезличенный пример, прототип, проверка результата.</p>
+
+      <div class="bz-feature bz-feature--ai">
+        <div class="bz-feature-copy">
+          <p class="bz-tag">Второй пример · ИИ по необходимости</p>
+          <h3>ИИ-агент для сводок и черновиков</h3>
+          <p class="bz-lead">Агент смотрит в данные, к которым открыт доступ, готовит сводку и черновик письма или документа. Решение остаётся за сотрудником: без подтверждения ничего не уходит.</p>
+          <p class="bz-meta">ИИ можно подключить для работы с текстом и документами. При необходимости модель размещается на сервере компании — после оценки оборудования и настройки прав доступа.</p>
+        </div>
+        <div class="bz-visual">
+          <ol class="bz-lane">
+            <li class="bz-stage">
+              <span class="bz-step">01</span>
+              <h4>Данные</h4>
+              <p>Документы, письма и таблицы компании, к которым открыт доступ.</p>
+            </li>
+            <li class="bz-stage">
+              <span class="bz-step">02</span>
+              <h4>Сводка и черновик</h4>
+              <p>Короткая выжимка и подготовленный текст с указанием источников.</p>
+            </li>
+            <li class="bz-stage bz-stage--hold">
+              <span class="bz-step">03</span>
+              <h4>Подтверждение сотрудником</h4>
+              <p>Сотрудник правит формулировки и решает, отправлять ли результат.</p>
+              <span class="bz-hold">Отправка — только после подтверждения</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="bz-more">
+        <p class="bz-more-head">Остальные направления</p>
+        <div class="bz-groups">
+          <div class="bz-group">
+            <h4>Таблицы и документы</h4>
+            <ul>
+              <li><b>Excel-макросы</b> — сбор данных, форматирование, расчёты и сборка итоговых листов.</li>
+              <li><b>Программы и скрипты для документов</b> — подготовка, проверка и оформление по шаблону в понятном интерфейсе.</li>
+            </ul>
+          </div>
+          <div class="bz-group">
+            <h4>Роботы и отчётность</h4>
+            <ul>
+              <li><b>Роботы для рутины</b> — повторяющиеся шаги в привычных программах: перенос данных, заполнение форм, сверка файлов.</li>
+              <li><b>Автоматические отчёты</b> — регулярная сборка отчётов из разных источников по расписанию, без ручного пересчёта.</li>
+            </ul>
+          </div>
+          <div class="bz-group">
+            <h4>Чат-боты</h4>
+            <ul>
+              <li><b>Клиентский</b> — отвечает на типовые вопросы по заданным сценариям и передаёт сложные обращения сотруднику.</li>
+              <li><b>Внутренний, с источниками</b> — отвечает сотрудникам по внутренним документам и базам, опираясь на реальные источники компании.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bz-launch">
+        <p class="bz-launch-head">Маршрут запуска</p>
+        <ol class="bz-route">
+          <li><span>01</span>Один процесс</li>
+          <li><span>02</span>Обезличенный пример</li>
+          <li><span>03</span>Прототип</li>
+          <li><span>04</span>Проверка результата</li>
+        </ol>
+        <p class="bz-launch-note">Начинаем с одного процесса и обезличенного примера. На прототипе проверяем результат и определяем дальнейший объём работы.</p>
+      </div>
     </div>
   </section>
 </main>
@@ -2103,9 +2290,28 @@ footer a:hover{color:#eef2fb;}
     showPanel(panels[0].getAttribute('data-panel'), false, false);
   })();
 
-  document.querySelectorAll('.business-item').forEach(function(el, i){
-    register(el, {opacity:0, transform:'translateY(16px)'}, (i % 2) * 70, 500, EASE_OUT);
-  });
+  /* Business section — ordered reveal: heading, then schema + result,
+     then the calmer secondary items. Everything stays readable without JS. */
+  (function(){
+    var bz = document.getElementById('business');
+    if (!bz) { return; }
+    Array.prototype.forEach.call(bz.querySelectorAll('.bz-feature'), function(feature){
+      var copy = feature.querySelector('.bz-feature-copy');
+      var visual = feature.querySelector('.bz-visual');
+      if (copy) { register(copy, {opacity:0, transform:'translateY(20px)'}, 0, 540, EASE_OUT); }
+      if (visual) { register(visual, {opacity:0, transform:'translateY(26px) scale(.985)'}, 120, 680, EASE); }
+      Array.prototype.forEach.call(feature.querySelectorAll('.bz-chain li, .bz-stage'), function(el, i){
+        register(el, {opacity:0, transform:'translateY(12px)'}, 200 + i * 90, 460, EASE_OUT);
+      });
+    });
+
+    Array.prototype.forEach.call(bz.querySelectorAll('.bz-group'), function(el, i){
+      register(el, {opacity:0, transform:'translateY(14px)'}, i * 80, 480, EASE_OUT);
+    });
+    Array.prototype.forEach.call(bz.querySelectorAll('.bz-route li'), function(el, i){
+      register(el, {opacity:0, transform:'translateY(10px)'}, i * 70, 420, EASE_OUT);
+    });
+  })();
 
   boot();
 })();
