@@ -1,10 +1,12 @@
 <!doctype html>
 <html lang="ru">
 <head>
+
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Предложение по внедрению автоматизации</title>
-<meta name="description" content="Небольшие инструменты для повседневных задач компании Масстонн: 8 разделов идей автоматизации и пример первого проекта. Авторское предложение для обсуждения.">
+<meta name="description" content="Небольшие инструменты для повседневных задач компании: вопросы для обсуждения, разделы идей и пример первого проекта. Авторское предложение для обсуждения.">
 <meta name="robots" content="noindex,nofollow">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Предложение по внедрению автоматизации">
@@ -60,7 +62,7 @@
 
   .slide{
     width:100%;
-    max-width:100vw;
+    max-width:100%;
     overflow-x:hidden;
     padding: clamp(24px,3vw,40px) clamp(20px,6vw,96px);
   }
@@ -82,22 +84,34 @@
     to{opacity:1; transform:translateY(0);}
   }
   .slide.enter .idea-row,
-  .slide.enter .idea-cell{
+  .slide.enter .idea-cell,
+  .slide.enter .ask-item,
+  .slide.enter .flow-step{
     opacity:0;
     animation: itemIn .5s ease both;
   }
   .slide.enter .idea-row:nth-child(1),
-  .slide.enter .idea-cell:nth-child(1){animation-delay:80ms;}
+  .slide.enter .idea-cell:nth-child(1),
+  .slide.enter .ask-item:nth-child(1),
+  .slide.enter .flow-step:nth-child(1){animation-delay:80ms;}
   .slide.enter .idea-row:nth-child(2),
-  .slide.enter .idea-cell:nth-child(2){animation-delay:180ms;}
+  .slide.enter .idea-cell:nth-child(2),
+  .slide.enter .ask-item:nth-child(2),
+  .slide.enter .flow-step:nth-child(2){animation-delay:180ms;}
   .slide.enter .idea-row:nth-child(3),
-  .slide.enter .idea-cell:nth-child(3){animation-delay:280ms;}
+  .slide.enter .idea-cell:nth-child(3),
+  .slide.enter .ask-item:nth-child(3),
+  .slide.enter .flow-step:nth-child(3){animation-delay:280ms;}
   .slide.enter .idea-row:nth-child(4),
-  .slide.enter .idea-cell:nth-child(4){animation-delay:380ms;}
+  .slide.enter .idea-cell:nth-child(4),
+  .slide.enter .ask-item:nth-child(4),
+  .slide.enter .flow-step:nth-child(4){animation-delay:380ms;}
   @media (prefers-reduced-motion: reduce){
     .slide.enter .slide-inner{animation:none;}
     .slide.enter .idea-row,
-    .slide.enter .idea-cell{animation:none; opacity:1;}
+    .slide.enter .idea-cell,
+    .slide.enter .ask-item,
+    .slide.enter .flow-step{animation:none; opacity:1;}
   }
 
   .slide-light{background:var(--bg); color:var(--ink);}
@@ -146,11 +160,12 @@
     display:inline-block; width:10px; height:10px; background:var(--blue);
     transform:rotate(45deg); margin-bottom:4px;
   }
+  .slide-dark .head-mark{background:var(--blue-soft);}
   .slide-eyebrow{ font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--blue); font-weight:700; }
   .slide-dark .slide-eyebrow{color:var(--blue-soft);}
   .slide-head h2{ font-size:clamp(28px,4.6vw,54px); line-height:1.06; max-width:22ch; }
 
-  /* ===== DARK ASYMMETRICAL SECTION ===== */
+  /* ===== ASYMMETRICAL SECTION (split) ===== */
   .section-split{
     display:grid;
     grid-template-columns:1fr;
@@ -159,17 +174,18 @@
   @media (min-width:1100px){
     .section-split{ grid-template-columns:minmax(240px,280px) minmax(0,1fr); align-items:start; }
   }
-  .section-side h2{font-size:clamp(28px,3.2vw,42px);overflow-wrap:break-word;}
+  .section-side h2{font-size:clamp(28px,3.2vw,42px); overflow-wrap:break-word;}
   .section-side{ display:flex; flex-direction:column; gap:16px; }
   .section-num{
     font-size:clamp(52px,7.2vw,108px);
     font-weight:800;
     line-height:.82;
-    color:rgba(255,255,255,.14);
     letter-spacing:-.02em;
   }
+  .slide-dark .section-num{ color:rgba(255,255,255,.14); }
+  .slide-light .section-num{ color:rgba(10,16,32,.11); }
 
-  /* ===== IDEA GRID (shared 2x2) ===== */
+  /* ===== IDEA LISTS ===== */
   .idea-stack, .idea-grid{
     list-style:none; margin:0; padding:0;
     display:grid;
@@ -180,37 +196,76 @@
     .idea-stack, .idea-grid{ grid-template-columns:1fr 1fr; }
   }
   .idea-row, .idea-cell{
-    padding: clamp(15px,1.8vw,20px) 0 clamp(15px,1.8vw,20px) 0;
-    border-top:1px solid var(--line-dark);
+    padding: clamp(15px,1.8vw,20px) 0;
+    border-top:1px solid var(--line-light);
   }
-  .idea-grid .idea-cell{ border-top:1px solid var(--line-light); }
+  .slide-dark .idea-row, .slide-dark .idea-cell{ border-top-color:var(--line-dark); }
   @media (min-width:640px){
     .idea-row:nth-child(odd), .idea-cell:nth-child(odd){ padding-right:clamp(20px,2.6vw,36px); }
     .idea-row:nth-child(even), .idea-cell:nth-child(even){
       padding-left:clamp(20px,2.6vw,36px);
-      border-left:1px solid var(--line-dark);
+      border-left:1px solid var(--line-light);
     }
-    .idea-grid .idea-cell:nth-child(even){ border-left:1px solid var(--line-light); }
+    .slide-dark .idea-row:nth-child(even), .slide-dark .idea-cell:nth-child(even){ border-left-color:var(--line-dark); }
   }
   .idea-tag{
     display:block; font-size:13px; font-weight:800; letter-spacing:.08em;
-    color:rgba(255,255,255,.36); margin-bottom:8px;
+    color:rgba(37,99,235,.55); margin-bottom:8px;
   }
-  .idea-grid .idea-tag{ color:rgba(37,99,235,.45); }
+  .slide-dark .idea-tag{ color:rgba(255,255,255,.4); }
   .idea-row h3, .idea-cell h3{
     font-size:clamp(19px,1.85vw,24px); font-weight:600; line-height:1.2;
     display:flex; flex-wrap:wrap; align-items:baseline; gap:10px;
   }
-  .idea-row p, .idea-cell p{ margin-top:10px; font-size:18px; line-height:1.4; }
-  @media(max-width:600px){.idea-row p,.idea-cell p{font-size:16px;}}
-  .idea-row p{ color:var(--muted-dark); max-width:54ch; }
-  .idea-cell p{ color:var(--muted-light); max-width:50ch; }
+  .idea-row p, .idea-cell p{ margin-top:10px; font-size:18px; line-height:1.4; max-width:52ch; color:var(--muted-light); }
+  .slide-dark .idea-row p, .slide-dark .idea-cell p{ color:var(--muted-dark); }
+  @media(max-width:600px){ .idea-row p, .idea-cell p{font-size:16px;} }
 
   .idea-flag{
     font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--blue);
     font-weight:700; background:rgba(37,99,235,.1); padding:3px 9px; border-radius:999px;
   }
-  .slide-dark .idea-flag{ color:var(--blue-soft); background:rgba(127,163,242,.14); }
+  .slide-dark .idea-flag{ color:var(--blue-soft); background:rgba(127,163,242,.16); }
+
+  /* ===== FEATURE + THREE (повседневные операции) ===== */
+  .idea-lead{
+    list-style:none; margin:0; padding:0;
+    display:grid; grid-template-columns:1fr; gap:0;
+  }
+  .idea-lead .idea-cell{ border-left:none !important; padding-left:0 !important; padding-right:0 !important; }
+  @media (min-width:900px){
+    .idea-lead{ grid-template-columns:1.04fr 1fr; column-gap:clamp(26px,3.6vw,52px); }
+    .idea-lead .lead-main{ grid-column:1; grid-row:1 / span 3; }
+    .idea-lead .lead-minor{ grid-column:2; }
+    .idea-lead .lead-main h3{ font-size:clamp(23px,2.3vw,30px); }
+    .idea-lead .lead-main p{ font-size:clamp(18px,1.4vw,19px); max-width:34ch; }
+    .idea-lead .lead-minor{ padding-top:clamp(11px,1.2vw,14px); padding-bottom:clamp(11px,1.2vw,14px); }
+    .idea-lead .lead-minor h3{ font-size:clamp(19px,1.7vw,22px); }
+    .idea-lead .lead-minor p{ font-size:17px; margin-top:8px; max-width:48ch; }
+  }
+
+  /* ===== QUESTIONS SLIDE ===== */
+  .ask-layout{ display:grid; grid-template-columns:1fr; gap:clamp(26px,3.6vw,54px); align-items:start; }
+  @media (min-width:1000px){ .ask-layout{ grid-template-columns:.85fr 1.15fr; } }
+  .ask-head{ display:flex; flex-direction:column; gap:clamp(14px,1.8vw,20px); }
+  .ask-title{ font-size:clamp(34px,5.4vw,64px); line-height:1.02; }
+  .ask-title .soft{ color:var(--blue-soft); }
+  .ask-lead{ font-size:clamp(16px,1.5vw,19px); line-height:1.45; color:var(--muted-dark); max-width:34ch; }
+  .ask-list{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr; gap:0; }
+  .ask-item{
+    display:grid; grid-template-columns:auto minmax(0,1fr); gap:clamp(14px,1.8vw,22px);
+    align-items:start;
+    padding:clamp(14px,1.7vw,19px) 0;
+    border-top:1px solid var(--line-dark);
+  }
+  .ask-item:last-child{ border-bottom:1px solid var(--line-dark); }
+  .ask-num{
+    font-size:clamp(20px,2vw,26px); font-weight:800; line-height:1.15;
+    color:var(--blue-soft); letter-spacing:-.02em; min-width:2ch;
+  }
+  .ask-item h3{ font-size:clamp(19px,1.9vw,25px); line-height:1.2; }
+  .ask-item p{ margin-top:8px; font-size:17px; line-height:1.42; color:var(--muted-dark); max-width:56ch; }
+  @media(max-width:600px){ .ask-item p{font-size:16px;} }
 
   /* ===== FINAL SLIDE ===== */
   #start .slide-inner{ display:flex; flex-direction:column; gap:clamp(30px,4.6vw,50px); }
@@ -243,6 +298,8 @@
   .start-links{ display:flex; flex-wrap:wrap; gap:clamp(16px,3vw,32px); font-size:clamp(16px,1.8vw,20px); }
   .start-links a{ color:var(--white); text-decoration:none; border-bottom:2px solid var(--blue); padding-bottom:2px; font-weight:700; }
   .start-links a:hover, .start-links a:focus{ color:var(--blue-soft); }
+  a{ color:var(--blue); }
+  a:hover{ color:#1d4fd1; }
 
   /* ===== NAV / CONTROLS ===== */
   .controls{
@@ -339,167 +396,173 @@
       </div>
     </section>
 
-    <section id="r1" class="slide slide-dark layout-stack" data-index="1" aria-labelledby="r1-h">
-      <div class="slide-inner section-split">
-        <div class="section-side">
-          <span class="section-num" aria-hidden="true">01</span>
-          <div class="slide-head">
-            <span class="slide-eyebrow">Раздел 01</span>
-            <h2 id="r1-h" tabindex="-1">Таблицы и реестры</h2>
-          </div>
+    <section id="discussion" class="slide slide-dark" data-index="1" aria-labelledby="discussion-h">
+      <div class="slide-inner ask-layout">
+        <div class="ask-head">
+          <span class="tag">Перед обсуждением идей</span>
+          <h2 id="discussion-h" class="ask-title" tabindex="-1">Что хотелось бы<br><span class="soft">упростить?</span></h2>
+          <p class="ask-lead">Сначала — ваши задачи, потом идеи. Дальнейшие разделы это только варианты для обсуждения.</p>
         </div>
-        <ol class="idea-stack">
-          <li class="idea-row">
-            <span class="idea-tag" aria-hidden="true">01</span>
-            <h3>Объединение таблиц <span class="idea-flag">Первый шаг</span></h3>
-            <p>Объединяет однотипные файлы от разных источников в одну таблицу без ручного копирования.</p>
+        <ol class="ask-list">
+          <li class="ask-item">
+            <span class="ask-num" aria-hidden="true">01</span>
+            <div>
+              <h3>Какие операции повторяются каждый день?</h3>
+              <p>Полезно вспомнить действия, которые выполняются регулярно и почти без изменений.</p>
+            </div>
           </li>
-          <li class="idea-row">
-            <span class="idea-tag" aria-hidden="true">02</span>
-            <h3>Реестр под формат заказчика</h3>
-            <p>Собирает данные в таблицу со столбцами и порядком, которые требует конкретный клиент.</p>
+          <li class="ask-item">
+            <span class="ask-num" aria-hidden="true">02</span>
+            <div>
+              <h3>Где данные переносятся вручную?</h3>
+              <p>Из документа в систему, из одной программы в другую или между карточками и формами.</p>
+            </div>
           </li>
-          <li class="idea-row">
-            <span class="idea-tag" aria-hidden="true">03</span>
-            <h3>Единые названия и форматы данных</h3>
-            <p>Приводит города, контрагентов и даты к единому виду по согласованному словарю соответствий.</p>
+          <li class="ask-item">
+            <span class="ask-num" aria-hidden="true">03</span>
+            <div>
+              <h3>Где нужны ручные проверки?</h3>
+              <p>Важно понять, какие шаги требуют дополнительной сверки или исправления после выполнения.</p>
+            </div>
           </li>
-          <li class="idea-row">
-            <span class="idea-tag" aria-hidden="true">04</span>
-            <h3>Разбивка сводной таблицы</h3>
-            <p>Делит общий реестр на отдельные файлы по клиенту или периоду одним запуском.</p>
+          <li class="ask-item">
+            <span class="ask-num" aria-hidden="true">04</span>
+            <div>
+              <h3>С чего начать первый пилот?</h3>
+              <p>Выберем частую задачу с понятным результатом. Для разбора подойдёт обезличенный пример.</p>
+            </div>
           </li>
         </ol>
       </div>
     </section>
 
-    <section id="r2" class="slide slide-light layout-grid" data-index="2" aria-labelledby="r2-h">
+    <section id="r4" class="slide slide-light layout-grid" data-index="2" aria-labelledby="r4-h">
       <div class="slide-inner">
         <div class="slide-head">
           <span class="head-mark" aria-hidden="true"></span>
-          <span class="slide-eyebrow">Раздел 02</span>
-          <h2 id="r2-h" tabindex="-1">Подготовка документов</h2>
+          <span class="slide-eyebrow">Раздел 01</span>
+          <h2 id="r4-h" tabindex="-1">Повседневные операции</h2>
         </div>
-        <div class="idea-grid">
-          <div class="idea-cell">
+        <div class="idea-lead">
+          <div class="idea-cell lead-main">
             <span class="idea-tag" aria-hidden="true">01</span>
-            <h3>Заявка на перевозку из карточки <span class="idea-flag">Первый шаг</span></h3>
-            <p>Формирует готовый документ-заявку по данным карточки рейса без повторного набора текста.</p>
+            <h3>Обработка файлов одним запуском <span class="idea-flag">Первый шаг</span></h3>
+            <p>Переводит документы поддерживаемых форматов в PDF и объединяет PDF-файлы в заданном порядке.</p>
           </div>
-          <div class="idea-cell">
+          <div class="idea-cell lead-minor">
             <span class="idea-tag" aria-hidden="true">02</span>
-            <h3>Генератор коммерческих предложений</h3>
-            <p>Собирает коммерческое предложение по утверждённой ставке и шаблону из введённых параметров.</p>
+            <h3>Порядок в названиях файлов</h3>
+            <p>Переименовывает и раскладывает копии файлов по согласованным правилам: номеру, дате или клиенту.</p>
           </div>
-          <div class="idea-cell">
+          <div class="idea-cell lead-minor">
             <span class="idea-tag" aria-hidden="true">03</span>
-            <h3>Пакет документов по рейсу</h3>
-            <p>По одной строке таблицы создаёт сразу несколько связанных документов, например заявку и счёт-черновик.</p>
+            <h3>Данные из однотипных документов</h3>
+            <p>Извлекает нужные поля из документов одного формата для проверки сотрудником и последующей загрузки.</p>
           </div>
-          <div class="idea-cell">
+          <div class="idea-cell lead-minor">
             <span class="idea-tag" aria-hidden="true">04</span>
-            <h3>Проверка обязательных полей документа</h3>
-            <p>Перед печатью проверяет, что нужные поля заполнены, и указывает пропуски.</p>
+            <h3>Повторяющиеся действия в программе</h3>
+            <p>Выполняет согласованный сценарий заполнения форм и сохранения результата. Способ выбирается после проверки программы.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="r3" class="slide slide-dark layout-stack" data-index="3" aria-labelledby="r3-h">
+    <section id="r1" class="slide slide-dark layout-stack" data-index="3" aria-labelledby="r1-h">
       <div class="slide-inner section-split">
         <div class="section-side">
-          <span class="section-num" aria-hidden="true">03</span>
+          <span class="section-num" aria-hidden="true">02</span>
           <div class="slide-head">
-            <span class="slide-eyebrow">Раздел 03</span>
+            <span class="slide-eyebrow">Раздел 02</span>
+            <h2 id="r1-h" tabindex="-1">Данные и таблицы</h2>
+          </div>
+        </div>
+        <ol class="idea-stack">
+          <li class="idea-row">
+            <span class="idea-tag" aria-hidden="true">01</span>
+            <h3>Объединение однотипных выгрузок <span class="idea-flag">Первый шаг</span></h3>
+            <p>Несколько файлов с одинаковой структурой можно свести в единую таблицу без ручного копирования строк.</p>
+          </li>
+          <li class="idea-row">
+            <span class="idea-tag" aria-hidden="true">02</span>
+            <h3>Реестр по контрагенту</h3>
+            <p>Данные по одному контрагенту из разных источников можно собрать в общий список для удобного просмотра.</p>
+          </li>
+          <li class="idea-row">
+            <span class="idea-tag" aria-hidden="true">03</span>
+            <h3>Единые названия и форматы</h3>
+            <p>Разные обозначения одних и тех же полей и значений можно привести к общему виду для дальнейшей работы.</p>
+          </li>
+          <li class="idea-row">
+            <span class="idea-tag" aria-hidden="true">04</span>
+            <h3>Разбивка по клиенту и периоду</h3>
+            <p>Общий массив данных можно разложить по клиентам или периодам, если такая группировка нужна для анализа.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="r2" class="slide slide-light layout-grid" data-index="4" aria-labelledby="r2-h">
+      <div class="slide-inner">
+        <div class="slide-head">
+          <span class="head-mark" aria-hidden="true"></span>
+          <span class="slide-eyebrow">Раздел 03</span>
+          <h2 id="r2-h" tabindex="-1">Подготовка документов</h2>
+        </div>
+        <div class="idea-grid">
+          <div class="idea-cell">
+            <span class="idea-tag" aria-hidden="true">01</span>
+            <h3>Документ по карточке или форме <span class="idea-flag">Первый шаг</span></h3>
+            <p>По данным карточки или заполненной формы можно подготовить заявку, справку или договор по утверждённому шаблону.</p>
+          </div>
+          <div class="idea-cell">
+            <span class="idea-tag" aria-hidden="true">02</span>
+            <h3>Генератор коммерческих предложений</h3>
+            <p>Из согласованных цен и шаблона можно собрать документ с предложением без ручного набора текста.</p>
+          </div>
+          <div class="idea-cell">
+            <span class="idea-tag" aria-hidden="true">03</span>
+            <h3>Пакет связанных документов</h3>
+            <p>Если несколько документов формируются из одних и тех же данных, их можно готовить одновременно.</p>
+          </div>
+          <div class="idea-cell">
+            <span class="idea-tag" aria-hidden="true">04</span>
+            <h3>Проверка обязательных полей</h3>
+            <p>Перед формированием документа можно проверить наличие всех обязательных данных и указать, чего не хватает.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="r3" class="slide slide-dark layout-stack" data-index="5" aria-labelledby="r3-h">
+      <div class="slide-inner section-split">
+        <div class="section-side">
+          <span class="section-num" aria-hidden="true">04</span>
+          <div class="slide-head">
+            <span class="slide-eyebrow">Раздел 04</span>
             <h2 id="r3-h" tabindex="-1">Проверка данных</h2>
           </div>
         </div>
         <ol class="idea-stack">
           <li class="idea-row">
             <span class="idea-tag" aria-hidden="true">01</span>
-            <h3>Сверка двух реестров рейсов <span class="idea-flag">Первый шаг</span></h3>
-            <p>Сопоставляет список рейсов из одного источника со списком из другого и показывает расхождения.</p>
+            <h3>Сверка двух реестров заказов <span class="idea-flag">Первый шаг</span></h3>
+            <p>Два списка заказов или операций можно сопоставить и выделить расхождения между ними.</p>
           </li>
           <li class="idea-row">
             <span class="idea-tag" aria-hidden="true">02</span>
-            <h3>Сверка реквизитов контрагентов</h3>
-            <p>Сравнивает сведения из двух таблиц и показывает несовпадения для проверки сотрудником.</p>
+            <h3>Проверка реквизитов</h3>
+            <p>Реквизиты контрагентов можно проверить на корректность формата и соответствие требуемым правилам.</p>
           </li>
           <li class="idea-row">
             <span class="idea-tag" aria-hidden="true">03</span>
-            <h3>Поиск возможных дублей документов</h3>
-            <p>Находит возможные совпадения по номеру, дате и контрагенту по реестру документов и выводит кандидатов для проверки.</p>
+            <h3>Поиск возможных дублей</h3>
+            <p>В большом списке можно выявить записи, похожие друг на друга, для последующей проверки сотрудником.</p>
           </li>
           <li class="idea-row">
             <span class="idea-tag" aria-hidden="true">04</span>
-            <h3>Сравнение сумм по условиям</h3>
-            <p>Сопоставляет согласованные условия рейса с фактическими доплатами. Только список расхождений, без выводов о задолженности.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section id="r4" class="slide slide-light layout-grid" data-index="4" aria-labelledby="r4-h">
-      <div class="slide-inner">
-        <div class="slide-head">
-          <span class="head-mark" aria-hidden="true"></span>
-          <span class="slide-eyebrow">Раздел 04</span>
-          <h2 id="r4-h" tabindex="-1">Архив и комплекты</h2>
-        </div>
-        <div class="idea-grid">
-          <div class="idea-cell">
-            <span class="idea-tag" aria-hidden="true">01</span>
-            <h3>Сортировка документов по номеру и дате <span class="idea-flag">Первый шаг</span></h3>
-            <p>Переименовывает и раскладывает копии документов (оригиналы сохраняются) по номеру рейса, дате или контрагенту.</p>
-          </div>
-          <div class="idea-cell">
-            <span class="idea-tag" aria-hidden="true">02</span>
-            <h3>Проверка комплекта документов</h3>
-            <p>Проверяет наличие файлов по рейсу в архиве (не содержание и подписи) и выводит список недостающих.</p>
-          </div>
-          <div class="idea-cell">
-            <span class="idea-tag" aria-hidden="true">03</span>
-            <h3>Сборка комплекта клиенту за месяц</h3>
-            <p>Собирает документы и реестр по одному клиенту за выбранный период в один пакет.</p>
-          </div>
-          <div class="idea-cell">
-            <span class="idea-tag" aria-hidden="true">04</span>
-            <h3>Поиск файла по номеру или дате</h3>
-            <p>Находит документ в архиве без ручного перебора папок.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="r5" class="slide slide-dark layout-stack" data-index="5" aria-labelledby="r5-h">
-      <div class="slide-inner section-split">
-        <div class="section-side">
-          <span class="section-num" aria-hidden="true">05</span>
-          <div class="slide-head">
-            <span class="slide-eyebrow">Раздел 05</span>
-            <h2 id="r5-h" tabindex="-1">Рейсы и задания</h2>
-          </div>
-        </div>
-        <ol class="idea-stack">
-          <li class="idea-row">
-            <span class="idea-tag" aria-hidden="true">01</span>
-            <h3>Список заданий на день <span class="idea-flag">Первый шаг</span></h3>
-            <p>Формирует перечень рейсов на выбранную дату из доступной выгрузки для утренней проверки.</p>
-          </li>
-          <li class="idea-row">
-            <span class="idea-tag" aria-hidden="true">02</span>
-            <h3>Журнал отклонений и простоев</h3>
-            <p>Фиксирует введённые сотрудником задержки, простои и повреждения в единой форме учёта.</p>
-          </li>
-          <li class="idea-row">
-            <span class="idea-tag" aria-hidden="true">03</span>
-            <h3>Контроль дат по рейсам</h3>
-            <p>Показывает рейсы, где согласованная дата приближается или прошла, для ручного контроля.</p>
-          </li>
-          <li class="idea-row">
-            <span class="idea-tag" aria-hidden="true">04</span>
-            <h3>Привязка фото к рейсу</h3>
-            <p>Прикрепляет фотографии и материалы к рейсу для последующего поиска. Доступы для совместной работы нескольких сотрудников продумываются отдельно.</p>
+            <h3>Сравнение согласованных и фактических сумм</h3>
+            <p>Плановые и фактические суммы можно сопоставить, а окончательное решение по расхождениям остаётся за сотрудником.</p>
           </li>
         </ol>
       </div>
@@ -509,29 +572,29 @@
       <div class="slide-inner">
         <div class="slide-head">
           <span class="head-mark" aria-hidden="true"></span>
-          <span class="slide-eyebrow">Раздел 06</span>
+          <span class="slide-eyebrow">Раздел 05</span>
           <h2 id="r6-h" tabindex="-1">Коммерческая работа</h2>
         </div>
         <div class="idea-grid">
           <div class="idea-cell">
             <span class="idea-tag" aria-hidden="true">01</span>
-            <h3>Сравнение предложений перевозчиков <span class="idea-flag">Первый шаг</span></h3>
-            <p>Сопоставляет несколько предложений по одинаковым условиям рейса в одной таблице.</p>
+            <h3>Сравнение предложений поставщиков <span class="idea-flag">Первый шаг</span></h3>
+            <p>Предложения поставщиков и перевозчиков можно сравнивать по одинаковому составу услуг и условиям.</p>
           </div>
           <div class="idea-cell">
             <span class="idea-tag" aria-hidden="true">02</span>
-            <h3>История ставок по направлениям</h3>
-            <p>Собирает данные по прошлым сопоставимым рейсам, чтобы видеть диапазон ставок.</p>
+            <h3>История цен по сопоставимым условиям</h3>
+            <p>Цены за прошлые периоды по похожим условиям можно собрать вместе для оценки динамики.</p>
           </div>
           <div class="idea-cell">
             <span class="idea-tag" aria-hidden="true">03</span>
-            <h3>Учёт отправленных предложений</h3>
-            <p>Ведёт реестр предложений, вопросов клиента и даты следующего контакта.</p>
+            <h3>Учёт предложений и следующего контакта</h3>
+            <p>Отправленные предложения и планируемые следующие шаги по ним можно фиксировать в одном месте.</p>
           </div>
           <div class="idea-cell">
             <span class="idea-tag" aria-hidden="true">04</span>
-            <h3>Тарифный справочник условий клиентов</h3>
-            <p>Хранит версии согласованных условий и тарифов для быстрого расчёта.</p>
+            <h3>Версии условий с клиентами</h3>
+            <p>Разные версии согласуемых условий с клиентом можно хранить и сравнивать между собой.</p>
           </div>
         </div>
       </div>
@@ -540,42 +603,108 @@
     <section id="r7" class="slide slide-dark layout-stack" data-index="7" aria-labelledby="r7-h">
       <div class="slide-inner section-split">
         <div class="section-side">
-          <span class="section-num" aria-hidden="true">07</span>
+          <span class="section-num" aria-hidden="true">06</span>
           <div class="slide-head">
-            <span class="slide-eyebrow">Раздел 07</span>
+            <span class="slide-eyebrow">Раздел 06</span>
             <h2 id="r7-h" tabindex="-1">Отчёты руководителю</h2>
           </div>
         </div>
         <ol class="idea-stack">
           <li class="idea-row">
             <span class="idea-tag" aria-hidden="true">01</span>
-            <h3>Сводка по статусам и отклонениям <span class="idea-flag">Первый шаг</span></h3>
-            <p>Собирает краткий отчёт о текущих статусах рейсов и зафиксированных отклонениях за период.</p>
+            <h3>Сводка заказов и задач <span class="idea-flag">Первый шаг</span></h3>
+            <p>Данные по заказам и задачам можно собрать в единый отчёт для общего обзора ситуации.</p>
           </li>
           <li class="idea-row">
             <span class="idea-tag" aria-hidden="true">02</span>
-            <h3>Объём перевозок по клиентам и направлениям</h3>
-            <p>Формирует отчёт по клиентам, направлениям и периодам на основе накопленных данных.</p>
+            <h3>Показатели по клиентам и услугам</h3>
+            <p>На основе учтённых данных можно формировать показатели в разрезе клиентов и видов услуг.</p>
           </li>
           <li class="idea-row">
             <span class="idea-tag" aria-hidden="true">03</span>
-            <h3>Открытые задачи по документам</h3>
-            <p>Показывает открытые задачи по документам и ответственным из заполненного реестра.</p>
+            <h3>Задачи и ответственные</h3>
+            <p>Из зафиксированных данных можно формировать список задач с указанием ответственных.</p>
           </li>
           <li class="idea-row">
             <span class="idea-tag" aria-hidden="true">04</span>
-            <h3>План-факт по показателям</h3>
-            <p>Сравнивает плановые и фактические значения по согласованным показателям.</p>
+            <h3>Сравнение плана и факта</h3>
+            <p>Плановые и фактические показатели можно сопоставлять в одном отчёте для наглядности.</p>
           </li>
         </ol>
       </div>
     </section>
 
-    <section id="r8" class="slide slide-light layout-grid" data-index="8" aria-labelledby="r8-h">
+    <section id="r5" class="slide slide-light layout-grid" data-index="8" aria-labelledby="r5-h">
       <div class="slide-inner">
         <div class="slide-head">
           <span class="head-mark" aria-hidden="true"></span>
-          <span class="slide-eyebrow">Раздел 08</span>
+          <span class="slide-eyebrow">Раздел 07 · Возможные сценарии</span>
+          <h2 id="r5-h" tabindex="-1">Примеры для перевозок</h2>
+        </div>
+        <div class="idea-grid">
+          <div class="idea-cell">
+            <span class="idea-tag" aria-hidden="true">01</span>
+            <h3>Общий список заданий <span class="idea-flag">Первый шаг</span></h3>
+            <p>Если список рейсов или заданий собирается вручную из разных источников, его можно формировать автоматически.</p>
+          </div>
+          <div class="idea-cell">
+            <span class="idea-tag" aria-hidden="true">02</span>
+            <h3>Фиксация изменений</h3>
+            <p>Если сведения об изменениях по рейсу разбросаны по разным местам, их можно собирать в одном документе.</p>
+          </div>
+          <div class="idea-cell">
+            <span class="idea-tag" aria-hidden="true">03</span>
+            <h3>Проверка дат</h3>
+            <p>Если сроки по рейсам контролируются вручную, можно настроить автоматическую проверку и напоминания.</p>
+          </div>
+          <div class="idea-cell">
+            <span class="idea-tag" aria-hidden="true">04</span>
+            <h3>Привязка фото к рейсу</h3>
+            <p>Если фотографии по рейсу сложно найти среди прочих файлов, их можно связывать с конкретным рейсом.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="r9" class="slide slide-dark layout-stack" data-index="9" aria-labelledby="r9-h">
+      <div class="slide-inner section-split">
+        <div class="section-side">
+          <span class="section-num" aria-hidden="true">08</span>
+          <div class="slide-head">
+            <span class="slide-eyebrow">Раздел 08 · При необходимости</span>
+            <h2 id="r9-h" tabindex="-1">Возможности для сайта</h2>
+          </div>
+        </div>
+        <ol class="idea-stack">
+          <li class="idea-row">
+            <span class="idea-tag" aria-hidden="true">01</span>
+            <h3>Страницы услуг и направлений</h3>
+            <p>Дополнительные страницы об услугах и направлениях — с условиями и примерами для знакомства до обращения.</p>
+          </li>
+          <li class="idea-row">
+            <span class="idea-tag" aria-hidden="true">02</span>
+            <h3>Учёт обращений с сайта</h3>
+            <p>Если маршрут ещё не настроен — передача заявки менеджеру и контроль обработки. Короткая форма с номером сохраняется.</p>
+          </li>
+          <li class="idea-row">
+            <span class="idea-tag" aria-hidden="true">03</span>
+            <h3>Аналитика источников заявок</h3>
+            <p>Можно связать источник обращения с его дальнейшей обработкой и оценивать результат по учтённым данным.</p>
+          </li>
+          <li class="idea-row">
+            <span class="idea-tag" aria-hidden="true">04</span>
+            <h3>Материалы для клиента</h3>
+            <p>Презентация компании и описание услуг в PDF, которые можно скачать с сайта или отправить вместе с предложением.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="r8" class="slide slide-light layout-grid" data-index="10" aria-labelledby="r8-h">
+      <div class="slide-inner">
+        <div class="slide-head">
+          <span class="head-mark" aria-hidden="true"></span>
+          <span class="slide-eyebrow">Раздел 09</span>
           <h2 id="r8-h" tabindex="-1">Помощники и дальнейшее развитие</h2>
         </div>
         <div class="idea-grid">
@@ -603,7 +732,7 @@
       </div>
     </section>
 
-    <section id="start" class="slide slide-dark" data-index="9" aria-labelledby="start-h">
+    <section id="start" class="slide slide-dark" data-index="11" aria-labelledby="start-h">
       <div class="slide-inner">
         <span class="tag">Варианты для обсуждения</span>
         <h2 id="start-h" class="start-title" tabindex="-1">Первый проект</h2>
@@ -636,7 +765,7 @@
 
   <nav class="controls" aria-label="Навигация по слайдам">
     <button type="button" id="prevBtn" class="nav-btn">Назад</button>
-    <div class="counter" id="counter">1 / 10</div>
+    <div class="counter" id="counter">1 / 12</div>
     <div class="toc-wrap">
       <button type="button" id="tocBtn" class="toc-btn" aria-expanded="false" aria-controls="tocMenu">Оглавление</button>
       <div id="tocMenu" class="toc-menu" hidden></div>
@@ -656,13 +785,15 @@
     var order = slides.map(function(s){ return s.id; });
     var titles = {
       intro: "Обложка",
-      r1: "Таблицы и реестры",
+      discussion: "Что хотелось бы упростить?",
+      r4: "Повседневные операции",
+      r1: "Данные и таблицы",
       r2: "Подготовка документов",
       r3: "Проверка данных",
-      r4: "Архив и комплекты",
-      r5: "Рейсы и задания",
       r6: "Коммерческая работа",
       r7: "Отчёты руководителю",
+      r5: "Примеры для перевозок",
+      r9: "Возможности для сайта",
       r8: "Помощники и дальнейшее развитие",
       start: "Первый проект"
     };
@@ -684,7 +815,6 @@
 
     if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
 
-    // Build TOC
     order.forEach(function(id){
       var btn = document.createElement('button');
       btn.type = 'button';
