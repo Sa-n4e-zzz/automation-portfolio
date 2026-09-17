@@ -31,6 +31,7 @@
     color:var(--ink);
     -webkit-font-smoothing:antialiased;
     font-size:18px;
+    overflow-x:hidden;
   }
   html.deck-ready body{height:100vh;height:100dvh;}
   @media (max-width:600px){
@@ -53,12 +54,15 @@
   html.deck-ready .viewport{
     position:relative;
     overflow-y:auto;
+    overflow-x:hidden;
     -webkit-overflow-scrolling:touch;
   }
 
   .slide{
     width:100%;
-    padding: clamp(24px,3vw,40px) clamp(24px,6vw,96px);
+    max-width:100vw;
+    overflow-x:hidden;
+    padding: clamp(24px,3vw,40px) clamp(20px,6vw,96px);
   }
   html.deck-ready .slide{
     min-height:100%;
@@ -68,10 +72,10 @@
   }
   .slide[hidden]{display:none !important;}
 
-  .slide.enter .slide-inner{animation: slideIn .4s ease both;}
+  .slide.enter .slide-inner{animation: slideIn .58s cubic-bezier(.19,.68,.28,1) both;}
   @keyframes slideIn{
-    from{opacity:0; transform:translateY(18px);}
-    to{opacity:1; transform:translateY(0);}
+    from{opacity:0; transform:translateX(26px);}
+    to{opacity:1; transform:translateX(0);}
   }
   @keyframes itemIn{
     from{opacity:0; transform:translateY(14px);}
@@ -80,16 +84,16 @@
   .slide.enter .idea-row,
   .slide.enter .idea-cell{
     opacity:0;
-    animation: itemIn .45s ease both;
+    animation: itemIn .5s ease both;
   }
   .slide.enter .idea-row:nth-child(1),
-  .slide.enter .idea-cell:nth-child(1){animation-delay:0ms;}
+  .slide.enter .idea-cell:nth-child(1){animation-delay:80ms;}
   .slide.enter .idea-row:nth-child(2),
-  .slide.enter .idea-cell:nth-child(2){animation-delay:60ms;}
+  .slide.enter .idea-cell:nth-child(2){animation-delay:180ms;}
   .slide.enter .idea-row:nth-child(3),
-  .slide.enter .idea-cell:nth-child(3){animation-delay:120ms;}
+  .slide.enter .idea-cell:nth-child(3){animation-delay:280ms;}
   .slide.enter .idea-row:nth-child(4),
-  .slide.enter .idea-cell:nth-child(4){animation-delay:180ms;}
+  .slide.enter .idea-cell:nth-child(4){animation-delay:380ms;}
   @media (prefers-reduced-motion: reduce){
     .slide.enter .slide-inner{animation:none;}
     .slide.enter .idea-row,
@@ -101,276 +105,188 @@
 
   .slide-inner{max-width:1180px; margin:0 auto; width:100%;}
 
-  h1,h2,h3{margin:0; font-weight:800; letter-spacing:-.01em;}
+  h1,h2,h3{margin:0; font-weight:600; letter-spacing:-.035em;}
   p{margin:0;}
 
   h1[tabindex="-1"], h2[tabindex="-1"], h3[tabindex="-1"]{outline:none;}
 
   /* ===== COVER ===== */
-  #intro .slide-inner{
-    display:flex; flex-direction:column; gap:clamp(28px,5vw,56px);
+  .cover-layout{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:clamp(28px,5vw,48px);
+    align-items:center;
   }
+  @media (min-width:820px){
+    .cover-layout{grid-template-columns:1.15fr .85fr;}
+  }
+  .cover-left{display:flex; flex-direction:column; gap:clamp(20px,3vw,30px);}
   .cover-title{
-    font-size:clamp(36px,7vw,88px);
-    line-height:0.98;
+    font-size:clamp(32px,4.9vw,64px);
+    line-height:1.05;
     color:var(--ink);
   }
   .cover-title .accent{color:var(--blue);}
-  .cover-meta{
-    display:flex; flex-direction:column; gap:10px;
-  }
-  .cover-name{
-    font-size:clamp(18px,2.4vw,26px);
-    font-weight:700;
-  }
-  .cover-line{
-    font-size:clamp(16px,1.8vw,22px);
-    color:var(--muted-light);
-    max-width:46ch;
-  }
+  .cover-meta{display:flex; flex-direction:column; gap:10px;}
+  .cover-name{font-size:clamp(18px,2vw,23px); font-weight:700;}
+  .cover-line{font-size:clamp(16px,1.5vw,19px); color:var(--muted-light); max-width:46ch;}
   .tag{
-    display:inline-block;
-    font-size:13px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--blue);
-    font-weight:700;
+    display:inline-block; font-size:13px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--blue); font-weight:700;
   }
   .slide-dark .tag{color:var(--blue-soft);}
 
+  .cover-visual{display:none; color:var(--ink); justify-self:center; width:100%; max-width:240px;}
+  @media (min-width:820px){ .cover-visual{display:block;} }
+  .cover-visual svg{width:100%; height:auto; display:block;}
+
   /* ===== SECTION HEAD ===== */
-  .slide-head{
-    display:flex; flex-direction:column; gap:10px;
-    margin-bottom:clamp(20px,2.5vw,28px);
+  .slide-head{ display:flex; flex-direction:column; gap:10px; margin-bottom:clamp(22px,2.6vw,30px); }
+  .head-mark{
+    display:inline-block; width:10px; height:10px; background:var(--blue);
+    transform:rotate(45deg); margin-bottom:4px;
   }
-  .slide-eyebrow{
-    font-size:13px;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:var(--blue);
-    font-weight:700;
-  }
+  .slide-eyebrow{ font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--blue); font-weight:700; }
   .slide-dark .slide-eyebrow{color:var(--blue-soft);}
-  .slide-head h2{
-    font-size:clamp(30px,5.2vw,62px);
-    line-height:1.04;
-  }
+  .slide-head h2{ font-size:clamp(28px,4.6vw,54px); line-height:1.06; max-width:22ch; }
 
-  /* ===== STACK LAYOUT (dark sections) ===== */
-  .idea-stack{
-    list-style:none; margin:0; padding:0;
-  }
-  .idea-row{
+  /* ===== DARK ASYMMETRICAL SECTION ===== */
+  .section-split{
     display:grid;
-    grid-template-columns: minmax(64px,110px) 1fr;
-    gap: clamp(16px,3vw,32px);
-    padding: clamp(12px,1.6vw,16px) 0;
-    border-top:1px solid var(--line-dark);
+    grid-template-columns:1fr;
+    gap:clamp(26px,4vw,40px);
   }
-  .idea-row:first-child{border-top:1px solid var(--line-dark);}
-  .idea-num{
-    font-size:clamp(22px,3vw,36px);
+  @media (min-width:1100px){
+    .section-split{ grid-template-columns:minmax(240px,280px) minmax(0,1fr); align-items:start; }
+  }
+  .section-side h2{font-size:clamp(28px,3.2vw,42px);overflow-wrap:break-word;}
+  .section-side{ display:flex; flex-direction:column; gap:16px; }
+  .section-num{
+    font-size:clamp(52px,7.2vw,108px);
     font-weight:800;
-    color:rgba(255,255,255,.28);
-    line-height:1;
-  }
-  .idea-row h3{
-    font-size:clamp(18px,2vw,26px);
-    line-height:1.15;
-    display:flex; flex-wrap:wrap; align-items:baseline; gap:12px;
-  }
-  .idea-row p{
-    margin-top:8px;
-    font-size:clamp(16px,1.5vw,18px);
-    color:var(--muted-dark);
-    max-width:62ch;
+    line-height:.82;
+    color:rgba(255,255,255,.14);
+    letter-spacing:-.02em;
   }
 
-  /* ===== GRID LAYOUT (light sections) ===== */
-  .idea-grid{
+  /* ===== IDEA GRID (shared 2x2) ===== */
+  .idea-stack, .idea-grid{
+    list-style:none; margin:0; padding:0;
     display:grid;
     grid-template-columns:1fr;
     gap:0;
   }
-  @media (min-width:760px){
-    .idea-grid{grid-template-columns:1fr 1fr;}
+  @media (min-width:640px){
+    .idea-stack, .idea-grid{ grid-template-columns:1fr 1fr; }
   }
-  .idea-cell{
-    padding: clamp(14px,1.8vw,20px) clamp(0px,2vw,28px) clamp(14px,1.8vw,20px) 0;
-    border-top:1px solid var(--line-light);
+  .idea-row, .idea-cell{
+    padding: clamp(15px,1.8vw,20px) 0 clamp(15px,1.8vw,20px) 0;
+    border-top:1px solid var(--line-dark);
   }
-  @media (min-width:760px){
-    .idea-cell:nth-child(odd){padding-right:clamp(24px,3vw,40px);}
-    .idea-cell:nth-child(even){
-      padding-left:clamp(24px,3vw,40px);
-      border-left:1px solid var(--line-light);
+  .idea-grid .idea-cell{ border-top:1px solid var(--line-light); }
+  @media (min-width:640px){
+    .idea-row:nth-child(odd), .idea-cell:nth-child(odd){ padding-right:clamp(20px,2.6vw,36px); }
+    .idea-row:nth-child(even), .idea-cell:nth-child(even){
+      padding-left:clamp(20px,2.6vw,36px);
+      border-left:1px solid var(--line-dark);
     }
+    .idea-grid .idea-cell:nth-child(even){ border-left:1px solid var(--line-light); }
   }
-  .idea-cell .idea-num{
-    color:rgba(37,99,235,.32);
+  .idea-tag{
+    display:block; font-size:13px; font-weight:800; letter-spacing:.08em;
+    color:rgba(255,255,255,.36); margin-bottom:8px;
   }
-  .idea-cell h3{
-    font-size:clamp(18px,2vw,26px);
-    line-height:1.15;
-    margin-top:8px;
+  .idea-grid .idea-tag{ color:rgba(37,99,235,.45); }
+  .idea-row h3, .idea-cell h3{
+    font-size:clamp(19px,1.85vw,24px); font-weight:600; line-height:1.2;
     display:flex; flex-wrap:wrap; align-items:baseline; gap:10px;
   }
-  .idea-cell p{
-    margin-top:10px;
-    font-size:clamp(16px,1.5vw,18px);
-    color:var(--muted-light);
-    max-width:52ch;
-  }
+  .idea-row p, .idea-cell p{ margin-top:10px; font-size:18px; line-height:1.4; }
+  @media(max-width:600px){.idea-row p,.idea-cell p{font-size:16px;}}
+  .idea-row p{ color:var(--muted-dark); max-width:54ch; }
+  .idea-cell p{ color:var(--muted-light); max-width:50ch; }
 
   .idea-flag{
-    font-size:13px;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    color:var(--blue);
-    font-weight:700;
-    background:rgba(37,99,235,.1);
-    padding:3px 9px;
-    border-radius:999px;
+    font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--blue);
+    font-weight:700; background:rgba(37,99,235,.1); padding:3px 9px; border-radius:999px;
   }
-  .slide-dark .idea-flag{
-    color:var(--blue-soft);
-    background:rgba(127,163,242,.14);
-  }
+  .slide-dark .idea-flag{ color:var(--blue-soft); background:rgba(127,163,242,.14); }
 
   /* ===== FINAL SLIDE ===== */
-  #start .slide-inner{display:flex; flex-direction:column; gap:clamp(32px,5vw,56px);}
-  .start-title{
-    font-size:clamp(34px,6.5vw,84px);
-    line-height:1.02;
+  #start .slide-inner{ display:flex; flex-direction:column; gap:clamp(30px,4.6vw,50px); }
+  .start-title{ font-size:clamp(32px,6vw,72px); line-height:1.03; }
+
+  .flow-steps{
+    position:relative;
+    list-style:none; margin:0; padding:0;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:clamp(14px,2vw,24px);
   }
-  .start-flow{
-    display:flex; flex-wrap:wrap; gap:clamp(10px,2vw,18px);
-    align-items:center;
+  .flow-steps::before{
+    content:""; position:absolute; top:20px; left:0; right:0; height:1px; background:var(--line-dark);
   }
-  .start-step{
-    font-size:clamp(17px,2vw,24px);
-    font-weight:700;
+  .flow-step{ position:relative; display:flex; flex-direction:column; gap:14px; }
+  .flow-num{
+    width:40px; height:40px; border-radius:50%;
+    background:var(--ink); border:1.5px solid var(--blue-soft); color:var(--white);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px;
   }
-  .start-arrow{
-    color:var(--blue-soft);
-    font-size:clamp(17px,2vw,24px);
+  .flow-label{ font-size:clamp(15px,1.5vw,19px); font-weight:700; }
+  @media (max-width:640px){
+    .flow-steps{ grid-template-columns:1fr; gap:16px; }
+    .flow-steps::before{ display:none; }
+    .flow-step{ flex-direction:row; align-items:center; }
+    .flow-num{ flex:none; }
   }
-  .start-links{
-    display:flex; flex-wrap:wrap; gap:clamp(16px,3vw,32px);
-    font-size:clamp(16px,1.8vw,20px);
-  }
-  .start-links a{
-    color:var(--white);
-    text-decoration:none;
-    border-bottom:2px solid var(--blue);
-    padding-bottom:2px;
-    font-weight:700;
-  }
-  .start-links a:hover, .start-links a:focus{color:var(--blue-soft);}
-  .start-source{
-    font-size:13px;
-    color:var(--muted-dark);
-    max-width:60ch;
-  }
-  .start-source a{color:var(--blue-soft);}
+
+  .start-links{ display:flex; flex-wrap:wrap; gap:clamp(16px,3vw,32px); font-size:clamp(16px,1.8vw,20px); }
+  .start-links a{ color:var(--white); text-decoration:none; border-bottom:2px solid var(--blue); padding-bottom:2px; font-weight:700; }
+  .start-links a:hover, .start-links a:focus{ color:var(--blue-soft); }
 
   /* ===== NAV / CONTROLS ===== */
   .controls{
-    display:none;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    padding:14px clamp(16px,4vw,40px);
-    padding-bottom:calc(14px + env(safe-area-inset-bottom));
-    background:var(--white);
-    border-top:1px solid var(--line-light);
-    position:relative;
-    z-index:5;
+    display:none; align-items:center; justify-content:space-between; gap:16px;
+    padding:14px clamp(16px,4vw,40px); padding-bottom:calc(14px + env(safe-area-inset-bottom));
+    background:var(--bg); border-top:1px solid var(--line-light); position:relative; z-index:5;
   }
   html.deck-ready .controls{display:flex;}
 
   .nav-btn{
-    font-family:var(--font);
-    font-size:15px;
-    font-weight:700;
-    color:var(--ink);
-    background:transparent;
-    border:1.5px solid var(--ink);
-    border-radius:999px;
-    padding:10px 22px;
-    cursor:pointer;
+    font-family:var(--font); font-size:15px; font-weight:500; color:var(--ink);
+    background:transparent; border:1px solid var(--line-light); border-radius:999px; padding:10px 22px; cursor:pointer;
   }
-  .nav-btn:hover{background:var(--ink); color:var(--white);}
-  .nav-btn:disabled{opacity:.35; cursor:default;}
-  .nav-btn:disabled:hover{background:transparent; color:var(--ink);}
-  .nav-btn:focus-visible, .toc-btn:focus-visible, .toc-item:focus-visible{
-    outline:3px solid var(--blue); outline-offset:2px;
-  }
+  .nav-btn:hover{ background:var(--ink); color:var(--white); }
+  .nav-btn:disabled{ opacity:.35; cursor:default; }
+  .nav-btn:disabled:hover{ background:transparent; color:var(--ink); }
+  .nav-btn:focus-visible, .toc-btn:focus-visible, .toc-item:focus-visible{ outline:3px solid var(--blue); outline-offset:2px; }
 
-  .counter{
-    font-size:14px;
-    font-weight:700;
-    color:var(--muted-light);
-    letter-spacing:.03em;
-    min-width:64px;
-    text-align:center;
-  }
+  .counter{ font-size:14px; font-weight:700; color:var(--muted-light); letter-spacing:.03em; min-width:64px; text-align:center; }
 
   .toc-wrap{position:static;}
   .toc-btn{
-    font-family:var(--font);
-    font-size:15px;
-    font-weight:700;
-    color:var(--white);
-    background:var(--blue);
-    border:none;
-    border-radius:999px;
-    padding:10px 22px;
-    cursor:pointer;
+    font-family:var(--font); font-size:15px; font-weight:700; color:var(--white);
+    background:var(--blue); border:none; border-radius:999px; padding:10px 22px; cursor:pointer;
   }
   .toc-btn:hover{background:#1d4fd1;}
 
   .toc-menu{
-    position:absolute;
-    bottom:calc(100% + 12px);
-    left:50%;
-    transform:translateX(-50%);
-    background:var(--white);
-    border:1px solid var(--line-light);
-    border-radius:14px;
-    box-shadow:0 12px 40px rgba(10,16,32,.18);
-    padding:10px;
-    display:grid;
-    grid-template-columns:1fr;
-    gap:2px;
-    width:min(420px,calc(100vw - 32px));
-    max-height:calc(100dvh - 160px);
-    overflow-y:auto;
+    position:absolute; bottom:calc(100% + 12px); left:50%; transform:translateX(-50%);
+    background:var(--white); border:1px solid var(--line-light); border-radius:14px;
+    box-shadow:0 12px 40px rgba(10,16,32,.18); padding:10px;
+    display:grid; grid-template-columns:1fr; gap:2px;
+    width:min(420px,calc(100vw - 32px)); max-height:calc(100dvh - 160px); overflow-y:auto;
   }
   .toc-menu[hidden]{display:none;}
   .toc-item{
-    display:block;
-    width:100%;
-    text-align:left;
-    font-family:var(--font);
-    font-size:15px;
-    color:var(--ink);
-    background:transparent;
-    border:none;
-    border-radius:8px;
-    padding:9px 12px;
-    cursor:pointer;
+    display:block; width:100%; text-align:left; font-family:var(--font); font-size:15px; color:var(--ink);
+    background:transparent; border:none; border-radius:8px; padding:9px 12px; cursor:pointer;
   }
   .toc-item:hover{background:var(--bg);}
   .toc-item[aria-current="true"]{color:var(--blue); font-weight:700;}
 
   @media (max-width:600px){
-    html.deck-ready .controls{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-      align-items:center;
-    }
+    html.deck-ready .controls{ display:grid; grid-template-columns:1fr 1fr; gap:10px; align-items:center; }
   }
 
   @media print{
@@ -389,50 +305,69 @@
   <main class="viewport" id="viewport">
 
     <section id="intro" class="slide slide-light" data-index="0" aria-labelledby="intro-h">
-      <div class="slide-inner">
-        <span class="tag">Варианты для обсуждения</span>
-        <h1 id="intro-h" class="cover-title" tabindex="-1">Предложение<br>по внедрению<br><span class="accent">автоматизации</span></h1>
-        <div class="cover-meta">
-          <p class="cover-name">Александр Федосеев</p>
-          <p class="cover-line">Небольшие инструменты для повседневных задач компании.</p>
+      <div class="slide-inner cover-layout">
+        <div class="cover-left">
+          <span class="tag">Варианты для обсуждения</span>
+          <h1 id="intro-h" class="cover-title" tabindex="-1">Предложение<br>по внедрению<br><span class="accent">автоматизации</span></h1>
+          <div class="cover-meta">
+            <p class="cover-name">Александр Федосеев</p>
+            <p class="cover-line">Небольшие инструменты для повседневных задач компании.</p>
+          </div>
+        </div>
+        <div class="cover-visual" aria-hidden="true">
+          <svg viewBox="0 0 150 310" width="100%" height="100%" focusable="false">
+            <g fill="none" stroke="currentColor" stroke-width="1.4">
+              <rect x="22" y="4" width="120" height="76" rx="4" fill="#d5e3ff" stroke="#a6bfea"/>
+              <rect x="14" y="12" width="120" height="76" rx="4" fill="#e9f0ff" stroke="#89a8dc"/>
+              <rect x="6" y="20" width="120" height="76" rx="4" fill="white" stroke="#6488c7"/>
+              <line x1="22" y1="40" x2="104" y2="40"/>
+              <line x1="22" y1="54" x2="118" y2="54"/>
+              <line x1="22" y1="68" x2="90" y2="68"/>
+              <line x1="66" y1="96" x2="66" y2="128" stroke-dasharray="3 5"/>
+              <circle cx="66" cy="146" r="20" fill="#2563eb" stroke="#2563eb"/>
+              <line x1="66" y1="166" x2="66" y2="196" stroke-dasharray="3 5"/>
+              <rect x="6" y="200" width="120" height="96" rx="4" fill="#e9f0ff" stroke="#6488c7"/>
+              <line x1="6" y1="222" x2="126" y2="222"/>
+              <line x1="6" y1="244" x2="126" y2="244"/>
+              <line x1="6" y1="266" x2="126" y2="266"/>
+              <line x1="46" y1="200" x2="46" y2="296"/>
+              <line x1="86" y1="200" x2="86" y2="296"/>
+            </g>
+            <path d="M68 134L58 148H66L64 158L75 143H67Z" fill="white"/>
+          </svg>
         </div>
       </div>
     </section>
 
     <section id="r1" class="slide slide-dark layout-stack" data-index="1" aria-labelledby="r1-h">
-      <div class="slide-inner">
-        <div class="slide-head">
-          <span class="slide-eyebrow">Раздел 01</span>
-          <h2 id="r1-h" tabindex="-1">Таблицы и реестры</h2>
+      <div class="slide-inner section-split">
+        <div class="section-side">
+          <span class="section-num" aria-hidden="true">01</span>
+          <div class="slide-head">
+            <span class="slide-eyebrow">Раздел 01</span>
+            <h2 id="r1-h" tabindex="-1">Таблицы и реестры</h2>
+          </div>
         </div>
         <ol class="idea-stack">
           <li class="idea-row">
-            <span class="idea-num">01</span>
-            <div>
-              <h3>Объединение таблиц <span class="idea-flag">Первый шаг</span></h3>
-              <p>Объединяет однотипные файлы от разных источников в одну таблицу без ручного копирования.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">01</span>
+            <h3>Объединение таблиц <span class="idea-flag">Первый шаг</span></h3>
+            <p>Объединяет однотипные файлы от разных источников в одну таблицу без ручного копирования.</p>
           </li>
           <li class="idea-row">
-            <span class="idea-num">02</span>
-            <div>
-              <h3>Реестр под формат заказчика</h3>
-              <p>Собирает данные в таблицу со столбцами и порядком, которые требует конкретный клиент.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">02</span>
+            <h3>Реестр под формат заказчика</h3>
+            <p>Собирает данные в таблицу со столбцами и порядком, которые требует конкретный клиент.</p>
           </li>
           <li class="idea-row">
-            <span class="idea-num">03</span>
-            <div>
-              <h3>Единые названия и форматы данных</h3>
-              <p>Приводит города, контрагентов и даты к единому виду по согласованному словарю соответствий.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">03</span>
+            <h3>Единые названия и форматы данных</h3>
+            <p>Приводит города, контрагентов и даты к единому виду по согласованному словарю соответствий.</p>
           </li>
           <li class="idea-row">
-            <span class="idea-num">04</span>
-            <div>
-              <h3>Разбивка сводной таблицы</h3>
-              <p>Делит общий реестр на отдельные файлы по клиенту или периоду одним запуском.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">04</span>
+            <h3>Разбивка сводной таблицы</h3>
+            <p>Делит общий реестр на отдельные файлы по клиенту или периоду одним запуском.</p>
           </li>
         </ol>
       </div>
@@ -441,27 +376,28 @@
     <section id="r2" class="slide slide-light layout-grid" data-index="2" aria-labelledby="r2-h">
       <div class="slide-inner">
         <div class="slide-head">
+          <span class="head-mark" aria-hidden="true"></span>
           <span class="slide-eyebrow">Раздел 02</span>
           <h2 id="r2-h" tabindex="-1">Подготовка документов</h2>
         </div>
         <div class="idea-grid">
           <div class="idea-cell">
-            <span class="idea-num">01</span>
+            <span class="idea-tag" aria-hidden="true">01</span>
             <h3>Заявка на перевозку из карточки <span class="idea-flag">Первый шаг</span></h3>
             <p>Формирует готовый документ-заявку по данным карточки рейса без повторного набора текста.</p>
           </div>
           <div class="idea-cell">
-            <span class="idea-num">02</span>
+            <span class="idea-tag" aria-hidden="true">02</span>
             <h3>Генератор коммерческих предложений</h3>
             <p>Собирает коммерческое предложение по утверждённой ставке и шаблону из введённых параметров.</p>
           </div>
           <div class="idea-cell">
-            <span class="idea-num">03</span>
+            <span class="idea-tag" aria-hidden="true">03</span>
             <h3>Пакет документов по рейсу</h3>
             <p>По одной строке таблицы создаёт сразу несколько связанных документов, например заявку и счёт-черновик.</p>
           </div>
           <div class="idea-cell">
-            <span class="idea-num">04</span>
+            <span class="idea-tag" aria-hidden="true">04</span>
             <h3>Проверка обязательных полей документа</h3>
             <p>Перед печатью проверяет, что нужные поля заполнены, и указывает пропуски.</p>
           </div>
@@ -470,39 +406,34 @@
     </section>
 
     <section id="r3" class="slide slide-dark layout-stack" data-index="3" aria-labelledby="r3-h">
-      <div class="slide-inner">
-        <div class="slide-head">
-          <span class="slide-eyebrow">Раздел 03</span>
-          <h2 id="r3-h" tabindex="-1">Проверка данных</h2>
+      <div class="slide-inner section-split">
+        <div class="section-side">
+          <span class="section-num" aria-hidden="true">03</span>
+          <div class="slide-head">
+            <span class="slide-eyebrow">Раздел 03</span>
+            <h2 id="r3-h" tabindex="-1">Проверка данных</h2>
+          </div>
         </div>
         <ol class="idea-stack">
           <li class="idea-row">
-            <span class="idea-num">01</span>
-            <div>
-              <h3>Сверка двух реестров рейсов <span class="idea-flag">Первый шаг</span></h3>
-              <p>Сопоставляет список рейсов из одного источника со списком из другого и показывает расхождения.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">01</span>
+            <h3>Сверка двух реестров рейсов <span class="idea-flag">Первый шаг</span></h3>
+            <p>Сопоставляет список рейсов из одного источника со списком из другого и показывает расхождения.</p>
           </li>
           <li class="idea-row">
-            <span class="idea-num">02</span>
-            <div>
-              <h3>Сверка реквизитов контрагентов</h3>
-              <p>Сравнивает сведения из двух таблиц и показывает несовпадения для проверки сотрудником.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">02</span>
+            <h3>Сверка реквизитов контрагентов</h3>
+            <p>Сравнивает сведения из двух таблиц и показывает несовпадения для проверки сотрудником.</p>
           </li>
           <li class="idea-row">
-            <span class="idea-num">03</span>
-            <div>
-              <h3>Поиск возможных дублей документов</h3>
-              <p>Находит возможные совпадения по номеру, дате и контрагенту по реестру документов и выводит кандидатов для проверки.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">03</span>
+            <h3>Поиск возможных дублей документов</h3>
+            <p>Находит возможные совпадения по номеру, дате и контрагенту по реестру документов и выводит кандидатов для проверки.</p>
           </li>
           <li class="idea-row">
-            <span class="idea-num">04</span>
-            <div>
-              <h3>Сравнение сумм по условиям</h3>
-              <p>Сопоставляет согласованные условия рейса с фактическими доплатами. Только список расхождений, без выводов о задолженности.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">04</span>
+            <h3>Сравнение сумм по условиям</h3>
+            <p>Сопоставляет согласованные условия рейса с фактическими доплатами. Только список расхождений, без выводов о задолженности.</p>
           </li>
         </ol>
       </div>
@@ -511,27 +442,28 @@
     <section id="r4" class="slide slide-light layout-grid" data-index="4" aria-labelledby="r4-h">
       <div class="slide-inner">
         <div class="slide-head">
+          <span class="head-mark" aria-hidden="true"></span>
           <span class="slide-eyebrow">Раздел 04</span>
           <h2 id="r4-h" tabindex="-1">Архив и комплекты</h2>
         </div>
         <div class="idea-grid">
           <div class="idea-cell">
-            <span class="idea-num">01</span>
+            <span class="idea-tag" aria-hidden="true">01</span>
             <h3>Сортировка документов по номеру и дате <span class="idea-flag">Первый шаг</span></h3>
             <p>Переименовывает и раскладывает копии документов (оригиналы сохраняются) по номеру рейса, дате или контрагенту.</p>
           </div>
           <div class="idea-cell">
-            <span class="idea-num">02</span>
+            <span class="idea-tag" aria-hidden="true">02</span>
             <h3>Проверка комплекта документов</h3>
             <p>Проверяет наличие файлов по рейсу в архиве (не содержание и подписи) и выводит список недостающих.</p>
           </div>
           <div class="idea-cell">
-            <span class="idea-num">03</span>
+            <span class="idea-tag" aria-hidden="true">03</span>
             <h3>Сборка комплекта клиенту за месяц</h3>
             <p>Собирает документы и реестр по одному клиенту за выбранный период в один пакет.</p>
           </div>
           <div class="idea-cell">
-            <span class="idea-num">04</span>
+            <span class="idea-tag" aria-hidden="true">04</span>
             <h3>Поиск файла по номеру или дате</h3>
             <p>Находит документ в архиве без ручного перебора папок.</p>
           </div>
@@ -540,39 +472,34 @@
     </section>
 
     <section id="r5" class="slide slide-dark layout-stack" data-index="5" aria-labelledby="r5-h">
-      <div class="slide-inner">
-        <div class="slide-head">
-          <span class="slide-eyebrow">Раздел 05</span>
-          <h2 id="r5-h" tabindex="-1">Рейсы и задания</h2>
+      <div class="slide-inner section-split">
+        <div class="section-side">
+          <span class="section-num" aria-hidden="true">05</span>
+          <div class="slide-head">
+            <span class="slide-eyebrow">Раздел 05</span>
+            <h2 id="r5-h" tabindex="-1">Рейсы и задания</h2>
+          </div>
         </div>
         <ol class="idea-stack">
           <li class="idea-row">
-            <span class="idea-num">01</span>
-            <div>
-              <h3>Список заданий на день <span class="idea-flag">Первый шаг</span></h3>
-              <p>Формирует перечень рейсов на выбранную дату из доступной выгрузки для утренней проверки.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">01</span>
+            <h3>Список заданий на день <span class="idea-flag">Первый шаг</span></h3>
+            <p>Формирует перечень рейсов на выбранную дату из доступной выгрузки для утренней проверки.</p>
           </li>
           <li class="idea-row">
-            <span class="idea-num">02</span>
-            <div>
-              <h3>Журнал отклонений и простоев</h3>
-              <p>Фиксирует введённые сотрудником задержки, простои и повреждения в единой форме учёта.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">02</span>
+            <h3>Журнал отклонений и простоев</h3>
+            <p>Фиксирует введённые сотрудником задержки, простои и повреждения в единой форме учёта.</p>
           </li>
           <li class="idea-row">
-            <span class="idea-num">03</span>
-            <div>
-              <h3>Контроль дат по рейсам</h3>
-              <p>Показывает рейсы, где согласованная дата приближается или прошла, для ручного контроля.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">03</span>
+            <h3>Контроль дат по рейсам</h3>
+            <p>Показывает рейсы, где согласованная дата приближается или прошла, для ручного контроля.</p>
           </li>
           <li class="idea-row">
-            <span class="idea-num">04</span>
-            <div>
-              <h3>Привязка фото к рейсу</h3>
-              <p>Прикрепляет фотографии и материалы к рейсу для последующего поиска. Доступы для совместной работы нескольких сотрудников продумываются отдельно.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">04</span>
+            <h3>Привязка фото к рейсу</h3>
+            <p>Прикрепляет фотографии и материалы к рейсу для последующего поиска. Доступы для совместной работы нескольких сотрудников продумываются отдельно.</p>
           </li>
         </ol>
       </div>
@@ -581,27 +508,28 @@
     <section id="r6" class="slide slide-light layout-grid" data-index="6" aria-labelledby="r6-h">
       <div class="slide-inner">
         <div class="slide-head">
+          <span class="head-mark" aria-hidden="true"></span>
           <span class="slide-eyebrow">Раздел 06</span>
           <h2 id="r6-h" tabindex="-1">Коммерческая работа</h2>
         </div>
         <div class="idea-grid">
           <div class="idea-cell">
-            <span class="idea-num">01</span>
+            <span class="idea-tag" aria-hidden="true">01</span>
             <h3>Сравнение предложений перевозчиков <span class="idea-flag">Первый шаг</span></h3>
             <p>Сопоставляет несколько предложений по одинаковым условиям рейса в одной таблице.</p>
           </div>
           <div class="idea-cell">
-            <span class="idea-num">02</span>
+            <span class="idea-tag" aria-hidden="true">02</span>
             <h3>История ставок по направлениям</h3>
             <p>Собирает данные по прошлым сопоставимым рейсам, чтобы видеть диапазон ставок.</p>
           </div>
           <div class="idea-cell">
-            <span class="idea-num">03</span>
+            <span class="idea-tag" aria-hidden="true">03</span>
             <h3>Учёт отправленных предложений</h3>
             <p>Ведёт реестр предложений, вопросов клиента и даты следующего контакта.</p>
           </div>
           <div class="idea-cell">
-            <span class="idea-num">04</span>
+            <span class="idea-tag" aria-hidden="true">04</span>
             <h3>Тарифный справочник условий клиентов</h3>
             <p>Хранит версии согласованных условий и тарифов для быстрого расчёта.</p>
           </div>
@@ -610,39 +538,34 @@
     </section>
 
     <section id="r7" class="slide slide-dark layout-stack" data-index="7" aria-labelledby="r7-h">
-      <div class="slide-inner">
-        <div class="slide-head">
-          <span class="slide-eyebrow">Раздел 07</span>
-          <h2 id="r7-h" tabindex="-1">Отчёты руководителю</h2>
+      <div class="slide-inner section-split">
+        <div class="section-side">
+          <span class="section-num" aria-hidden="true">07</span>
+          <div class="slide-head">
+            <span class="slide-eyebrow">Раздел 07</span>
+            <h2 id="r7-h" tabindex="-1">Отчёты руководителю</h2>
+          </div>
         </div>
         <ol class="idea-stack">
           <li class="idea-row">
-            <span class="idea-num">01</span>
-            <div>
-              <h3>Сводка по статусам и отклонениям <span class="idea-flag">Первый шаг</span></h3>
-              <p>Собирает краткий отчёт о текущих статусах рейсов и зафиксированных отклонениях за период.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">01</span>
+            <h3>Сводка по статусам и отклонениям <span class="idea-flag">Первый шаг</span></h3>
+            <p>Собирает краткий отчёт о текущих статусах рейсов и зафиксированных отклонениях за период.</p>
           </li>
           <li class="idea-row">
-            <span class="idea-num">02</span>
-            <div>
-              <h3>Объём перевозок по клиентам и направлениям</h3>
-              <p>Формирует отчёт по клиентам, направлениям и периодам на основе накопленных данных.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">02</span>
+            <h3>Объём перевозок по клиентам и направлениям</h3>
+            <p>Формирует отчёт по клиентам, направлениям и периодам на основе накопленных данных.</p>
           </li>
           <li class="idea-row">
-            <span class="idea-num">03</span>
-            <div>
-              <h3>Открытые задачи по документам</h3>
-              <p>Показывает открытые задачи по документам и ответственным из заполненного реестра.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">03</span>
+            <h3>Открытые задачи по документам</h3>
+            <p>Показывает открытые задачи по документам и ответственным из заполненного реестра.</p>
           </li>
           <li class="idea-row">
-            <span class="idea-num">04</span>
-            <div>
-              <h3>План-факт по показателям</h3>
-              <p>Сравнивает плановые и фактические значения по согласованным показателям.</p>
-            </div>
+            <span class="idea-tag" aria-hidden="true">04</span>
+            <h3>План-факт по показателям</h3>
+            <p>Сравнивает плановые и фактические значения по согласованным показателям.</p>
           </li>
         </ol>
       </div>
@@ -651,27 +574,28 @@
     <section id="r8" class="slide slide-light layout-grid" data-index="8" aria-labelledby="r8-h">
       <div class="slide-inner">
         <div class="slide-head">
+          <span class="head-mark" aria-hidden="true"></span>
           <span class="slide-eyebrow">Раздел 08</span>
           <h2 id="r8-h" tabindex="-1">Помощники и дальнейшее развитие</h2>
         </div>
         <div class="idea-grid">
           <div class="idea-cell">
-            <span class="idea-num">01</span>
+            <span class="idea-tag" aria-hidden="true">01</span>
             <h3>Справочный бот по шаблонам</h3>
             <p>Выдаёт ссылку на нужный утверждённый шаблон по ключевому слову, без использования ИИ.</p>
           </div>
           <div class="idea-cell">
-            <span class="idea-num">02</span>
+            <span class="idea-tag" aria-hidden="true">02</span>
             <h3>Уведомления об обновлении шаблонов</h3>
             <p>При утверждении новой версии в каталоге сообщает, какой документ использовать.</p>
           </div>
           <div class="idea-cell">
-            <span class="idea-num">03</span>
+            <span class="idea-tag" aria-hidden="true">03</span>
             <h3>Черновики сопроводительных писем</h3>
             <p>ИИ готовит текст к выбранному комплекту документов; сотрудник проверяет его перед отправкой.</p>
           </div>
           <div class="idea-cell">
-            <span class="idea-num">04</span>
+            <span class="idea-tag" aria-hidden="true">04</span>
             <h3>Поиск по архиву с указанием источника</h3>
             <p>ИИ ищет информацию в разрешённых документах архива с указанием источника ответа. Направление для дальнейшего развития, не первый пилот.</p>
           </div>
@@ -683,15 +607,24 @@
       <div class="slide-inner">
         <span class="tag">Варианты для обсуждения</span>
         <h2 id="start-h" class="start-title" tabindex="-1">Первый проект</h2>
-        <div class="start-flow">
-          <span class="start-step">Частая операция</span>
-          <span class="start-arrow">→</span>
-          <span class="start-step">Обезличенный пример</span>
-          <span class="start-arrow">→</span>
-          <span class="start-step">Прототип</span>
-          <span class="start-arrow">→</span>
-          <span class="start-step">Проверка результата</span>
-        </div>
+        <ol class="flow-steps">
+          <li class="flow-step">
+            <span class="flow-num" aria-hidden="true">01</span>
+            <span class="flow-label">Частая операция</span>
+          </li>
+          <li class="flow-step">
+            <span class="flow-num" aria-hidden="true">02</span>
+            <span class="flow-label">Обезличенный пример</span>
+          </li>
+          <li class="flow-step">
+            <span class="flow-num" aria-hidden="true">03</span>
+            <span class="flow-label">Прототип</span>
+          </li>
+          <li class="flow-step">
+            <span class="flow-num" aria-hidden="true">04</span>
+            <span class="flow-label">Проверка результата</span>
+          </li>
+        </ol>
         <div class="start-links">
           <a href="index.html">Портфолио</a>
           <a href="resume.pdf">Резюме и контакты</a>
